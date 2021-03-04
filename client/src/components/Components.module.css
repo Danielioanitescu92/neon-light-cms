@@ -1,0 +1,183 @@
+.navbar {
+    width: 100%;
+    height: 70px;
+    background: rgb(150, 150, 163);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.routesnav {
+    width: 100%;
+    height: 70px;
+    background: rgb(150, 150, 163);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer {
+    margin-bottom: 0;
+    width: 100%;
+    height: 70px;
+    background: rgb(150, 150, 163);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.inline {
+    display: flex;
+}
+
+.inline * {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.collapse {
+    width: 100%;
+    height: 70px;
+    background: rgb(115, 115, 124);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addpost {
+    margin-bottom: 10vw;
+    padding: 2vw;
+    background: rgb(115, 115, 124);
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.myedit, .addpost input {
+    width: 60vw;
+    margin: 2vw;
+    padding: 2vw;
+    background: rgb(222, 222, 223);
+    border: 5px solid rgb(80, 80, 255);
+    color: rgb(0, 0, 0);
+}
+
+.mytag {
+    background: rgb(52, 52, 253);
+    border: 5px solid rgb(13, 13, 194);
+    color: rgb(238, 238, 238);
+    border-radius: 5px;
+    margin: 2vw;
+}
+
+.grff {
+    background: rgb(113, 142, 255);
+    height: 30vh;
+    min-height: 145px;
+    width: 80vw;
+    min-width: 480px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.mytest {
+    background: rgb(147, 160, 211);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    margin: auto;
+}
+
+.mydate {
+    background: rgb(88, 167, 219);
+    width: calc(80vw - 30px);
+    min-width: 450px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.mydateNr {
+    background: rgb(23, 77, 112);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mynrs {
+    background: rgb(147, 160, 211);
+    height: 100%;
+    width: 30px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mynr {
+    background: rgb(59, 230, 230);
+}
+
+.grffBl {
+    background: rgb(11, 45, 184);
+    width: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+.theform {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+}
+
+.thelist {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+}
+
+.item {
+    padding: 10px;
+    width: 80vw;
+    min-width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
+    background: rgb(115, 115, 124);
+    color: rgb(255, 255, 255);
+}
+
+.postpic {
+    width: 200px;
+}
+
+.comment {
+    background: rgb(91, 91, 99);
+}
+
+.reply {
+    background: rgb(47, 47, 51);
+}
