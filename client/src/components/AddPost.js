@@ -4,7 +4,7 @@ import styles from './Components.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { addItem } from '../actions/itemActions'
+import { addItem, getSpecificItems } from '../actions/itemActions'
 import { sendTheNewPost } from '../actions/subActions'
 
 import EditorJs from 'react-editor-js';
