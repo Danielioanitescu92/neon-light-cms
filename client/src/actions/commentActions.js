@@ -61,6 +61,12 @@ export const deleteCommOnPostDel = id => {
             //         })
             //     }
             // })
+            .then(() =>
+            console.log("dellComm ACTION, GOOD")
+            )
+            .catch(err => 
+                console.log("dellComm ACTION, ERROR: ", err)
+            )
     }
 };
 

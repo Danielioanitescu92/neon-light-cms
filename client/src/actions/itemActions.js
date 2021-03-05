@@ -165,12 +165,12 @@ export const deleteItem = id => {
         axios
             .delete(`/api/items/${id}`, tokenConfig(getState))
             .then(res => {
+                dispatch(deleteCommOnPostDel(id))
+                dispatch(deleteReplyOnPostDel(id))
                 dispatch({
                     type: DELETE_ITEMS,
                     payload: id
                 })
-                dispatch(deleteCommOnPostDel(id))
-                dispatch(deleteReplyOnPostDel(id))
             })
             .catch(err => 
                 dispatch(returnErrors(err.response.data, err.response.status))

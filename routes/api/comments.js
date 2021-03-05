@@ -73,14 +73,17 @@ router.delete('/onPostDel/:id', (req, res) => {
     Comment.find({ forWich: req.params.id })
     .then(comm => {
         if(comm.length > 0) {
-            comm. map(c => {
+            comm.map(c => {
                 console.log("dellComm 2, comm: ", c._id)
                 // res.status(200).json(comm)
                 c.remove()
             })
         }
     })
-    .catch(err => res.status(404).json({ success: false }))
+    .catch(err => {
+        console.log("dellComm 3, ERROR: ", err)
+        res.status(404).json({ success: false })
+    })
 });
 
 // @route POST api/comments/like
