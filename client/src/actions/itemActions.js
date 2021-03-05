@@ -185,14 +185,15 @@ export const addItem = (item) => {
             .post('/api/items', item, tokenConfig(getState))
             .then(res => {
                 console.log("got res.data: ", res.data)
-                dispatch({
-                    type: ADD_ITEMS,
-                    payload: res.data
-                })
+                // dispatch({
+                //     type: ADD_ITEMS,
+                //     payload: res.data
+                // })
             })
-            .catch(err => 
+            .catch(err => {
+                console.log("ERROOOOR: ", err)
                 dispatch(returnErrors(err.response.data, err.response.status))
-            )
+            })
     }
 };
 

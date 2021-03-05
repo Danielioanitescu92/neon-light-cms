@@ -108,7 +108,7 @@ const AddPost = () => {
         setTag3('')
         setTag4('')
         history.push('/')
-        dispatch(getSpecificItems(null, null, null, null))
+        // dispatch(getSpecificItems(null, null, null, null))
     }
     
     const instanceRef = useRef(null)
