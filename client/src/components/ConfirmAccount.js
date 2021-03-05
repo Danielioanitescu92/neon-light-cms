@@ -10,6 +10,7 @@ const ConfirmAccount = ({ match }) => {
     const err = useSelector(store => store.error)
 
     useEffect(() => {
+        console.log("TOKEN: ", match.params.token)
         dispatch(confAcc(match.params.token))
     }, [])
 

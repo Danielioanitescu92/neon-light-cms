@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     avatar: {
         type: String,
-        default: 'unknown.png'
+        default: 'https://images.pexels.com/photos/6069/grass-lawn-green-wooden-6069.jpg'
     },
     name: {
         type: String,

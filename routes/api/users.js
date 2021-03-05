@@ -271,6 +271,7 @@ router.delete('/:id', (req, res) => {
 // @desc Register new User
 // @access Public
 router.post('/', (req, res) => {
+    console.log("1 add user: ", req.body)
     const { name, email, password, role } = req.body;
 
     if(!name || !email || !password || !role) {
@@ -280,6 +281,7 @@ router.post('/', (req, res) => {
     User.findOne({ email })
     .then(user => {
         if(user) return res.status(400).json({ msg: "User already exists" });
+        console.log("2 add user")
 
         const token = crypto.randomBytes(20).toString('hex');
         const newUser = new User({
@@ -334,14 +336,17 @@ router.post('/', (req, res) => {
         sgMail
         .send(msg)
         .then(() => {
+            console.log("3 add user email sent")
             res.status(200).json({ msg: 'Your email has been sent' })
         })
         .catch((error) => {
+            console.log("4 add user email error", error)
             res.status(400).json({ msg: 'There was an error' });
         })
 
     })
     .catch(err => {
+        console.log("5 reg not possible: ", err)
         res.status(400).json({ msg: "Register not possible" });
     });
 });
@@ -350,13 +355,17 @@ router.post('/', (req, res) => {
 // // @desc Get resetPasswordToken and erase for confirmation
 // // @access Private
 router.get('/confirmAccount/:token', (req, res) => {
+    console.log("1 confirmAccount req.params.token: ", req.params.token)
     User.findOne({
         resetPasswordToken: req.params.token
     })
     .then(user => {
+        console.log("2 confirmAccount: ", user)
         if(!user) {
+            console.log("3 confirmAccount no user ERR: ")
             res.json({ msg: 'Password reset link is invalid or has expired. Please try again.' })
         } else {
+            console.log("4 confirmAccount user exist")
             res.status(200).json({ msg: 'Your account is active. You can now login.' });
             user.resetPasswordToken = null;
             user.save();
