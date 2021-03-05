@@ -325,24 +325,16 @@ router.post('/', (req, res) => {
             text:
                 'Your account has been created. \n\n' +
                 'To confirm it, please click the link bellow: \n\n' +
-                `http://${req.hostname}:${port}/confirmAccount/${token} \n\n`,
+                `http://${req.hostname}/confirmAccount/${token} \n\n`,
                 // `${href}/confirmAccount/${token} \n\n`
             html:
                 'Your account has been created. \n\n' +
                 'To confirm it, please click the link bellow: \n\n' +
-                `<strong>http://${req.hostname}:${port}/confirmAccount/${token}</strong> \n\n`
+                `<strong>http://${req.hostname}/confirmAccount/${token}</strong> \n\n`
                 // `${href}/confirmAccount/${token} \n\n`,
         }
         sgMail
         .send(msg)
-        .then(() => {
-            console.log("3 add user email sent")
-            res.status(200).json({ msg: 'Your email has been sent' })
-        })
-        .catch((error) => {
-            console.log("4 add user email error", error)
-            res.status(400).json({ msg: 'There was an error' });
-        })
 
     })
     .catch(err => {
