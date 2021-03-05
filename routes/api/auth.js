@@ -161,13 +161,13 @@ router.post('/forgotPass', (req, res) => {
                 text:
                     'You are receiving this email because you have requested your password. \n\n' +
                     'Please click the following link to complete the process whitin one hour of receiving it: \n\n' +
-                    `http://${req.hostname}:${port}/resetPass/${token} \n\n` +
+                    `http://${req.hostname}/resetPass/${token} \n\n` +
                     // `${href}/resetPass/${token} \n\n` +
                     'If you did not requested a password change, please ignore this email',
                 html:
                     'You are receiving this email because you have requested your password. \n\n' +
                     'Please click the following link to complete the process whitin one hour of receiving it: \n\n' +
-                    `<strong>http://${req.hostname}:${port}/resetPass/${token}</strong> \n\n` +
+                    `<strong>http://${req.hostname}/resetPass/${token}</strong> \n\n` +
                     // `${href}/resetPass/${token} \n\n` +
                     'If you did not requested a password change, please ignore this email'
             }
