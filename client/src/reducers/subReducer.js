@@ -2,6 +2,7 @@ import {
     GET_SUBS,
     DELETE_SUB,
     SUBS_LOADING,
+    SUBS_UNLOADING,
     GO_SUBS,
     TOTAL_SUBS
 } from '../actions/types';

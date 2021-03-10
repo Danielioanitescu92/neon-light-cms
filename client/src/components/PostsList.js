@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { getUsers } from '../actions/userActions'
 import { deleteItem, getSpecificItems, getSpecificItemsForMe } from '../actions/itemActions'
+import { getItemsFiles, goItemsFiles } from '../actions/fileActions'
 
 import ViewsSource from './ViewsSource'
 import ViewsTime from './ViewsTime'
@@ -19,6 +20,9 @@ const PostsList = ({ match }) => {
     const itemz = useSelector(store => store.item.items.results)
     const next = useSelector(store => store.item.items.next)
     const userz = useSelector(store => store.user.users)
+    const picz = useSelector(store => store.file.files.items)
+    const piczLoading = useSelector(store => store.file.loadingIt)
+    const itemzLoading = useSelector(store => store.item.loading)
 
     const [ query, setQuery ] = useState('')
     const [ search, setSearch ] = useState(match.params.search ? match.params.search : null)
@@ -107,7 +111,9 @@ const PostsList = ({ match }) => {
     }
 
     useEffect(() => {
+        // RESET FILTERS
         if(byWho) {
+            jump(search, author, page, sort)
             if(window.location.pathname === '/') {
                 setQuery('')
                 setSearch(null)
@@ -121,11 +127,23 @@ const PostsList = ({ match }) => {
                 setSort(null)
             }
         }
-    }, [window.location.pathname])
+    }, [byWho, finder])
 
     useEffect(() => {
-        jump(search, author, page, sort)
-    }, [byWho, finder])
+        // BRING NEW IMAGES
+        if(!piczLoading) {
+            if(!itemzLoading) {
+                if(itemz) {
+                    dispatch(goItemsFiles());
+                    if(itemz.length > 0) {
+                        itemz.map(item => {
+                            dispatch(getItemsFiles([item.picUrl]))
+                        })
+                    }
+                }
+            }
+        }
+    }, [itemz])
 
     // PAGE
     const togglePage = e => {
@@ -186,6 +204,7 @@ const PostsList = ({ match }) => {
     const handleDelPost = e => {
         console.log("DELETED ITEM _ID: ", e.target.id)
         dispatch(deleteItem(e.target.id))
+        setFinder(!finder)
     }
     
     return (
@@ -271,7 +290,17 @@ const PostsList = ({ match }) => {
                         itemz.map(item =>                            
                             <div key={item._id} className={styles.item}>
                                 <div>
-                                    <img src={item.picUrl} alt={item.title} width="50" height="50"></img>
+                                    {picz ?
+                                        picz.length > 0 ?
+                                            picz.map(pic =>
+                                                pic === null ?
+                                                    null
+                                                : pic.filename === item.picUrl ?
+                                                    <img key={pic._id} src={`/api/uploads/image/${pic.filename}`} alt={pic.filename} width="50" height="50"></img>
+                                                : null
+                                            )
+                                        : null
+                                    : null}
                                 </div>
                                 <div>
                                     <p>by { item.by }</p>

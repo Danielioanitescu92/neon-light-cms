@@ -21,39 +21,45 @@ const initialState = {
         items: [],
         avatars: []
     },
-    loading: false,
+    loadingIt: false,
     loadingAv: false
 }
 
 export default function(state = initialState, action) {
     switch(action.type) {
-        case GET_FILE:
-            return {
-                ...state,
-                files: action.payload,
-                loading: false
-            }
-        case GET_THIS_FILE:
-            return {
-                ...state,
-                files: action.payload,
-                loading: false
-            }
+        // case GET_FILE:
+        //     return {
+        //         ...state,
+        //         files: action.payload,
+        //         loading: false
+        //     }
+        // case GET_THIS_FILE:
+        //     return {
+        //         ...state,
+        //         files: action.payload,
+        //         loading: false
+        //     }
         case GET_ITEMS_FILES:
             return {
                 ...state,
                 files: {
                     ...state.files,
-                    items:  [...state.files.items, action.payload[0]]
+                    items:  [
+                        ...state.files.items,
+                        state.files.items.some((element) => element.filename === action.payload[0].filename) ? null : action.payload[0]
+                    ]
                 },
-                loading: false
+                loadingIt: false
             }
         case GET_AVATARS_FILE:
             return {
                 ...state,
                 files: {
                     ...state.files,
-                    avatars: [...state.files.avatars, action.payload[0]]
+                    avatars: [
+                        ...state.files.avatars,
+                        state.files.avatars.some((element) => element.filename === action.payload[0].filename) ? null : action.payload[0]
+                    ]
                 },
                 loadingAv: false
             }
@@ -64,6 +70,7 @@ export default function(state = initialState, action) {
                     ...state.files,
                     items:  [action.payload, ...state.files.items]
                 },
+                loadingIt: false
             }
         case ADD_USER_FILE:
             return {
@@ -72,6 +79,7 @@ export default function(state = initialState, action) {
                     ...state.files,
                     avatars:  [action.payload, ...state.files.avatars]
                 },
+                loadingAv: false
             }
         case DELETE_FILE:
             return {
@@ -118,7 +126,7 @@ export default function(state = initialState, action) {
         case FILE_LOADING:
             return {
                 ...state,
-                loading: true
+                loadingIt: true
             }
         case AVATAR_FILES_LOADING:
             return {

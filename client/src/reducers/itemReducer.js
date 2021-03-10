@@ -61,10 +61,7 @@ export default function(state = initialState, action) {
         case ADD_ITEMS:
             return {
                 ...state,
-                items: {
-                    ...state.items,
-                    results: [action.payload, ...state.items.results]
-                }
+                items: [action.payload, ...state.items]
             }
         case UPDATE_ITEM:
             return {

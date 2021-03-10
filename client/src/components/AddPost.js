@@ -1,11 +1,12 @@
-import React, { useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import styles from './Components.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { addItem, getSpecificItems } from '../actions/itemActions'
+import { addItem, goItems } from '../actions/itemActions'
 import { sendTheNewPost } from '../actions/subActions'
+import { addPostFile, goItemsFiles, goAvatarsFile } from '../actions/fileActions'
 
 import EditorJs from 'react-editor-js';
 import Header from '@editorjs/header'; 
@@ -19,10 +20,13 @@ import Delimiter from '@editorjs/delimiter'
 
 const AddPost = () => {
     const byWho = useSelector(store => store.auth.user)
+    const item = useSelector(store => store.item.items)
+    const file = useSelector(store => store.file.files.items)
+    const piczLoading = useSelector(store => store.file.loadingIt)
     const history = useHistory();
     const dispatch = useDispatch()
 
-    const [ file, setFile ] = useState('')
+    const [ myFile, setMyFile ] = useState('')
     const [ title, setTitle ] = useState('')
     const [ subtitle, setSubtitle ] = useState('')
     const [ text, setText ] = useState('')
@@ -32,8 +36,29 @@ const AddPost = () => {
     const [ tag3, setTag3 ] = useState('')
     const [ tag4, setTag4 ] = useState('')  
     const [ data, setData ] = useState(null)
+
+    useEffect(() => {
+        // REMOVE ALL OLD IMAGES
+        dispatch(goItems())
+        dispatch(goItemsFiles())
+        dispatch(goAvatarsFile())
+    }, [])
+
+    useEffect(() => {
+        // GO TO HOME
+        if(!piczLoading) {
+            if(item.length > 0) {
+                if(file.length > 0) {
+                    console.log("history.push('/')")
+                    history.push('/')
+                }
+            }
+        }
+    }, [item, file])
     
-    const handlePic = e => setFile(e.target.value)
+    const onFileChange = e => {
+        setMyFile(e.target.files[0])
+    }
     const handleTitle = e => setTitle(e.target.value)
     const handleSubtitle = e => setSubtitle(e.target.value)    
     const handleTags = e => setTagText(e.target.value)
@@ -77,6 +102,11 @@ const AddPost = () => {
     }
 
     const handleSubmit = e => {
+        e.preventDefault();
+        const formData = new FormData()
+        formData.append('file', myFile)
+        // dispatch(addPostFile(formData))
+
         const newItem = {
             views: {
                 organic: [],
@@ -85,7 +115,7 @@ const AddPost = () => {
                 total: 0
             },
             commCount: 0,
-            picUrl: file,
+            picUrl: myFile.name,
             title: title,
             subtitle: subtitle,
             text: text,
@@ -97,9 +127,10 @@ const AddPost = () => {
                 {tag: tag4},
             ]
         }
-        dispatch(addItem(newItem))
-        dispatch(sendTheNewPost(newItem))
-        setFile('')
+        // dispatch(addItem(newItem))
+        // dispatch(sendTheNewPost(newItem))        
+        dispatch(addPostFile(formData, newItem))
+        setMyFile('')
         setTitle('')
         setSubtitle('')
         setText('')
@@ -107,7 +138,14 @@ const AddPost = () => {
         setTag2('')
         setTag3('')
         setTag4('')
-        history.push('/')
+        // if(!piczLoading) {
+        //     if(item) {
+        //         if(file) {
+        //             console.log("history.push('/')")
+        //             history.push('/')
+        //         }
+        //     }
+        // }
         // dispatch(getSpecificItems(null, null, null, null))
     }
     
@@ -122,7 +160,7 @@ const AddPost = () => {
         <div>
             <div className={styles.addpost}>
                 <b>Picture URL</b>
-                <input name="text" type="text" value={file} onChange={handlePic}></input>
+                <input name="myFile" type="file" onChange={onFileChange}></input>
                 <b>Title</b>
                 <input name="title" type="text" value={title} onChange={handleTitle}></input>
                 <b>Subtitle</b>

@@ -19,6 +19,8 @@ import {
 import { returnErrors } from './errorActions';
 import { addItem } from './itemActions';
 import { doneEditing } from './userActions'
+import { sendTheNewPost } from './subActions'
+import { useHistory } from 'react-router-dom'
 
 export const getFiles = () => {
     return function(dispatch) {
@@ -38,7 +40,6 @@ export const getFiles = () => {
 
 export const getItemsFiles = picsArray => {
     return function(dispatch) {
-        dispatch(goItemsFiles());
         dispatch(setFilesLoading());
         if(picsArray) {
             picsArray.map(filename => { 
@@ -62,8 +63,8 @@ export const getItemsFiles = picsArray => {
 export const getAvatarsFile = avatarsArray => {
     console.log("111 present avatars: ", avatarsArray)
     return function(dispatch) {
-        dispatch(goAvatarsFile());
         dispatch(setAvatarFilesLoading());
+        dispatch(goAvatarsFile());
         avatarsArray.map(filename => {
             console.log("222 map each avatars: ", filename)
             axios
@@ -83,8 +84,10 @@ export const getAvatarsFile = avatarsArray => {
     }
 };
 
-export const addPostFile = (file, newPost, myName) => {
+export const addPostFile = (file, newItem) => {
+    console.log("1 addPostFile: file Loading")
     return function(dispatch) {
+        dispatch(setFilesLoading());
         const config = {
             headers: {
                 'Content-Type': 'multipart/data-form'
@@ -93,20 +96,30 @@ export const addPostFile = (file, newPost, myName) => {
         axios
             .post('/api/uploads/upload', file, config)
             .then(res => {
-                dispatch(addItem(newPost, myName))
+                console.log("2 addPostFile: file added")
                 dispatch({
-                    type: ADD_POST_FILE,
+                    type: ADD_POST_FILE, 
                     payload: res.data
                 })
             })
-            .catch(err => 
+            .then(() => {
+                console.log("3 addPostFile: addItem")
+                dispatch(addItem(newItem));
+            })
+            .then(() => {
+                console.log("4 addPostFile: sendTheNewPost")
+                dispatch(sendTheNewPost(newItem))
+            })
+            .catch(err => {
+                console.log("5 error: ", err)
                 dispatch(returnErrors(err.response.data, err.response.status))
-            )
+            })
     }
 };
 
 export const addUserFile = (file, editedProfile) => {
     return function(dispatch) {
+        dispatch(setAvatarFilesLoading())
         const config = {
             headers: {
                 'Content-Type': 'multipart/data-form'
@@ -116,10 +129,13 @@ export const addUserFile = (file, editedProfile) => {
             .post('/api/uploads/upload', file, config)
             .then(res => {
                 dispatch(doneEditing(editedProfile))
-                // dispatch({
-                //     type: ADD_USER_FILE, 
-                //     payload: res.data
-                // })
+                dispatch({
+                    type: ADD_USER_FILE, 
+                    payload: res.data
+                })
+            })
+            .then(() => {
+                dispatch(getAvatarsFile([editedProfile.avatar]))
             })
             .catch(err => 
                 dispatch(returnErrors(err.response.data, err.response.status))

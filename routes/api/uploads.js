@@ -44,7 +44,7 @@ const storage = new GridFsStorage({
 // sets file input to single file
 const singleUpload = multer({
    storage,
-   limits:{fileSize: 300000}
+   limits:{fileSize: 3000000}
 }).single('file');
 
 // // @route GET /uploads/files
@@ -97,6 +97,7 @@ router.get('/files/:filename', (req, res) => {
 // // @desc Get single file in json
 // // @access Public
 router.get('/image/:filename', (req, res) => {
+   console.log("API IMAGE")
    gfs.find({ filename: req.params.filename }).toArray((err, files) => {
       if(!files[0] || files[0].length === 0){
          return res.status(404).json({ err: "Could not find file" });

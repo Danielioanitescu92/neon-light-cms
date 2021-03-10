@@ -36,7 +36,8 @@ export default function(state = initialState, action) {
                             ...state.users,
                             results: state.users.results.map(user => user._id !== action.payload._id ? user : action.payload )
                         }                        
-                    : state.users.map(user => user._id !== action.payload._id ? user : action.payload )
+                    : state.users.map(user => user._id !== action.payload._id ? user : action.payload ),
+                loading: false
             } 
         case DELETE_USERS:
             return {
@@ -46,7 +47,8 @@ export default function(state = initialState, action) {
                         ...state.users,
                         results: state.users.results.filter(user => user._id !== action.payload)
                     }
-                    : state.users.filter(user => user._id !== action.payload)
+                    : state.users.filter(user => user._id !== action.payload),
+                loading: false
             }
         case ADD_USER:
             return {
@@ -56,7 +58,8 @@ export default function(state = initialState, action) {
                         ...state.users,
                         results: [ action.payload, ...state.users.results ]
                     }
-                    : [action.payload, ...state.users]
+                    : [action.payload, ...state.users],
+                loading: false
             }   
 
         // for paginated(in /users)

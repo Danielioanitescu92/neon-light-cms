@@ -167,28 +167,29 @@ export const deleteItem = id => {
             .then(res => {
                 dispatch(deleteCommOnPostDel(id))
                 dispatch(deleteReplyOnPostDel(id))
-                dispatch({
-                    type: DELETE_ITEMS,
-                    payload: id
-                })
+                // dispatch({
+                //     type: DELETE_ITEMS,
+                //     payload: id
+                // })
             })
-            .catch(err => 
+            .catch(err => {
+                console.log("NEW ERR: ", err)
                 dispatch(returnErrors(err.response.data, err.response.status))
-            )
+            })
     }
 };
 
 export const addItem = (item) => {
     return function(dispatch, getState) {
+        dispatch(setItemsLoading())
         // const body = JSON.stringify(item);
         axios
             .post('/api/items', item, tokenConfig(getState))
             .then(res => {
-                console.log("got res.data: ", res.data)
-                // dispatch({
-                //     type: ADD_ITEMS,
-                //     payload: res.data
-                // })
+                dispatch({
+                    type: ADD_ITEMS,
+                    payload: res.data
+                })
             })
             .catch(err => {
                 console.log("ERROOOOR: ", err)

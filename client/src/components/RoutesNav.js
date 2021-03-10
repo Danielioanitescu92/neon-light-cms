@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getSpecificItems, getSpecificItemsForMe } from '../actions/itemActions'
 import { getSpecificSubs } from '../actions/subActions'
-import { getUsers, getSpecificUsers } from '../actions/userActions'
+import { getSpecificUsers } from '../actions/userActions'
 
 const RoutesNav = () => {
     const dispatch = useDispatch()
@@ -12,28 +12,20 @@ const RoutesNav = () => {
     const itemzLoading = useSelector(store => store.item.loading)
 
     const togglePage = () => {
-        if(!window.location.pathname.includes('/myaccount') ||
-            !window.location.pathname.includes('/users') ||
-            !window.location.pathname.includes('/subslist') ||
-            !window.location.pathname.includes('/post') ||
-            !window.location.pathname.includes('/addpost') ||
-            !window.location.pathname.includes('/settings')) {
-                dispatch(getSpecificItems(null, null, null, null))
-        }
+        dispatch(getSpecificItems(null, null, null, null))
     }
     const toggleAcc = () => {
-        dispatch(getUsers())
-        if(window.location.pathname.includes(`/myaccount`)) {
+        if(window.location.href.includes(`/myaccount`)) {
             dispatch(getSpecificItemsForMe(null, byWho.name, null, null))
         }
     }
     const toggleUsr = () => {
-        if(window.location.pathname.includes(`/users`)) {
+        if(window.location.href.includes(`/users`)) {
             dispatch(getSpecificUsers(null, null, null, null))
         }
     }
     const toggleSubs = () => {
-        if(window.location.pathname.includes(`/subslist`)) {
+        if(window.location.href.includes(`/subslist`)) {
             dispatch(getSpecificSubs(null, null, null))
         }
     }

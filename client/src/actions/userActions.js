@@ -140,6 +140,7 @@ export const addUser = ({ name, email, password, role }) => {
 
 export const doneEditing = user => {
     return function(dispatch) {
+        dispatch(setUsersLoading())
         axios
             .post(`/api/users/editprofile/${user._id}`, user)
             .then(res => {

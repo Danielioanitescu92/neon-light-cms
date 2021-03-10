@@ -3,6 +3,9 @@ import styles from './Components.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { getSpecificUsers, deleteUser, doneEditing } from '../actions/userActions'
+import { getAvatarsFile, deleteAvatarFile, goAvatarsFile } from '../actions/fileActions'
+
+import unknown from '../unknown.png'
 
 import AddUser from './AddUser'
 import MessUsers from './MessUsers'
@@ -17,6 +20,9 @@ const UsersList = ({ match }) => {
     const previous = useSelector(store => store.user.users.previous)
     const userz = useSelector(store => store.user.users.results)
     const next = useSelector(store => store.user.users.next)
+    const filez = useSelector(store => store.file.files.avatars)
+    const filezLoading = useSelector(store => store.file.loadingAv)
+    const userzLoading = useSelector(store => store.user.loading)
     
     const [ msg, setMsg ] = useState('')
 
@@ -96,11 +102,34 @@ const UsersList = ({ match }) => {
     }, [byWho, finder])
 
     useEffect(() => {
+        if(!filezLoading) {
+            if(!userzLoading) {
+                if(userz) {
+                    dispatch(goAvatarsFile())
+                    if(userz.length > 0) {
+                        userz.map(user => {
+                            if(user.avatar !== 'unknown.png') {
+                                dispatch(getAvatarsFile([user.avatar]))
+                            }
+                        })
+                    }
+                }
+            }
+        }
+    }, [userz])
+
+    useEffect(() => {
         setMsg(err.msg.msg)
     }, [err])
 
     const handleDelUser = e => {
         dispatch(deleteUser(e.target.id))
+        if(!filezLoading) {
+            if(!userzLoading) {
+                dispatch(deleteAvatarFile(e.target.value))
+            }
+        }
+        setFinder(!finder)
     }
 
     const promote = e => {
@@ -296,8 +325,18 @@ const UsersList = ({ match }) => {
                             {userz ? 
                                 userz.map(user =>
                                     <div key={user._id} className={styles.item}>
-                                        <div>
-                                            <img src={user.avatar} alt={user.name} width="50" height="50"></img>
+                                        <div>                    
+                                            {user.avatar === 'unknown.png' ?
+                                                <img src={unknown} alt={user.name} width="50" height="50"></img>
+                                            : filez ?
+                                                filez.map(file =>
+                                                    file === null ?
+                                                        null
+                                                    : file.filename === user.avatar ?
+                                                        <img key={file._id} src={`/api/uploads/image/${file.filename}`} alt={user.name} width="50" height="50"></img>
+                                                    : null
+                                                )
+                                            : null}
                                         </div>
                                         <div>
                                             <p>{user.name}</p>
@@ -323,7 +362,7 @@ const UsersList = ({ match }) => {
                                             : null}
                                         </div>
                                         <div>
-                                            {user.role === "admin" ? <button disabled > X </button> : <button id={user._id} onClick={handleDelUser} > X </button>}
+                                            {user.role === "admin" ? <button disabled > X </button> : <button id={user._id} value={user.avatar} onClick={handleDelUser} > X </button>}
                                         </div>
                                     </div>                                
                                 )

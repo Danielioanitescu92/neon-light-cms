@@ -43,7 +43,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <div className="App">
-          <AppNavbar/>
+          <AppNavbar/>            
           <RoutesNav/>
           <Switch>
             
