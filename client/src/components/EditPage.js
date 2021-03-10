@@ -42,10 +42,6 @@ const EditPage = ({ match }) => {
     }, [dispatch])
 
     useEffect(() => {
-        console.log("DATAAAA: ", data)
-    }, [data])
-
-    useEffect(() => {
         if(itemz) {
             if(itemz._id === match.params.id) {
                 setId(itemz._id)
@@ -73,7 +69,6 @@ const EditPage = ({ match }) => {
         }
     }, [itemz, dispatch])
     
-    const handlePic = e => setFile(e.target.value)
     const handleTitle = e => setTitle(e.target.value)
     const handleSubtitle = e => setSubtitle(e.target.value)
     const handleTags = e => setTagText(e.target.value)
@@ -166,8 +161,6 @@ const EditPage = ({ match }) => {
                     itemz._id === match.params.id ?
                         <div>
                             <div className={styles.addpost}>
-                                <b>Picture URL</b>
-                                <input name="text" type="text" value={file} onChange={handlePic}></input>
                                 <b>Title</b>
                                 <input name="title" type="text" value={title} onChange={handleTitle}></input>
                                 <b>Subtitle</b>
@@ -200,10 +193,7 @@ const EditPage = ({ match }) => {
                                 </div>
                                 <button onClick={handleSubmit}>Submit</button>
                             </div>        
-                            <h1>Preview:</h1>
-                            
-                            {file ? <img src={file} alt={title ? title : file} width="50" height="50"></img> : null}
-                            
+                            <h1>Preview:</h1>                            
                             <h2>{title ? title : null}</h2>
                             <h4>{subtitle ? subtitle : null}</h4>
                             <p>{by ? by : null}</p>

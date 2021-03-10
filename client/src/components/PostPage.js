@@ -20,8 +20,6 @@ const PostPage = ({ match }) => {
     const commentz = useSelector(store => store.comment.comments)
     const repliez = useSelector(store => store.reply.replies)
     const picz = useSelector(store => store.file.files.items)
-    const piczLoading = useSelector(store => store.file.loadingIt)
-    const itemzLoading = useSelector(store => store.item.loading)
 
     useEffect(() => {
         if(byWho) {
@@ -32,20 +30,14 @@ const PostPage = ({ match }) => {
     }, [byWho])
 
     useEffect(() => {
-        if(byWho) {            
+        dispatch(goItemsFiles());
+        if(byWho) {
             if(itemz) {
                 if(itemz._id === match.params.id) {
                     setMyItem(itemz)
                 }
-                if(!piczLoading) {
-                    if(!itemzLoading) {
-                        dispatch(goItemsFiles());
-                        if(itemz.length > 0) {
-                            itemz.map(item => {
-                                dispatch(getItemsFiles([item.picUrl]))
-                            })
-                        }
-                    }
+                if(itemz.picUrl) {
+                    dispatch(getItemsFiles([itemz.picUrl]))
                 }
             }
         }

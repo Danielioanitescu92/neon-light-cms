@@ -202,11 +202,20 @@ const PostsList = ({ match }) => {
 
     // DELETE POST
     const handleDelPost = e => {
-        console.log("DELETED ITEM _ID: ", e.target.id)
         dispatch(deleteItem(e.target.id))
         if(!piczLoading) {
             if(!itemzLoading) {
-                dispatch(deleteItemFile(e.target.value))
+                itemz.map(item => {
+                    if(item._id === e.target.id) {
+                        picz.map(pic => {
+                            if(pic !== null) {
+                                if(item.picUrl === pic.filename) {
+                                    dispatch(deleteItemFile(pic._id))
+                                }
+                            }
+                        })
+                    }
+                })
             }
         }
         setFinder(!finder)
@@ -346,7 +355,7 @@ const PostsList = ({ match }) => {
                                 <div>
                                     {byWho ?
                                         byWho.role === "admin" ?
-                                            <button id={item._id} value={item.title} onClick={handleDelPost} > X </button>
+                                            <button id={item._id} onClick={handleDelPost} > X </button>
                                         : null
                                     : null}
                                 </div>
