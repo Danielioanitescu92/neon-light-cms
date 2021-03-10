@@ -162,15 +162,16 @@ export const getSpecificItemsForMe = (search, me, page, sort) => {
 
 export const deleteItem = id => {
     return function(dispatch, getState) {
+        dispatch(setItemsLoading())
         axios
             .delete(`/api/items/${id}`, tokenConfig(getState))
             .then(res => {
                 dispatch(deleteCommOnPostDel(id))
                 dispatch(deleteReplyOnPostDel(id))
-                // dispatch({
-                //     type: DELETE_ITEMS,
-                //     payload: id
-                // })
+                dispatch({
+                    type: DELETE_ITEMS,
+                    payload: id
+                })
             })
             .catch(err => {
                 console.log("NEW ERR: ", err)

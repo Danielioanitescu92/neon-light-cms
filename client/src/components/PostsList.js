@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { getUsers } from '../actions/userActions'
 import { deleteItem, getSpecificItems, getSpecificItemsForMe } from '../actions/itemActions'
-import { getItemsFiles, goItemsFiles } from '../actions/fileActions'
+import { getItemsFiles, goItemsFiles, deleteItemFile } from '../actions/fileActions'
 
 import ViewsSource from './ViewsSource'
 import ViewsTime from './ViewsTime'
@@ -204,6 +204,11 @@ const PostsList = ({ match }) => {
     const handleDelPost = e => {
         console.log("DELETED ITEM _ID: ", e.target.id)
         dispatch(deleteItem(e.target.id))
+        if(!piczLoading) {
+            if(!itemzLoading) {
+                dispatch(deleteItemFile(e.target.value))
+            }
+        }
         setFinder(!finder)
     }
     

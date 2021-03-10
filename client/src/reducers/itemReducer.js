@@ -53,10 +53,11 @@ export default function(state = initialState, action) {
         case DELETE_ITEMS:
             return {
                 ...state,
-                items: {
-                    ...state.items,
-                    results: state.items.results.filter(item => item._id !== action.payload)
-                }
+                // items: {
+                //     ...state.items,
+                //     results: state.items.results.filter(item => item._id !== action.payload)
+                // },
+                loading: false
             }
         case ADD_ITEMS:
             return {

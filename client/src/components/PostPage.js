@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom'
 import { getThisItem, doneEditingCC } from '../actions/itemActions'
 import { getThisComms, addComment, deleteComment, addLike, removeLike } from '../actions/commentActions'
 import { getThisReps, addReply, deleteReply, addRLike, removeRLike } from '../actions/replyActions'
+import { getItemsFiles, goItemsFiles } from '../actions/fileActions'
 
 const PostPage = ({ match }) => {
+    const dispatch = useDispatch()
 
     const [ myItem, setMyItem ] = useState({})
     const [ comment, setComment ] = useState('')
@@ -17,7 +19,9 @@ const PostPage = ({ match }) => {
     const itemz = useSelector(store => store.item.items)
     const commentz = useSelector(store => store.comment.comments)
     const repliez = useSelector(store => store.reply.replies)
-    const dispatch = useDispatch()
+    const picz = useSelector(store => store.file.files.items)
+    const piczLoading = useSelector(store => store.file.loadingIt)
+    const itemzLoading = useSelector(store => store.item.loading)
 
     useEffect(() => {
         if(byWho) {
@@ -32,6 +36,16 @@ const PostPage = ({ match }) => {
             if(itemz) {
                 if(itemz._id === match.params.id) {
                     setMyItem(itemz)
+                }
+                if(!piczLoading) {
+                    if(!itemzLoading) {
+                        dispatch(goItemsFiles());
+                        if(itemz.length > 0) {
+                            itemz.map(item => {
+                                dispatch(getItemsFiles([item.picUrl]))
+                            })
+                        }
+                    }
                 }
             }
         }
@@ -161,7 +175,17 @@ const PostPage = ({ match }) => {
 
                         <div className={styles.post}>
                             <div>
-                                <img src={itemz.picUrl} alt={itemz.title} width="50" height="50"></img>
+                                {picz ?
+                                    picz.length > 0 ?
+                                        picz.map(pic =>
+                                            pic === null ?
+                                                null
+                                            : pic.filename === itemz.picUrl ?
+                                                <img key={pic._id} src={`/api/uploads/image/${pic.filename}`} alt={itemz.title} width="50" height="50"></img>
+                                            : null
+                                        )
+                                    : null
+                                : null}
                             </div>
                             <div>
                                 <Link to={`/author/${itemz.by}`}> <p>{itemz.by}</p> </Link>
