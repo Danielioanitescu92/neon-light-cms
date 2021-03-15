@@ -29,7 +29,59 @@ const BlogTAC = () => {
                                     <h1>Terms and Conditions for blog</h1>
                                 </div>
                                 <div>
-                                    <p>{tc.text}</p>
+                                    {/* <p>{tc.text}</p> */}
+                                    
+                                    {tc.text ?
+                                        tc.text.blocks ?
+                                            tc.text.blocks.map(elem =>
+                                                elem.type === 'header' ?
+                                                    <h3 key={elem.data.text}>{elem.data.text}</h3>
+                                                : elem.type === 'paragraph' ?
+                                                    <p key={elem.data.text}>{elem.data.text}</p>
+                                                : elem.type === 'list' ?
+                                                    elem.data.style === 'ordered' ?
+                                                        <ol key={elem._id}>
+                                                            {elem.data.items.map((it, index) => <li key={index}>{it}</li>)}
+                                                        </ol>
+                                                : 
+                                                        <ul key={elem._id}>
+                                                            {elem.data.items.map((it, index) => <li key={index}>{it}</li>)}
+                                                        </ul>
+                                                : elem.type === 'delimiter' ?
+                                                    <h2 key='delimiter'>* * *</h2>
+                                                : elem.type === 'quote' ?
+                                                    <div key='quote'>
+                                                        <div>
+                                                            <span><h2>"</h2></span>
+                                                            <span><p>{elem.data.text}</p></span>
+                                                            <span><h2>"</h2></span>
+                                                        </div>
+                                                        <div>
+                                                            <span><h2>By </h2></span>
+                                                            <span><p>{elem.data.caption}</p></span>
+                                                        </div>
+                                                    </div>
+                                                : elem.type === 'linkTool' ?
+                                                    <a href={elem.data.link} key={elem.data.link}>
+                                                        <b>{elem.data.link}</b>
+                                                    </a>
+                                                : elem.type === 'warning' ?
+                                                    <div key='warning'>
+                                                        <span><h2>! </h2></span>
+                                                        <span>
+                                                            <div>
+                                                                <b>{elem.data.title}</b>
+                                                            </div>
+                                                            <div>
+                                                                <p>{elem.data.message}</p>
+                                                            </div>
+                                                        </span>
+                                                    </div>
+                                                : null
+                                            )
+                                        : <p>{tc.text}</p>
+                                    : null}
+
                                 </div>
                                 <div>
                                     {byWho ?

@@ -20,6 +20,8 @@ const PostPage = ({ match }) => {
     const commentz = useSelector(store => store.comment.comments)
     const repliez = useSelector(store => store.reply.replies)
     const picz = useSelector(store => store.file.files.items)
+    const piczLoading = useSelector(store => store.file.loadingIt)
+    const itemzLoading = useSelector(store => store.item.loading)
 
     useEffect(() => {
         if(byWho) {
@@ -37,7 +39,11 @@ const PostPage = ({ match }) => {
                     setMyItem(itemz)
                 }
                 if(itemz.picUrl) {
-                    dispatch(getItemsFiles([itemz.picUrl]))
+                    if(!piczLoading) {
+                        if(!itemzLoading) {
+                            dispatch(getItemsFiles([itemz.picUrl]))
+                        }
+                    }
                 }
             }
         }
