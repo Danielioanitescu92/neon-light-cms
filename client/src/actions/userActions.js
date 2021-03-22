@@ -195,12 +195,12 @@ export const confAcc = tok => {
 
         axios.get(`/api/users/confirmAccount/${tok}`)
         .then(res => {
-            console.log("2 confAcc ACTION res.data: ", res.data)
-            dispatch(returnErrors(res.data, res.status, 'ACC_LOADED'));
+            // console.log("2 confAcc ACTION res.data: ", res.data)
+            // dispatch(returnErrors(res.data, res.status, 'ACC_LOADED'));
         })
         .catch(err => {
-            console.log("2 confAcc ACTION ERR: ", err)
-            dispatch(returnErrors(err.response.data, err.response.status, 'ACC_LOADED'));
+            // console.log("2 confAcc ACTION ERR: ", err)
+            // dispatch(returnErrors(err.response.data, err.response.status, 'ACC_LOADED'));
         })
     }
 }
