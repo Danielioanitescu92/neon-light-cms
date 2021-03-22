@@ -1,4 +1,5 @@
 .thelist {
+    min-height: calc(100vh - 240px);
     width: 95%;
     display: flex;
     flex-direction: column;

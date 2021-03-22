@@ -110,10 +110,10 @@ const MyAccount = ({match}) => {
                     <b>Role:</b> <p>{byWho.role}</p>
                     <b>Register date:</b> <p>{byWho.register_date.slice(0,10)} {byWho.register_date.slice(11,19)}</p>
                     <b>socials:</b>
-                        {byWho.facebook ? <a href={byWho.facebook} target="_blank"> Facebook </a> : null}
-                        {byWho.instagram ? <a href={byWho.instagram} target="_blank"> Instagram </a> : null}
-                        {byWho.twitter ? <a href={byWho.twitter} target="_blank"> Twitter </a> : null}
-                        {byWho.youtube ? <a href={byWho.youtube} target="_blank"> Youtube </a> : null}
+                        {byWho.facebook ? <a href={`http://${byWho.facebook}`} target="_blank"> Facebook </a> : null}
+                        {byWho.instagram ? <a href={`http://${byWho.instagram}`} target="_blank"> Instagram </a> : null}
+                        {byWho.twitter ? <a href={`http://${byWho.twitter}`} target="_blank"> Twitter </a> : null}
+                        {byWho.youtube ? <a href={`http://${byWho.youtube}`} target="_blank"> Youtube </a> : null}
                     
                     <Link to={`/editprofile/${byWho._id}`}>
                         <p>Edit</p>
