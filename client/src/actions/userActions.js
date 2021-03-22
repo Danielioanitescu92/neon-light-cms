@@ -191,7 +191,7 @@ export const deleteUser = id => {
 export const confAcc = tok => {
     console.log("1 confAcc ACTION tok: ", tok)
     return function(dispatch) {
-        dispatch({ type: USERS_LOADING });
+        // dispatch({ type: USERS_LOADING });
 
         axios.get(`/api/users/confirmAccount/${tok}`)
         .then(res => {
