@@ -348,21 +348,21 @@ router.post('/', (req, res) => {
 // // @access Private
 router.get('/confirmAccount/:token', (req, res) => {
     console.log("1 confirmAccount req.params.token: ", req.params.token)
-    User.findOne({
-        resetPasswordToken: req.params.token
-    })
-    .then(user => {
-        console.log("2 confirmAccount: ", user)
-        if(!user) {
-            console.log("3 confirmAccount no user ERR: ")
-            res.json({ msg: 'Password reset link is invalid or has expired. Please try again.' })
-        } else {
-            console.log("4 confirmAccount user exist")
-            res.status(200).json({ msg: 'Your account is active. You can now login.' });
-            user.resetPasswordToken = null;
-            user.save();
-        }
-    })
+    // User.findOne({
+    //     resetPasswordToken: req.params.token
+    // })
+    // .then(user => {
+    //     console.log("2 confirmAccount: ", user)
+    //     if(!user) {
+    //         console.log("3 confirmAccount no user ERR: ")
+    //         res.json({ msg: 'Password reset link is invalid or has expired. Please try again.' })
+    //     } else {
+    //         console.log("4 confirmAccount user exist")
+    //         res.status(200).json({ msg: 'Your account is active. You can now login.' });
+    //         user.resetPasswordToken = null;
+    //         user.save();
+    //     }
+    // })
 });
 
 // @route POST api/users/contactdev

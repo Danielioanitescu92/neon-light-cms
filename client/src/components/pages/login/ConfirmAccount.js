@@ -11,9 +11,7 @@ const ConfirmAccount = ({ match }) => {
 
     useEffect(() => {
         console.log("TOKEN: ", match.params.token)
-        setTimeout(() => {
-            dispatch(confAcc(match.params.token)) }
-        , 1000)
+        dispatch(confAcc(match.params.token))
     }, [])
 
     useEffect(() => {
