@@ -1,0 +1,20 @@
+.thedash {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.ungrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin: auto;
+}
+
+.ungrapdiv {
+    margin: 20px;
+}

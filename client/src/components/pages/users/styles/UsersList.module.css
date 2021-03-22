@@ -1,0 +1,11 @@
+.item {
+    padding: 10px;
+    width: 80vw;
+    min-width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
+    background: rgb(115, 115, 124);
+    color: rgb(255, 255, 255);
+}

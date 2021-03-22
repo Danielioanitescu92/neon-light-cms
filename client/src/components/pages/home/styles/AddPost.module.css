@@ -1,0 +1,19 @@
+.addpost {
+    margin-bottom: 10vw;
+    padding: 2vw;
+    background: rgb(115, 115, 124);
+    color: rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.myedit, .addpost input {
+    width: 60vw;
+    margin: 2vw;
+    padding: 2vw;
+    background: rgb(222, 222, 223);
+    border: 5px solid rgb(80, 80, 255);
+    color: rgb(0, 0, 0);
+}

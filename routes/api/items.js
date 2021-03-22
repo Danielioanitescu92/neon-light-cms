@@ -643,6 +643,9 @@ router.get('/viewsUser/:whatSource/:whatTime', (req, res) => {
             })
         })
         .then(() => {
+            usrz.sort((a, b) => a.counting - b.counting)
+        })
+        .then(() => {
             res.status(200).json(usrz)
         })
     })

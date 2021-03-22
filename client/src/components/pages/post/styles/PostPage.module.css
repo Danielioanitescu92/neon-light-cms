@@ -1,0 +1,16 @@
+.thelist {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+}
+
+.comment {
+    background: rgb(91, 91, 99);
+}
+
+.reply {
+    background: rgb(47, 47, 51);
+}

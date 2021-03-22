@@ -1,0 +1,25 @@
+.navbar {
+    width: 100%;
+    height: 70px;
+    background: rgb(150, 150, 163);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.routesnav {
+    width: 100%;
+    height: 70px;
+    background: rgb(150, 150, 163);
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.routesforadmin {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

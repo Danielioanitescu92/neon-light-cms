@@ -1,0 +1,20 @@
+.arange {
+    width: 100%;
+    height: 200px;
+    margin: 50px;
+    background-color: rgb(150, 150, 163);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.diva {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    background-color: rgb(41, 41, 180);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
