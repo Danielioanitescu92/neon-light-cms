@@ -3,13 +3,13 @@ import styles from './styles/Dashboard.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { getUsers } from '../../../actions/userActions'
 
-import ViewsSource from '../dashboard/ViewsSource'
-import ViewsTime from '../dashboard/ViewsTime'
-import ViewsUsers from '../dashboard/ViewsUsers'
-import CountAll from '../dashboard/CountAll'
-import ScreenSize from '../dashboard/ScreenSize'
-import Graphix from '../dashboard/Graphix'
-import Uniques from '../dashboard/Uniques'
+import ViewsSource from './ViewsSource'
+import ViewsTime from './ViewsTime'
+import ViewsUsers from './ViewsUsers'
+import CountAll from './CountAll'
+import ScreenSize from './ScreenSize'
+import Graphix from './Graphix'
+import Uniques from './Uniques'
 
 const Dashboard = ({ match }) => {
     const dispatch = useDispatch()
