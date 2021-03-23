@@ -16,6 +16,8 @@ export const ProtectedRoute = ({
             if(byWho) {
                 if (byWho.role === 'admin') {
                     return <Component {...props} />;
+                } else {
+                    return <h2>Acces denied. Admins only.</h2>
                 }
             } else {
                 return <h2>Acces denied. Admins only.</h2>
