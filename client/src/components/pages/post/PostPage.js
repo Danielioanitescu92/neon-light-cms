@@ -60,6 +60,14 @@ const PostPage = ({ match }) => {
     const addingComment = e => {
         e.preventDefault()
         let editedPost = myItem
+        if(!itemzLoading) {
+            if(!commentzLoading) {
+                if(!repliezLoading) {
+                    editedPost = {...editedPost, commCount: editedPost.commCount}
+                    dispatch(doneEditingCC(editedPost))
+                }
+            }
+        }
         if(!reply) {
             const newComment = {
                 name: byWho.name,
@@ -69,11 +77,6 @@ const PostPage = ({ match }) => {
             }
             if(!commentzLoading) {
                 dispatch(addComment(newComment))
-                // modify item.countComm:
-                if(!itemzLoading) {
-                    editedPost = {...editedPost, commCount: editedPost.commCount+1}
-                    dispatch(doneEditingCC(editedPost))
-                }
             }
         } else {
             const newReply = {
@@ -85,11 +88,6 @@ const PostPage = ({ match }) => {
             }
             if(!repliezLoading) {
                 dispatch(addReply(newReply))
-                // modify item.countComm:
-                if(!itemzLoading) {
-                    editedPost = {...editedPost, commCount: editedPost.commCount+1}
-                    dispatch(doneEditingCC(editedPost))
-                }
             }
         }
         setComment('')
