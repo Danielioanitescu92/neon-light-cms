@@ -60,14 +60,8 @@ const PostPage = ({ match }) => {
     const addingComment = e => {
         e.preventDefault()
         let editedPost = myItem
-        if(!itemzLoading) {
-            if(!commentzLoading) {
-                if(!repliezLoading) {
-                    editedPost = {...editedPost, commCount: editedPost.commCount}
-                    dispatch(doneEditingCC(editedPost))
-                }
-            }
-        }
+        editedPost = {...editedPost, commCount: editedPost.commCount}
+        dispatch(doneEditingCC(editedPost))
         if(!reply) {
             const newComment = {
                 name: byWho.name,
@@ -75,9 +69,7 @@ const PostPage = ({ match }) => {
                 comment: comment,
                 forWich: myItem._id
             }
-            if(!commentzLoading) {
-                dispatch(addComment(newComment))
-            }
+            dispatch(addComment(newComment))
         } else {
             const newReply = {
                 name: byWho.name,
@@ -86,9 +78,7 @@ const PostPage = ({ match }) => {
                 forWich: myItem._id,
                 parentComm: parentComm
             }
-            if(!repliezLoading) {
-                dispatch(addReply(newReply))
-            }
+            dispatch(addReply(newReply))
         }
         setComment('')
         setParentComm('')
@@ -98,57 +88,33 @@ const PostPage = ({ match }) => {
     const handleDelComm = e => {
         let editedPost = myItem
         if(repliez) {
-            if(!commentzLoading) {
-                if(!repliezLoading) {
-                    repliez.map(rep => {
-                        if(rep.parentComm === e.target.id) {
-                            dispatch(deleteReply(rep._id, match.params.id))                                
-                            // modify item.countComm:
-                            editedPost = {...editedPost, commCount: editedPost.commCount-1}
-                        }
-                    })
+            repliez.map(rep => {
+                if(rep.parentComm === e.target.id) {
+                    dispatch(deleteReply(rep._id, match.params.id))                                
+                    // modify item.countComm:
+                    editedPost = {...editedPost, commCount: editedPost.commCount-1}
                 }
-            }
+            })
         }
         if(reply) {
             setReply(false)
         }
-        if(!commentzLoading) {
-            if(!repliezLoading) {
-                dispatch(deleteComment(e.target.id, match.params.id))
-            }
-        }
+        dispatch(deleteComment(e.target.id, match.params.id))
 
         // modify item.countComm:
-        if(!commentzLoading) {
-            if(!repliezLoading) {
-                if(!itemzLoading) {
-                    editedPost = {...editedPost, commCount: editedPost.commCount-1}
-                    dispatch(doneEditingCC(editedPost))
-                }
-            }
-        }
+        editedPost = {...editedPost, commCount: editedPost.commCount-1}
+        dispatch(doneEditingCC(editedPost))
     }
 
     const handleDelRep = e => {
         let editedPost = myItem
-        if(!commentzLoading) {
-            if(!repliezLoading) {
-                dispatch(deleteReply(e.target.id, match.params.id))
-            }
-        }
+        dispatch(deleteReply(e.target.id, match.params.id))
         if(reply) {
             setReply(false)
         }
         // modify item.countComm:
-        if(!commentzLoading) {
-            if(!repliezLoading) {
-                if(!itemzLoading) {
-                    editedPost = {...editedPost, commCount: editedPost.commCount-1}
-                    dispatch(doneEditingCC(editedPost))
-                }
-            }
-        }
+        editedPost = {...editedPost, commCount: editedPost.commCount-1}
+        dispatch(doneEditingCC(editedPost))
     }
 
     const handleCommLike = e => {
@@ -159,11 +125,7 @@ const PostPage = ({ match }) => {
                 userId: localStorage.getItem(`userId`),
                 itemId: myItem._id
             }
-            if(!commentzLoading) {
-                if(!repliezLoading) {
-                    dispatch(addLike(newLike))
-                }
-            }
+            dispatch(addLike(newLike))
         }
     }
         
@@ -175,11 +137,7 @@ const PostPage = ({ match }) => {
                 userId: localStorage.getItem(`userId`),
                 itemId: myItem._id
             }
-            if(!commentzLoading) {
-                if(!repliezLoading) {
-                    dispatch(removeLike(newLike))
-                }
-            }
+            dispatch(removeLike(newLike))
         }
     }
 
@@ -191,11 +149,7 @@ const PostPage = ({ match }) => {
                 userId: localStorage.getItem(`userId`),
                 itemId: myItem._id
             }
-            if(!commentzLoading) {
-                if(!repliezLoading) {
-                    dispatch(addRLike(newLike))
-                }
-            }
+            dispatch(addRLike(newLike))
         }
     }
 
@@ -207,11 +161,7 @@ const PostPage = ({ match }) => {
                 userId: localStorage.getItem(`userId`),
                 itemId: myItem._id
             }
-            if(!commentzLoading) {
-                if(!repliezLoading) {
-                    dispatch(removeRLike(newLike))
-                }
-            }
+            dispatch(removeRLike(newLike))
         }
     }
 
@@ -387,7 +337,7 @@ const PostPage = ({ match }) => {
                                     <h3>Add a comment</h3>
                                     <form id="form" onSubmit={addingComment}>
                                         <textarea name="comment" rows="5" value={comment} onChange={handleComment} />
-                                        <input type="submit" value={reply ? "Add Reply" : "Add comment"} ></input>
+                                        <input type="submit" value={reply ? "Add Reply" : "Add comment"}  disabled={itemzLoading ? true : commentzLoading ? true : repliezLoading ? true : false} ></input>
                                     </form>
                                 </div>
                             : null}
