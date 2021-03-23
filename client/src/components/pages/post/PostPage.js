@@ -69,6 +69,11 @@ const PostPage = ({ match }) => {
             }
             if(!commentzLoading) {
                 dispatch(addComment(newComment))
+                // modify item.countComm:
+                if(!itemzLoading) {
+                    editedPost = {...editedPost, commCount: editedPost.commCount+1}
+                    dispatch(doneEditingCC(editedPost))
+                }
             }
         } else {
             const newReply = {
@@ -80,18 +85,16 @@ const PostPage = ({ match }) => {
             }
             if(!repliezLoading) {
                 dispatch(addReply(newReply))
+                // modify item.countComm:
+                if(!itemzLoading) {
+                    editedPost = {...editedPost, commCount: editedPost.commCount+1}
+                    dispatch(doneEditingCC(editedPost))
+                }
             }
         }
         setComment('')
         setParentComm('')
         setReply(false)
-        // modify item.countComm:
-        if(!commentzLoading) {
-            if(!repliezLoading) {
-                editedPost = {...editedPost, commCount: editedPost.commCount+1}
-                dispatch(doneEditingCC(editedPost))
-            }
-        }
     }
 
     const handleDelComm = e => {
@@ -121,8 +124,10 @@ const PostPage = ({ match }) => {
         // modify item.countComm:
         if(!commentzLoading) {
             if(!repliezLoading) {
-                editedPost = {...editedPost, commCount: editedPost.commCount-1}
-                dispatch(doneEditingCC(editedPost))
+                if(!itemzLoading) {
+                    editedPost = {...editedPost, commCount: editedPost.commCount-1}
+                    dispatch(doneEditingCC(editedPost))
+                }
             }
         }
     }
@@ -140,8 +145,10 @@ const PostPage = ({ match }) => {
         // modify item.countComm:
         if(!commentzLoading) {
             if(!repliezLoading) {
-                editedPost = {...editedPost, commCount: editedPost.commCount-1}
-                dispatch(doneEditingCC(editedPost))
+                if(!itemzLoading) {
+                    editedPost = {...editedPost, commCount: editedPost.commCount-1}
+                    dispatch(doneEditingCC(editedPost))
+                }
             }
         }
     }
