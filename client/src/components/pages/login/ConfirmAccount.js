@@ -14,6 +14,7 @@ const ConfirmAccount = ({ match }) => {
     const history = useHistory();
     
     const err = useSelector(store => store.error)
+    const byWho = useSelector(store => store.auth.user)
 
     useEffect(() => {
         dispatch(confAcc(match.params.token))
@@ -21,8 +22,13 @@ const ConfirmAccount = ({ match }) => {
 
     useEffect(() => {
         setMsg(err.msg.msg)
-        dispatch(logout())
     }, [err])
+
+    useEffect(() => {
+        if(byWho) {
+            dispatch(logout())
+        }
+    }, [byWho])
 
     // const handleProceed = () => {
     //     // dispatch(logout())
