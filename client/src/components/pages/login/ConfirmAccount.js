@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react'
 import styles from './styles/ConfirmAccount.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+
 import { confAcc } from '../../../actions/userActions'
+import { logout } from '../../../actions/authActions'
+import { clearErrors } from '../../../actions/errorActions'
 
 const ConfirmAccount = ({ match }) => {
 
@@ -14,6 +17,7 @@ const ConfirmAccount = ({ match }) => {
 
     useEffect(() => {
         dispatch(confAcc(match.params.token))
+        dispatch(logout())
     }, [])
 
     useEffect(() => {
@@ -21,21 +25,14 @@ const ConfirmAccount = ({ match }) => {
     }, [err])
 
     const handleProceed = () => {
-        dispatch(logout())
-        dispatch(goItems())
-        dispatch(goComments())
-        dispatch(goReplies())
-        dispatch(goUsers())
-        dispatch(goSubs())
-        dispatch(goAb())
-        dispatch(clearErrors())
-        dispatch(goPp())
-        dispatch(goTc())
+        // dispatch(logout())
+        // dispatch(clearErrors())
         history.push(`/`)
     }
 
     return (
-        <div className={styles.thecover}>
+        <div>
+            {/* className={styles.thecover} */}
             {msg ?
                 <div>
                     <h3>{msg}</h3>
