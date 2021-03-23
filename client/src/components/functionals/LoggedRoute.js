@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { useSelector } from "react-redux"
 
-export const ProtectedRoute = ({
+export const LoggedRoute = ({
     component: Component,
     ...rest
 }) => {
