@@ -17,27 +17,28 @@ const ConfirmAccount = ({ match }) => {
 
     useEffect(() => {
         dispatch(confAcc(match.params.token))
-        dispatch(logout())
     }, [])
 
     useEffect(() => {
         setMsg(err.msg.msg)
+        dispatch(logout())
     }, [err])
 
-    const handleProceed = () => {
-        // dispatch(logout())
-        // dispatch(clearErrors())
-        history.push(`/`)
-    }
+    // const handleProceed = () => {
+    //     // dispatch(logout())
+    //     // dispatch(clearErrors())
+    //     history.push(`/`)
+    // }
 
     return (
         <div>
             {/* className={styles.thecover} */}
             {msg ?
-                <div>
-                    <h3>{msg}</h3>
-                    <button onClick={handleProceed}>Proceed to Login</button>
-                </div>
+                <h3>{msg}</h3>
+                // <div>
+                //     <h3>{msg}</h3>
+                //     <button onClick={handleProceed}>Proceed to Login</button>
+                // </div>
             : null}
         </div>
     )
