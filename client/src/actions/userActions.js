@@ -272,6 +272,7 @@ export const goUsers = () => {
 }
 
 export const setUsersLoading = () => {
+    console.log("LOAD THE USER")
     return {
         type: USERS_LOADING
     };
