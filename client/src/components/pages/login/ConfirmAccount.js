@@ -24,11 +24,11 @@ const ConfirmAccount = ({ match }) => {
         setMsg(err.msg.msg)
     }, [err])
 
-    useEffect(() => {
-        if(byWho) {
-            dispatch(logout())
-        }
-    }, [byWho])
+    // useEffect(() => {
+    //     if(byWho) {
+    //         dispatch(logout())
+    //     }
+    // }, [byWho])
 
     // const handleProceed = () => {
     //     // dispatch(logout())

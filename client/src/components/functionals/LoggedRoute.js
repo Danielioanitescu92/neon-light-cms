@@ -14,11 +14,9 @@ export const ProtectedRoute = ({
         {...rest}
         render={props => {
             if(byWho) {
-                if (byWho.role === 'admin') {
-                    return <Component {...props} />;
-                }
+                return <Component {...props} />
             } else {
-                return <h2>Acces denied. Admins only.</h2>
+                return <h2>Log In to receive information</h2>
             }
         }}
         />
