@@ -74,7 +74,7 @@ function App() {
             <LoggedRoute path="/search/:search/author/:author/page/:page" exact component={PostsList} />
             <LoggedRoute path="/search/:search/author/:author/page/:page/sort/:sort" exact component={PostsList} />
 
-            <LoggedRoute path="/confirmAccount/:token" component={ConfirmAccount} />
+            <Route path="/confirmAccount/:token" component={ConfirmAccount} />
             <ProtectedRoute path="/editabout/:id" component={EditAbout} />
             <ProtectedRoute path="/edit/:id" component={EditPage} />
             <ProtectedRoute path="/edittc/:id" component={EditTAC} />
@@ -85,8 +85,8 @@ function App() {
             <ProtectedRoute path="/settings/blog privacy policies" exact component={BlogPP} />
             <ProtectedRoute path="/settings/blog terms and conditions" exact component={BlogTAC} />
             <LoggedRoute path="/settings" exact component={Settings} />
-            <LoggedRoute path="/termsandconditions" component={TermsConds} />
-            <LoggedRoute path="/privacypolicies" component={PrivacyPolicies} />
+            <Route path="/termsandconditions" component={TermsConds} />
+            <Route path="/privacypolicies" component={PrivacyPolicies} />
 
             <LoggedRoute path="/" exact component={PostsList} />
             <LoggedRoute path="/page/:page" exact component={PostsList} />
@@ -125,7 +125,7 @@ function App() {
 
             <LoggedRoute path="/changepass/:id" component={ChangePass} />
             <LoggedRoute path="/editprofile/:id" component={EditProfile} />
-            <LoggedRoute path="/resetPass/:token" component={ResetPass} />
+            <Route path="/resetPass/:token" component={ResetPass} />
             <LoggedRoute path="/post/:id" component={PostPage} />
 
           </Switch>
