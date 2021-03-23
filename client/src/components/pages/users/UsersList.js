@@ -124,9 +124,11 @@ const UsersList = ({ match }) => {
 
     const handleDelUser = e => {
         dispatch(deleteUser(e.target.id))
-        if(!filezLoading) {
-            if(!userzLoading) {
-                dispatch(deleteAvatarFile(e.target.value))
+        if(e.target.value !== 'unknown.png') {
+            if(!filezLoading) {
+                if(!userzLoading) {
+                    dispatch(deleteAvatarFile(e.target.value))
+                }
             }
         }
         setFinder(!finder)
