@@ -35,10 +35,10 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/authActions';
 
-function App({ match }) {
+function App() {
 
   useEffect(() => {
-    if(!match.url.includes('/confirmAccount')) {
+    if(!window.location.pathname('/confirmAccount')) {
       store.dispatch(loadUser());
     }
   }, [store.dispatch])
