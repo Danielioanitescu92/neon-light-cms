@@ -189,17 +189,14 @@ export const deleteUser = id => {
 
 // Confirm account
 export const confAcc = tok => {
-    console.log("1 confAcc ACTION tok: ", tok)
     return function(dispatch) {
         // dispatch({ type: USERS_LOADING });
 
         axios.get(`/api/users/confirmAccount/${tok}`)
         .then(res => {
-            console.log("2 confAcc ACTION res.data: ", res.data)
             dispatch(returnErrors(res.data, res.status, 'ACC_LOADED'));
         })
         .catch(err => {
-            console.log("2 confAcc ACTION ERR: ", err)
             dispatch(returnErrors(err.response.data, err.response.status, 'ACC_LOADED'));
         })
     }
@@ -272,7 +269,6 @@ export const goUsers = () => {
 }
 
 export const setUsersLoading = () => {
-    console.log("LOAD THE USER")
     return {
         type: USERS_LOADING
     };

@@ -13,7 +13,6 @@ const ConfirmAccount = ({ match }) => {
     const err = useSelector(store => store.error)
 
     useEffect(() => {
-        console.log("TOKEN: ", match.params.token)
         dispatch(confAcc(match.params.token))
     }, [])
 
@@ -21,12 +20,26 @@ const ConfirmAccount = ({ match }) => {
         setMsg(err.msg.msg)
     }, [err])
 
+    const handleProceed = () => {
+        dispatch(logout())
+        dispatch(goItems())
+        dispatch(goComments())
+        dispatch(goReplies())
+        dispatch(goUsers())
+        dispatch(goSubs())
+        dispatch(goAb())
+        dispatch(clearErrors())
+        dispatch(goPp())
+        dispatch(goTc())
+        history.push(`/`)
+    }
+
     return (
         <div className={styles.thecover}>
             {msg ?
                 <div>
                     <h3>{msg}</h3>
-                    <button onClick={() => history.push(`/`)}>Proceed to Login</button>
+                    <button onClick={handleProceed}>Proceed to Login</button>
                 </div>
             : null}
         </div>
