@@ -49,11 +49,13 @@ router.post('/', (req, res) => {
 // @access Private
 router.delete('/:id', (req, res) => {
     console.log("rep del 1")
-    Reply.findById(req.params.id)
+    Reply.find({ forWich: req.params.id })
     .then(rep => {
-        if(rep) {
-            console.log("rep del 2")
-            rep.remove()
+        if(rep.length > 0) {
+            rep.map(r => {
+                console.log("rep del 2, rep: ", r._id)
+                r.remove()
+            })
         }
     })
     .then(() => {
