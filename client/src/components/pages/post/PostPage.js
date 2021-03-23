@@ -18,7 +18,9 @@ const PostPage = ({ match }) => {
     const byWho = useSelector(store => store.auth.user)
     const itemz = useSelector(store => store.item.items)
     const commentz = useSelector(store => store.comment.comments)
+    const commentzLoading = useSelector(store => store.comment.loading)
     const repliez = useSelector(store => store.reply.replies)
+    const repliezLoading = useSelector(store => store.reply.loading)
     const picz = useSelector(store => store.file.files.items)
     const piczLoading = useSelector(store => store.file.loadingIt)
     const itemzLoading = useSelector(store => store.item.loading)
@@ -65,7 +67,9 @@ const PostPage = ({ match }) => {
                 comment: comment,
                 forWich: myItem._id
             }
-            dispatch(addComment(newComment))
+            if(!commentzLoading) {
+                dispatch(addComment(newComment))
+            }
         } else {
             const newReply = {
                 name: byWho.name,
@@ -74,47 +78,72 @@ const PostPage = ({ match }) => {
                 forWich: myItem._id,
                 parentComm: parentComm
             }
-            dispatch(addReply(newReply))
+            if(!repliezLoading) {
+                dispatch(addReply(newReply))
+            }
         }
         setComment('')
         setParentComm('')
         setReply(false)
         // modify item.countComm:
-        editedPost = {...editedPost, commCount: editedPost.commCount+1}
-        dispatch(doneEditingCC(editedPost))
+        if(!commentzLoading) {
+            if(!repliezLoading) {
+                editedPost = {...editedPost, commCount: editedPost.commCount+1}
+                dispatch(doneEditingCC(editedPost))
+            }
+        }
     }
 
     const handleDelComm = e => {
         let editedPost = myItem
         if(repliez) {
-            repliez.map(rep => {
-                if(rep.parentComm === e.target.id) {
-                    dispatch(deleteReply(rep._id, match.params.id))
-
-                    // modify item.countComm:
-                    editedPost = {...editedPost, commCount: editedPost.commCount-1}
+            if(!commentzLoading) {
+                if(!repliezLoading) {
+                    repliez.map(rep => {
+                        if(rep.parentComm === e.target.id) {
+                            dispatch(deleteReply(rep._id, match.params.id))                                
+                            // modify item.countComm:
+                            editedPost = {...editedPost, commCount: editedPost.commCount-1}
+                        }
+                    })
                 }
-            })
+            }
         }
         if(reply) {
             setReply(false)
         }
-        dispatch(deleteComment(e.target.id, match.params.id))
+        if(!commentzLoading) {
+            if(!repliezLoading) {
+                dispatch(deleteComment(e.target.id, match.params.id))
+            }
+        }
 
         // modify item.countComm:
-        editedPost = {...editedPost, commCount: editedPost.commCount-1}
-        dispatch(doneEditingCC(editedPost))
+        if(!commentzLoading) {
+            if(!repliezLoading) {
+                editedPost = {...editedPost, commCount: editedPost.commCount-1}
+                dispatch(doneEditingCC(editedPost))
+            }
+        }
     }
 
     const handleDelRep = e => {
         let editedPost = myItem
-        dispatch(deleteReply(e.target.id, match.params.id))
+        if(!commentzLoading) {
+            if(!repliezLoading) {
+                dispatch(deleteReply(e.target.id, match.params.id))
+            }
+        }
         if(reply) {
             setReply(false)
         }
         // modify item.countComm:
-        editedPost = {...editedPost, commCount: editedPost.commCount-1}
-        dispatch(doneEditingCC(editedPost))
+        if(!commentzLoading) {
+            if(!repliezLoading) {
+                editedPost = {...editedPost, commCount: editedPost.commCount-1}
+                dispatch(doneEditingCC(editedPost))
+            }
+        }
     }
 
     const handleCommLike = e => {
@@ -125,7 +154,11 @@ const PostPage = ({ match }) => {
                 userId: localStorage.getItem(`userId`),
                 itemId: myItem._id
             }
-            dispatch(addLike(newLike))
+            if(!commentzLoading) {
+                if(!repliezLoading) {
+                    dispatch(addLike(newLike))
+                }
+            }
         }
     }
         
@@ -137,7 +170,11 @@ const PostPage = ({ match }) => {
                 userId: localStorage.getItem(`userId`),
                 itemId: myItem._id
             }
-            dispatch(removeLike(newLike))
+            if(!commentzLoading) {
+                if(!repliezLoading) {
+                    dispatch(removeLike(newLike))
+                }
+            }
         }
     }
 
@@ -149,7 +186,11 @@ const PostPage = ({ match }) => {
                 userId: localStorage.getItem(`userId`),
                 itemId: myItem._id
             }
-            dispatch(addRLike(newLike))
+            if(!commentzLoading) {
+                if(!repliezLoading) {
+                    dispatch(addRLike(newLike))
+                }
+            }
         }
     }
 
@@ -161,7 +202,11 @@ const PostPage = ({ match }) => {
                 userId: localStorage.getItem(`userId`),
                 itemId: myItem._id
             }
-            dispatch(removeRLike(newLike))
+            if(!commentzLoading) {
+                if(!repliezLoading) {
+                    dispatch(removeRLike(newLike))
+                }
+            }
         }
     }
 

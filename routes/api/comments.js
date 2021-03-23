@@ -55,8 +55,10 @@ router.delete('/:id', (req, res) => {
     console.log("comm del 1")
     Comment.findById(req.params.id)
     .then(comm => {
-        console.log("comm del 2")
-        comm.remove()
+        if(comm) {
+            console.log("comm del 2")
+            comm.remove()
+        }
     })
     .then(() => {
         console.log("comm del 3")
