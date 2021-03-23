@@ -38,7 +38,7 @@ import { loadUser } from './actions/authActions';
 function App() {
 
   useEffect(() => {
-    if(!window.location.pathname('/confirmAccount')) {
+    if(!window.location.pathname.includes('/confirmAccount')) {
       store.dispatch(loadUser());
     }
   }, [store.dispatch])
