@@ -38,7 +38,7 @@ import { loadUser } from './actions/authActions';
 function App() {
 
   useEffect(() => {
-    if(!window.location.pathname.includes('/confirmAccount')) {
+    if(!window.location.pathname.includes('/confirmAccount') || !window.location.pathname.includes('/resetPass')) {
       store.dispatch(loadUser());
     }
   }, [store.dispatch])
@@ -84,7 +84,7 @@ function App() {
             <ProtectedRoute path="/settings/contact developer" component={ContactDev} />
             <ProtectedRoute path="/settings/blog privacy policies" exact component={BlogPP} />
             <ProtectedRoute path="/settings/blog terms and conditions" exact component={BlogTAC} />
-            <LoggedRoute path="/settings" exact component={Settings} />
+            <ProtectedRoute path="/settings" exact component={Settings} />
             <Route path="/termsandconditions" component={TermsConds} />
             <Route path="/privacypolicies" component={PrivacyPolicies} />
 
