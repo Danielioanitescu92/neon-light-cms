@@ -7,6 +7,7 @@ import unknown from '../../../unknown.png'
 
 import { getAvatarsFile, addUserFile, deleteAvatarFile } from '../../../actions/fileActions'
 import { doneEditing } from '../../../actions/userActions'
+import { editAvatar } from '../../../actions/authActions'
 
 import ViewsSource from '../dashboard/ViewsSource'
 import ViewsTime from '../dashboard/ViewsTime'
@@ -42,28 +43,11 @@ const MyAccount = ({match}) => {
     useEffect(() => {
         if(byWho) {
             setMyUser(byWho)
-        }
-    }, [byWho])
-
-    useEffect(() => {
-        console.log("S-a schimbat/exista 'myUser'")
-        if(byWho) {
-            console.log("Daca esti logat,")
-            if(myUser) {
-                console.log("Si daca exista 'myUser',")
-                if(myUser.avatar !== 'unknown.png') {
-                    console.log("Si daca avatarul lui nu e 'unknown.png', atunci ia 'byWho.avatar'.")
-                    dispatch(getAvatarsFile([byWho.avatar]))
-                } else {
-                    console.log("Dar avatarul lui e 'unknown.png', atunci nu face nimic.")
-                }
-            } else if(byWho.avatar !== 'unknown.png') {
-                console.log("Si nu exista 'myUser', atunci ia 'byWho.avatar'.")
+            if(byWho.avatar !== 'unknown.png') {
                 dispatch(getAvatarsFile([byWho.avatar]))
             }
         }
-        console.log("--------")
-    }, [myUser])
+    }, [byWho])
 
     const onFileChange = e => setMyFile(e.target.files[0])
 
@@ -90,7 +74,6 @@ const MyAccount = ({match}) => {
 
     const handleDelAvatar = e => {
         if(e.target.id) {
-            console.log("FRONT file.filename: ", e.target.id)
             e.preventDefault()
             const editedProfile = {
                 _id: byWho._id,
@@ -106,6 +89,7 @@ const MyAccount = ({match}) => {
                 youtube: byWho.youtube
             }
             setMyUser(editedProfile)
+            dispatch(editAvatar(byWho._id, 'unknown.png'))
             dispatch(doneEditing(editedProfile))
             dispatch(deleteAvatarFile(e.target.id))
         }

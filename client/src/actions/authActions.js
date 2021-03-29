@@ -11,7 +11,8 @@ import {
     TOK_LOADED,
     FORG_SUCCESS,
     FORG_FAIL,
-    NO_USER_LOADING
+    NO_USER_LOADING,
+    AV_CHANGED
     // REGISTER_SUCCESS,
     // REGISTER_FAIL
 } from './types';
@@ -31,6 +32,25 @@ export const loadUser = () => {
             dispatch({
                 type: AUTH_ERROR
             });
+        })
+    }
+}
+
+// Editing avatar
+export const editAvatar = (id, avatar) => {
+    return function(dispatch, getState) {
+        dispatch({ type: USER_LOADING });
+
+        const body = JSON.stringify({ id, avatar });
+
+        axios.put(`./api/auth/editAvatar`, body, tokenConfig(getState))
+        .then(res => dispatch({
+            type: AV_CHANGED,
+            payload: res.data
+        }))
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+            dispatch({ type: USER_LOADED });
         })
     }
 }

@@ -236,6 +236,37 @@ router.put('/updatePasswordViaEmail', (req, res, next) => {
     })
 });
 
+// @route PUT api/auth/editAvatar
+// @desc Update user password
+// @access Private
+router.put('/editAvatar', (req, res, next) => {
+    const { id, avatar } = req.body;
+
+    User.find({ _id: id })
+    .then(user => {
+        if(user) {  
+            user[0].avatar = avatar,
+            user[0].save().then(() => {
+                res.json({ 
+                    _id: user[0]._id ,
+                    name: user[0].name,
+                    email: user[0].email,
+                    role: user[0].role,
+                    register_date: user[0].register_date,
+                    aboutme: user[0].aboutme,
+                    avatar: avatar,
+                    facebook: user[0].facebook,
+                    instagram: user[0].instagram,
+                    twitter: user[0].twitter,
+                    youtube: user[0].youtube
+                })
+            })
+        } else {
+            res.status(404).json({ msg: 'User doesn`t exist in our database.' });
+        }
+    })
+});
+
 // @route GET api/auth/user
 // @desc Get user data(after login)
 // @access Private

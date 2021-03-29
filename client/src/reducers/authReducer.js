@@ -10,6 +10,7 @@ import {
     // REGISTER_SUCCESS,
     REGISTER_FAIL,
     TOK_LOADED,
+    AV_CHANGED
     // FORG_FAIL
 } from '../actions/types';
 
@@ -34,6 +35,12 @@ export default function(state = initialState, action) {
                 isAuthenticated: true,
                 isLoading: false,
                 forToken: null,
+                user: action.payload
+            };
+        case AV_CHANGED:
+            return {
+                ...state,
+                isLoading: false,
                 user: action.payload
             };
         case TOK_LOADED:

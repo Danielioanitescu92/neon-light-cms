@@ -20,6 +20,7 @@ import { returnErrors } from './errorActions';
 import { addItem } from './itemActions';
 import { doneEditing } from './userActions'
 import { sendTheNewPost } from './subActions'
+import { editAvatar } from './authActions'
 import { useHistory } from 'react-router-dom'
 
 export const getFiles = () => {
@@ -125,6 +126,7 @@ export const addUserFile = (file, editedProfile) => {
         axios
             .post('/api/uploads/upload', file, config)
             .then(res => {
+                dispatch(editAvatar(editedProfile._id, editedProfile.avatar))
                 dispatch(doneEditing(editedProfile))
                 dispatch({
                     type: ADD_USER_FILE, 
@@ -174,12 +176,10 @@ export const deleteItemFile = id => {
 };
 
 export const deleteAvatarFile = id => {
-    console.log("1 deleteAvatarFile id: ", id)
     return function(dispatch) {
         axios
             .delete(`/api/uploads/files/${id}`)
             .then(() => {
-                console.log("2 deleteAvatarFile worked: ")
                     dispatch({
                         type: DELETE_AVATAR_FILE,
                         payload: id
@@ -187,7 +187,6 @@ export const deleteAvatarFile = id => {
                 }
             )
             .catch(err => {
-                console.log("3 deleteAvatarFile didnt work")
                 dispatch(returnErrors(err.response.data, err.response.status))
             })
     }

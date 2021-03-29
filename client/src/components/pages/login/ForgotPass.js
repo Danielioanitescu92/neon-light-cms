@@ -18,8 +18,8 @@ const ForgotPass = () => {
     }, [err])
 
     useEffect(() => {
-        if(msg || msg !== null || msg !== '') {
-            setTimeout(() => { setMsg('') }, 9000)
+        if(msg !== '' || msg !== null) {
+            setTimeout(() => { setMsg('') }, 5000)
         }
     }, [msg])
 

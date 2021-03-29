@@ -17,20 +17,8 @@ const ContactDev = () => {
     
     const err = useSelector(store => store.error)
 
-    // const assingUser = () => {
-    //     if(userz) {
-    //         userz.map(user => {
-    //             if(user._id === byWho._id) {
-    //                 setName(user.name)
-    //                 setEmail(user.email)
-    //             }
-    //         })
-    //     }
-    // }
-
     useEffect(() => {
         dispatch(getThisUser(byWho.name))
-        // dispatch(getUsers())
         if(byWho) {
             setName(byWho.name)
             setEmail(byWho.email)
@@ -42,8 +30,8 @@ const ContactDev = () => {
     }, [err])
 
     useEffect(() => {
-        if(msg || msg !== null || msg !== '') {
-            setTimeout(() => { setMsg('') }, 9000)
+        if(msg !== '' || msg !== null) {
+            setTimeout(() => { setMsg('') }, 5000)
         }
     }, [msg])
         
