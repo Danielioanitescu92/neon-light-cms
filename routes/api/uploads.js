@@ -146,11 +146,9 @@ router.delete('/files/:id', (req, res) => {
       } else {
          console.log("4 deleteFile file found: ", files[0])
          const fileId = files[0]._id
-         gfs.delete(fileId);
-         res.json("successfully deleted image!");
+         gfs.delete(fileId)
       }
    })
-   .catch(err => res.status(400).json("Delete image not possible"));
 })
 
 module.exports = router;

@@ -178,7 +178,7 @@ export const deleteAvatarFile = id => {
     return function(dispatch) {
         axios
             .delete(`/api/uploads/files/${id}`)
-            .then(res => {
+            .then(() => {
                 console.log("2 deleteAvatarFile worked: ")
                     dispatch({
                         type: DELETE_AVATAR_FILE,
