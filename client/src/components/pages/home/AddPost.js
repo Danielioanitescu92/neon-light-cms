@@ -4,8 +4,7 @@ import styles from './styles/AddPost.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-import { addItem, goItems } from '../../../actions/itemActions'
-import { sendTheNewPost } from '../../../actions/subActions'
+import { goItems } from '../../../actions/itemActions'
 import { addPostFile, goItemsFiles, goAvatarsFile } from '../../../actions/fileActions'
 
 import EditorJs from 'react-editor-js';
@@ -18,7 +17,12 @@ import Marker from '@editorjs/marker';
 import Warning from '@editorjs/warning'; 
 import Delimiter from '@editorjs/delimiter'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+
 const AddPost = () => {
+    const warnnn = <FontAwesomeIcon icon={faExclamationTriangle} />
+    
     const byWho = useSelector(store => store.auth.user)
     const item = useSelector(store => store.item.items)
     const file = useSelector(store => store.file.files.items)
@@ -105,7 +109,6 @@ const AddPost = () => {
         e.preventDefault();
         const formData = new FormData()
         formData.append('file', myFile)
-        // dispatch(addPostFile(formData))
 
         const newItem = {
             views: {
@@ -127,8 +130,6 @@ const AddPost = () => {
                 {tag: tag4},
             ]
         }
-        // dispatch(addItem(newItem))
-        // dispatch(sendTheNewPost(newItem))        
         dispatch(addPostFile(formData, newItem))
         setMyFile('')
         setTitle('')
@@ -138,15 +139,6 @@ const AddPost = () => {
         setTag2('')
         setTag3('')
         setTag4('')
-        // if(!piczLoading) {
-        //     if(item) {
-        //         if(file) {
-        //             console.log("history.push('/')")
-        //             history.push('/')
-        //         }
-        //     }
-        // }
-        // dispatch(getSpecificItems(null, null, null, null))
     }
     
     const instanceRef = useRef(null)
@@ -157,9 +149,9 @@ const AddPost = () => {
     }
 
     return (
-        <div>
+        <div className={styles.thelist}>
             <div className={styles.addpost}>
-                <b>Picture URL</b>
+                <b>Picture</b>
                 <input name="myFile" type="file" onChange={onFileChange}></input>
                 <b>Title</b>
                 <input name="title" type="text" value={title} onChange={handleTitle}></input>
@@ -185,7 +177,7 @@ const AddPost = () => {
                 </div>
                 <b>Tags</b>
                 <input name="tagText" type="text" value={tagText} onKeyDown={addTag} onChange={handleTags}></input>
-                <div>
+                <div className={styles.tags}>
                     <span id='tag1' className={tag1 ? styles.mytag : null} onClick={delTag}>{tag1 ? tag1 : tag1 === '' ? null : null}</span>
                     <span id='tag2' className={tag2 ? styles.mytag : null} onClick={delTag}>{tag2 ? tag2 : tag2 === '' ? null : null}</span>
                     <span id='tag3' className={tag3 ? styles.mytag : null} onClick={delTag}>{tag3 ? tag3 : tag3 === '' ? null : null}</span>
@@ -195,52 +187,47 @@ const AddPost = () => {
             </div>
 
             <h1>Preview:</h1>
-            <div>
+            <div className={styles.preview} className={styles.textblocks}>
                 {text ?
                     text.blocks ?
                         text.blocks.map(elem =>
                             elem.type === 'header' ?
-                                <h3 key={elem.data.text}>{elem.data.text}</h3>
+                                <h3 className={styles.blockheader} key={elem.data.text}>{elem.data.text}</h3>
                             : elem.type === 'paragraph' ?
-                                <p key={elem.data.text}>{elem.data.text}</p>
+                                <p className={styles.blockparagraph} key={elem.data.text}>{elem.data.text}</p>
                             : elem.type === 'list' ?
                                 elem.data.style === 'ordered' ?
-                                    <ol key={uuidv4()}>
-                                        {elem.data.items.map(it => <li key={it.slice('0,10')}>{it}</li>)}
+                                    <ol className={styles.blocklist} key={uuidv4()}>
+                                        {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                     </ol>
                                 : 
-                                    <ul key={uuidv4()}>
-                                        {elem.data.items.map(it => <li key={it.slice('0,10')}>{it}</li>)}
+                                    <ul className={styles.blocklist} key={uuidv4()}>
+                                        {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                     </ul>
                             : elem.type === 'delimiter' ?
-                                <h2 key='delimiter'>* * *</h2>
+                                <h2 className={styles.delimiter} key='delimiter'>* * *</h2>
                             : elem.type === 'quote' ?
-                                <div key='quote'>
-                                    <div>
-                                        <span><h2>"</h2></span>
-                                        <span><p>{elem.data.text}</p></span>
-                                        <span><h2>"</h2></span>
+                                <div className={styles.quote} key='quote'>
+                                    <div className={styles.quotequote}>
+                                        <h2 className={styles.firstq}>"</h2>
+                                        <blockquote>{elem.data.text}</blockquote>
+                                        <h2 className={styles.secondq}>"</h2>
                                     </div>
-                                    <div>
-                                        <span><h2>By </h2></span>
-                                        <span><p>{elem.data.caption}</p></span>
+                                    <div className={styles.quoteby}>
+                                        <i>{elem.data.caption}</i>
                                     </div>
                                 </div>
                             : elem.type === 'linkTool' ?
-                                <a href={elem.data.link} key={elem.data.link}>
+                                <a className={styles.linktool} href={elem.data.link} key={elem.data.link}>
                                     <b>{elem.data.link}</b>
                                 </a>
                             : elem.type === 'warning' ?
-                                <div key='warning'>
-                                    <span><h2>! </h2></span>
-                                    <span>
-                                        <div>
-                                            <b>{elem.data.title}</b>
-                                        </div>
-                                        <div>
-                                            <p>{elem.data.message}</p>
-                                        </div>
-                                    </span>
+                                <div className={styles.warning} key='warning'>
+                                    <h2 className={styles.warnsign}>{warnnn}</h2>
+                                    <div className={styles.warndiv}>
+                                        <b>{elem.data.title}</b>
+                                        <p>{elem.data.message}</p>
+                                    </div>
                                 </div>
                             : null
                         )

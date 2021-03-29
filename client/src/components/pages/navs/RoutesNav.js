@@ -6,6 +6,14 @@ import { getSpecificItems, getSpecificItemsForMe } from '../../../actions/itemAc
 import { getSpecificSubs } from '../../../actions/subActions'
 import { getSpecificUsers } from '../../../actions/userActions'
 
+import A from '../../../statics/icon_postslist.png'
+import B from '../../../statics/icon_addpost.png'
+import C from '../../../statics/icon_account.png'
+import D from '../../../statics/icon_contact.png'
+import E from '../../../statics/icon_users.png'
+import F from '../../../statics/icon_subs.png'
+import G from '../../../statics/icon_settings.png'
+
 const RoutesNav = () => {
     const dispatch = useDispatch()
     const byWho = useSelector(store => store.auth.user)
@@ -32,34 +40,58 @@ const RoutesNav = () => {
 
     return (
             byWho ?
-                <nav className={styles.navbar} className={styles.routesnav}>
+                <nav className={styles.navbar}>                   
                         
                     <div>
-                        <Link to={'/'} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}> <h4 onClick={togglePage}>Posts</h4> </Link>
+                        <Link to={'/'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
+                            {/* <img src={A} alt='Posts List' width="30" height="30" onClick={togglePage}></img> */}
+                            <h4 onClick={togglePage}>Posts</h4>
+                        </Link>
                     </div>
                     <div>
-                        <Link to={'/myaccount'} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}> <h4 onClick={toggleAcc}>My Account</h4> </Link>
+                        <Link to={'/addpost'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
+                            {/* <img src={B} alt='Add Post' width="30" height="30"></img> */}
+                            <h4>Add Post</h4>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to={'/myaccount'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
+                            {/* <img src={C} alt='My Account' width="30" height="30" onClick={toggleAcc}></img> */}
+                            <h4 onClick={toggleAcc}>My Account</h4>
+                        </Link>
                     </div>                        
                             
                     {byWho.role === "basic" ?
                         <div>
-                            <Link to={'/contact admin'} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}> <h4>Contact admin</h4> </Link>
+                            <Link to={'/contact admin'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
+                                {/* <img src={D} alt='Contact' width="30" height="30"></img> */}
+                                <h4>Contact admin</h4>
+                            </Link>
                         </div>
                     : null}
                             
                     {byWho.role === "admin" ?
                         <div>
-                            <Link to={'/users'} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}> <h4 onClick={toggleUsr}>Users</h4> </Link>
+                            <Link to={'/users'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
+                                {/* <img src={E} alt='Users' width="30" height="30" onClick={toggleUsr}></img> */}
+                                <h4 onClick={toggleUsr}>Users</h4>
+                            </Link>
                         </div>
                     : null}
                     {byWho.role === "admin" ?
                         <div>
-                            <Link to={'/subslist'} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}> <h4 onClick={toggleSubs}>Subscribers</h4> </Link>
+                            <Link to={'/subslist'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
+                                {/* <img src={F} alt='Subscribers' width="30" height="30" onClick={toggleSubs}></img> */}
+                                <h4 onClick={toggleSubs}>Subscribers</h4>
+                            </Link>
                         </div>
                     : null}
                     {byWho.role === "admin" ?
                         <div>
-                            <Link to={'/settings'} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}> <h4>Settings</h4> </Link>
+                            <Link to={'/settings'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
+                                {/* <img src={G} alt='Settings' width="30" height="30"></img> */}
+                                <h4>Settings</h4>
+                            </Link>
                         </div>
                     : null}
 

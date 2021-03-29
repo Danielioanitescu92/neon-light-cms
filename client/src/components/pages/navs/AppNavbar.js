@@ -31,16 +31,10 @@ const AppNavbar = () => {
     return (
         <header>
             <div className={styles.navbar}>
-                <div>
-                    <Link to={'/dashboard'}> <h1>Dashboard</h1> </Link>
-                </div>
-                <div>
-                    <div>
-                        {user ? <p>Welcome, { user.name }!</p> : null}
-                    </div>                    
-                    <div>
-                        {isAuth ? <Logout/> : <Link to={'/'}> <button onClick={toggleLog}>Login</button> </Link>}
-                    </div>
+                <Link to={'/dashboard'} className={styles.navbarlink}> <h1>Dashboard</h1> </Link>                
+                <div className={styles.navbarInfoDiv}>
+                    {user ? <p>Welcome, { user.name }!</p> : null}
+                    {isAuth ? <Logout/> : <Link to={'/'}> <button onClick={toggleLog} className={styles.logger}>Login</button> </Link>}
                 </div>
             </div>
             {isOpenLog ? <Login/> : null}

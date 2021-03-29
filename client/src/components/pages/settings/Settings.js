@@ -8,24 +8,22 @@ const Settings = () => {
     const byWho = useSelector(store => store.auth.user)
 
     return (
-        <div>
-            {byWho?
-                <div>
-                    <div>
-                        <Link to={'/settings/about us'}> <h4>About Us</h4> </Link>
-                    </div>
-                    <div>
-                        <Link to={'/settings/blog privacy policies'}> <h4>Privacy Policies</h4> </Link>
-                    </div>
-                    <div>
-                        <Link to={'/settings/blog terms and conditions'}> <h4>Terms and Conditions</h4> </Link>
-                    </div>
-                    <div>
-                        <Link to={'/settings/contact developer'}> <h4>Contact developer</h4> </Link>
-                    </div>
-                </div>
-            : null}            
-        </div>
+        byWho ?
+            <main className={styles.mymain}>
+                <Link to={'/settings/about us'}>
+                    <h3>About Us</h3>
+                </Link>
+                <Link to={'/settings/blog privacy policies'}>
+                    <h3>Privacy Policies</h3>
+                </Link>
+                <Link to={'/settings/blog terms and conditions'}>
+                    <h3>Terms and Conditions</h3>
+                </Link>
+                <Link to={'/settings/contact developer'}>
+                    <h3>Contact developer</h3>
+                </Link>
+            </main>
+        : null
     )
 }
 

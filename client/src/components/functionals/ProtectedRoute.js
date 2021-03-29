@@ -1,6 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { useSelector } from "react-redux"
+import styles from './styles/ProtectedRoute.module.css'
 
 export const ProtectedRoute = ({
     component: Component,
@@ -14,13 +15,15 @@ export const ProtectedRoute = ({
         {...rest}
         render={props => {
             if(byWho) {
-                if (byWho.role === 'admin') {
-                    return <Component {...props} />;
-                } else {
-                    return <h2>Acces denied. Admins only.</h2>
-                }
+                return <Component {...props} />
             } else {
-                return <h2>Acces denied. Admins only.</h2>
+                return (
+                    <div className={styles.itemz}>
+                        <div className={styles.post}>
+                            <h1>Log In to receive information</h1>
+                        </div>
+                    </div>
+                )
             }
         }}
         />

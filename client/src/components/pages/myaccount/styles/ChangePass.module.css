@@ -1,20 +1,54 @@
 .thelist {
-    width: 95%;
+    min-height: calc(100vh - 190px);
+    margin-top: 120px;
+    padding: 10vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin: 10px;
+    box-sizing: border-box;
 }
 
-.item {
-    padding: 10px;
-    width: 80vw;
-    min-width: 300px;
+.myform {
+    padding: 30px;
+    width: 400px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     margin: 5px;
-    background: rgb(115, 115, 124);
-    color: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    background-clip: padding-box;
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    box-sizing: border-box;
+}
+
+.myform label {
+    font-weight: 900;
+}
+
+.myform input, textarea {
+    width: 100%;
+    height: 30px;
+    margin: 1vw;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.07);
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.myformsub {
+    width: 200px !important;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgba(255, 255, 255, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    cursor: pointer;
 }

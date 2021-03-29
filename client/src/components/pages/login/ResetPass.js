@@ -35,19 +35,15 @@ const ResetPass = ({ match }) => {
     }
 
     return (
-        <div>
-            <div>
-                {msg ? <h3>{msg}</h3> : null}
-            </div>
-            <div className={styles.collapse}>
-                <form onSubmit={updatePassword} className={styles.collapse}>
-                    <label>New Password</label>
-                    <input type="password" value={password} onChange={handlePassword}></input>
-                    <label>Confirm Password</label>
-                    <input type="password" value={confirmPassword} onChange={handleConfPassword}></input>
-                    <input type="submit" value="Update Password"></input>
-                </form>
-            </div>
+        <div className={styles.thelist}>
+            {msg ? <h3 className={styles.messg}>{msg}</h3> : null}
+            <form onSubmit={updatePassword} className={styles.myform}>
+                <label>New Password</label>
+                <input type="password" value={password} onChange={handlePassword}></input>
+                <label>Confirm Password</label>
+                <input type="password" value={confirmPassword} onChange={handleConfPassword}></input>
+                <input type="submit" value="Update Password" className={styles.myformsub}></input>
+            </form>
         </div>
     )
 }

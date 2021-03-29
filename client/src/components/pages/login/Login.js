@@ -28,6 +28,12 @@ const Login = () => {
         }
     }, [err, isAuth])
 
+    useEffect(() => {
+        if(msg || msg !== null || msg !== '') {
+            setTimeout(() => { setMsg('') }, 9000)
+        }
+    }, [msg])
+
     const onSubmit = e => {
         e.preventDefault()
         const user = {
@@ -46,36 +52,33 @@ const Login = () => {
 
     return (
         <div>
-            <div>
-                {msg ? <p>{msg}</p> : null}
-            </div>
-            <div  className={styles.collapse}>
-                <div>
-                    <form onSubmit={onSubmit}>
-                        <label>Email</label>
+            <div className={styles.logger}>
+                <div className={styles.blurer}></div>
+                <div className={styles.former}>
+                    {msg ? <h3 className={styles.msg}>{msg}</h3> : null}
+                    <form>
                         <input 
+                            className={styles.formeripnut}
                             type='email'
                             name='email'
                             id='email'
                             placeholder='Email'
                             onChange={handleChangeEmail}
                         ></input>
-                        <label>Password</label>
                         <input 
+                            className={styles.formeripnut}
                             type='password'
                             name='password'
                             id='password'
                             placeholder='Password'
                             onChange={handleChangePassword}
                         ></input>
-                        <input type='submit' value='Login' disabled={userLoading ? true : false} />
-                    </form>  
-                </div>               
-                <div>
-                    {!isAuth ? <button onClick={toggleForg}>Forgot Pass</button> : null}
+                        <input className={styles.formersubmit} onClick={onSubmit} type='submit' value='Login' disabled={userLoading ? true : false} />
+                    </form>
+                    {!isAuth ? <p className={styles.formerforg} onClick={toggleForg}>Forgot password?</p> : null}
+                    {isOpenForg ? <ForgotPass/> : null}
                 </div>
             </div>
-                {isOpenForg ? <ForgotPass/> : null}
         </div>
     )
 }  

@@ -1,20 +1,163 @@
-.thelist {
-    width: 95%;
+.itemz {
+    min-height: calc(100vh - 190px);
+    margin-top: 120px;
+    padding: 10vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin: 10px;
+    box-sizing: border-box;
 }
 
-.item {
-    padding: 10px;
-    width: 80vw;
-    min-width: 300px;
+.post {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.05);
+    border-radius: 5px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.post a {
+    text-decoration: none;
+}
+
+.butt {
+    width: 100px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 900;
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    outline: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin: 5px;
-    background: rgb(115, 115, 124);
-    color: rgb(255, 255, 255);
+}
+
+
+
+
+
+
+
+.textblocks {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color:rgba(0, 0, 0, 0.8);
+}
+
+.textblocks * {
+    margin: 1vw 0 1vw 0;
+    box-sizing: border-box;
+    font-weight: 900;
+}
+
+.blockheader {
+    font-size: 24px;
+    color:rgba(0, 0, 0, 0.8);
+}
+
+.blockparagraph {
+    font-size: 16px;
+}
+
+.listitem {
+    margin: 1vw;
+}
+
+.delimiter {
+    color:rgba(0, 0, 0, 0.8);
+    align-self: center;
+    font-size: 36px;
+}
+
+.quote {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.quotequote {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.firstq {
+    margin: 1vw;
+}
+
+.quotequote blockquote {
+    margin: 1vw;
+    padding: 0;
+}
+
+.secondq {
+    margin: 1vw;
+}
+
+.quoteby {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    font-size: 14px;
+}
+
+.quoteby p {
+    text-align: center;
+}
+
+.linktool {
+    color:rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.linktool b {
+    font-size: 16px;
+}
+
+.warning {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.05);
+    border-left: 5px solid rgba(255, 230, 0, 0.7);
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.warnsign {
+    color:rgba(255, 230, 0, 0.7);
+    height: 100%;
+    font-size: 16px;
+    margin: 2vw !important;
+}
+
+.warndiv {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.warndiv b {
+    font-size: 14px;
+}
+
+.warndiv p {
+    font-size: 16px;
 }

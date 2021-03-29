@@ -6,8 +6,14 @@ import { getThisItem, doneEditingCC } from '../../../actions/itemActions'
 import { getThisComms, addComment, deleteComment, addLike, removeLike } from '../../../actions/commentActions'
 import { getThisReps, addReply, deleteReply, addRLike, removeRLike } from '../../../actions/replyActions'
 import { getItemsFiles, goItemsFiles } from '../../../actions/fileActions'
+import { v4 as uuidv4 } from 'uuid';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
 const PostPage = ({ match }) => {
+    const warnnn = <FontAwesomeIcon icon={faExclamationTriangle} />
+
     const dispatch = useDispatch()
 
     const [ myItem, setMyItem ] = useState({})
@@ -166,120 +172,107 @@ const PostPage = ({ match }) => {
     }
 
     return (
-        <div className={styles.thelist}>
-            {itemz ?
-                itemz._id === match.params.id ?
-                    <div key={itemz._id} className={styles.itemz}>
+        itemz ?
+            itemz._id === match.params.id ?
+                <div key={itemz._id} className={styles.itemz}>
 
-                        <div className={styles.post}>
-                            <div>
-                                {picz ?
-                                    picz.length > 0 ?
-                                        picz.map(pic =>
-                                            pic === null ?
-                                                null
-                                            : pic.filename === itemz.picUrl ?
-                                                <img key={pic._id} src={`/api/uploads/image/${pic.filename}`} alt={itemz.title} width="50" height="50"></img>
-                                            : null
-                                        )
-                                    : null
-                                : null}
-                            </div>
-                            <div>
-                                <Link to={`/author/${itemz.by}`}> <p>{itemz.by}</p> </Link>
-                            </div>
-                            <div>
-                                <p>{itemz.views.total} views</p>
-                            </div>
-                            <div>
-                                <p>{itemz.commCount} comments</p>
-                            </div>
-                            <div>
-                                <h2>{itemz.title}</h2>
-                            </div>
-                            <div>
-                                <h4>{itemz.subtitle}</h4>
-                            </div>
-                            <div>
-                                {itemz.text ?
-                                    itemz.text.blocks ?
-                                        itemz.text.blocks.map(elem =>
-                                            elem.type === 'header' ?
-                                                <h3 key={elem.data.text}>{elem.data.text}</h3>
-                                            : elem.type === 'paragraph' ?
-                                                <p key={elem.data.text}>{elem.data.text}</p>
-                                            : elem.type === 'list' ?
-                                                elem.data.style === 'ordered' ?
-                                                    <ol key={elem._id}>
-                                                        {elem.data.items.map(it => <li key={it.slice('0,10')}>{it}</li>)}
-                                                    </ol>
-                                            : 
-                                                    <ul key={elem._id}>
-                                                        {elem.data.items.map(it => <li key={it.slice('0,10')}>{it}</li>)}
-                                                    </ul>
-                                            : elem.type === 'delimiter' ?
-                                                <h2 key='delimiter'>* * *</h2>
-                                            : elem.type === 'quote' ?
-                                                <div key='quote'>
-                                                    <div>
-                                                        <span><h2>"</h2></span>
-                                                        <span><p>{elem.data.text}</p></span>
-                                                        <span><h2>"</h2></span>
-                                                    </div>
-                                                    <div>
-                                                        <span><h2>By </h2></span>
-                                                        <span><p>{elem.data.caption}</p></span>
-                                                    </div>
-                                                </div>
-                                            : elem.type === 'linkTool' ?
-                                                <a href={elem.data.link} key={elem.data.link}>
-                                                    <b>{elem.data.link}</b>
-                                                </a>
-                                            : elem.type === 'warning' ?
-                                                <div key='warning'>
-                                                    <span><h2>! </h2></span>
-                                                    <span>
-                                                        <div>
-                                                            <b>{elem.data.title}</b>
-                                                        </div>
-                                                        <div>
-                                                            <p>{elem.data.message}</p>
-                                                        </div>
-                                                    </span>
-                                                </div>
-                                            : null
-                                        )
-                                    : <p>{itemz.text}</p>
-                                : null}
-                            </div>
-                            <div>
-                                <p>{itemz.date.slice(0,10)} {itemz.date.slice(11,19)}</p>
-                            </div>
-                            <div>
-                                {itemz.tags ?
-                                    itemz.tags.map(t => <div key={t._id}>
-                                        <Link to={`/search/${t.tag}`}> <p>{t.tag}</p> </Link>
-                                    </div>)
-                                : null}
-                            </div>
+                    <div className={styles.post}>
+                        <h1>{itemz.title}</h1>
+                        <div className={styles.main}>
+                            <Link to={`/author/${itemz.by}`}> <p>{itemz.by}</p> </Link>
+                            <p>{itemz.date.slice(0,10)} {itemz.date.slice(11,19)}</p>
+                            <p>{itemz.views.total} views</p>
+                            <p>{itemz.commCount} comments</p>
                         </div>
-
-                        <div>
-
-                            <h1>{itemz.commCount} Comments</h1>
-
-                            {commentz ? commentz.map(comm => 
-                                comm.forWich === itemz._id ?
-                                    <div key={comm._id} className={styles.comment}>
-                                        <div>
-                                            <h2>{comm.name}</h2>
-                                            <p>{comm.date.slice(0,10)} {comm.date.slice(11,19)}</p>
+                        {picz ?
+                            picz.length > 0 ?
+                                picz.map(pic =>
+                                    pic === null ?
+                                        null
+                                    : pic.filename === itemz.picUrl ?
+                                        <img key={pic._id} src={`/api/uploads/image/${pic.filename}`} alt={itemz.title} width="50" height="50"></img>
+                                    : null
+                                )
+                            : null
+                        : null}
+                        <h4>{itemz.subtitle}</h4>
+                        <div className={styles.textblocks}>
+                            {itemz.text ?
+                                itemz.text.blocks ?
+                                    itemz.text.blocks.map(elem =>
+                                        elem.type === 'header' ?
+                                            <h3 className={styles.blockheader} key={elem.data.text}>{elem.data.text}</h3>
+                                        : elem.type === 'paragraph' ?
+                                            <p className={styles.blockparagraph} key={elem.data.text}>{elem.data.text}</p>
+                                        : elem.type === 'list' ?
+                                            elem.data.style === 'ordered' ?
+                                                <ol className={styles.blocklist} key={uuidv4()}>
+                                                    {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
+                                                </ol>
+                                        : 
+                                                <ul className={styles.blocklist} key={uuidv4()}>
+                                                    {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
+                                                </ul>
+                                        : elem.type === 'delimiter' ?
+                                            <h2 className={styles.delimiter} key='delimiter'>* * *</h2>
+                                        : elem.type === 'quote' ?
+                                            <div className={styles.quote} key='quote'>
+                                                <div className={styles.quotequote}>
+                                                    <h2 className={styles.firstq}>"</h2>
+                                                    <blockquote>{elem.data.text}</blockquote>
+                                                    <h2 className={styles.secondq}>"</h2>
+                                                </div>
+                                                <div className={styles.quoteby}>
+                                                    <i>{elem.data.caption}</i>
+                                                </div>
+                                            </div>
+                                        : elem.type === 'linkTool' ?
+                                            <a className={styles.linktool} href={elem.data.link} key={elem.data.link}>
+                                                <b>{elem.data.link}</b>
+                                            </a>
+                                        : elem.type === 'warning' ?
+                                            <div className={styles.warning} key='warning'>
+                                                <h2 className={styles.warnsign}>{warnnn}</h2>
+                                                <div className={styles.warndiv}>
+                                                    <b>{elem.data.title}</b>
+                                                    <p>{elem.data.message}</p>
+                                                </div>
+                                            </div>
+                                        : null
+                                    )
+                                : <p>{itemz.text}</p>
+                            : null}
+                        </div>
+                        {itemz.tags ?
+                            <div className={styles.tagsdiv}>
+                                {itemz.tags.map(t =>
+                                    t.tag !== '' ?
+                                        <div key={t._id}>
+                                            <Link to={`/search/${t.tag}`} className={styles.tag}> <p>{t.tag}</p> </Link>
                                         </div>
-                                        <div>
-                                            <p>{comm.comment}</p>
-                                        </div>
-                                        <div>
-                                            <p>{comm.likes.length}</p>                                            
+                                    : null)}
+                            </div>
+                        : null}
+                    </div>
+
+                    <div className={styles.comments}>
+
+                        <h3 className={styles.commentstitle}>{itemz.commCount} Comments</h3>
+
+                        <div className={styles.divider}></div>
+
+                        {commentz ? commentz.map(comm => 
+                            comm.forWich === itemz._id ?
+                                <div key={comm._id} className={styles.comment}>
+                                    <div className={styles.commenthead}>
+                                        <h3>{comm.name}</h3>
+                                        <p>{comm.date.slice(0,10)} {comm.date.slice(11,19)}</p>
+                                    </div>
+                                    <div>
+                                        <p>{comm.comment}</p>
+                                    </div>
+                                    <div className={styles.commentother}>
+                                        <div className={styles.commentlike}>                                            
                                                 {
                                                     comm.likes.length > 0 ?
                                                         comm.likes.some(lk => lk.userId === localStorage.getItem(`userId`)) ?
@@ -287,29 +280,31 @@ const PostPage = ({ match }) => {
                                                         : <button value={comm._id} onClick={handleCommLike} disabled={!localStorage.getItem(`userId`) ? true : false}>Like</button>
                                                     : <button value={comm._id} onClick={handleCommLike} disabled={!localStorage.getItem(`userId`) ? true : false}>Like</button>
                                                 }
+                                                <p>{comm.likes.length}</p>
                                         </div>
-                                        <div>
-                                            <a href='#form' id={comm._id} onClick={handleReply}> Reply </a>
+                                        <div className={styles.commentreply}>
+                                            <a href='#form' id={comm._id} onClick={handleReply}> Reply </a> 
+                                            {byWho ?
+                                                byWho.role === "admin" ?
+                                                    <button id={comm._id} onClick={ handleDelComm } className={styles.commentdel}> X </button>
+                                                : null
+                                            : null}                                    
                                         </div>
-                                        {byWho ?
-                                            byWho.role === "admin" ?
-                                                <button id={comm._id} onClick={ handleDelComm }> X </button>
-                                            : null
-                                        : null}                                        
+                                    </div>
 
-                                        <div>
-                                            {repliez ? repliez.map(rep =>
-                                                rep.parentComm === comm._id ?
-                                                    <div key={rep._id} className={styles.reply}>
-                                                        <div>
-                                                            <h2>{rep.name}</h2>
-                                                            <p>{rep.date.slice(0,10)} {rep.date.slice(11,19)}</p>
-                                                        </div>
-                                                        <div>
-                                                            <p>{rep.comment}</p>
-                                                        </div>
-                                                        <div>
-                                                            <p>{rep.likes.length}</p> 
+                                    <div>
+                                        {repliez ? repliez.map(rep =>
+                                            rep.parentComm === comm._id ?
+                                                <div key={rep._id} className={styles.reply}>
+                                                    <div className={styles.commenthead}>
+                                                        <h3>{rep.name}</h3>
+                                                        <p>{rep.date.slice(0,10)} {rep.date.slice(11,19)}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p>{rep.comment}</p>
+                                                    </div>
+                                                    <div className={styles.commentother}>
+                                                        <div className={styles.commentlike}>
                                                             {
                                                                 rep.likes.length > 0 ?
                                                                     rep.likes.some(lk => lk.userId === localStorage.getItem(`userId`)) ?
@@ -317,37 +312,42 @@ const PostPage = ({ match }) => {
                                                                     : <button value={rep._id} onClick={handleRepLike} disabled={!localStorage.getItem(`userId`) ? true : false}>Like</button>
                                                                 : <button value={rep._id} onClick={handleRepLike} disabled={!localStorage.getItem(`userId`) ? true : false}>Like</button>
                                                             }
+                                                            <p>{rep.likes.length}</p> 
                                                         </div>
-                                                        {byWho ?
-                                                            byWho.role === "admin" ?
-                                                            <button id={rep._id} onClick={handleDelRep} > X </button>
-                                                            : null
-                                                        : null}                                                        
-                                                    </div>
-                                                : null
-                                            ) : null}
-                                        </div>
-
+                                                        <div className={styles.commentreply}>
+                                                            {byWho ?
+                                                                byWho.role === "admin" ?
+                                                                <button id={rep._id} onClick={handleDelRep} className={styles.commentdel}> X </button>
+                                                                : null
+                                                            : null}   
+                                                        </div>
+                                                    </div>                                                     
+                                                </div>
+                                            : null
+                                        ) : null}
                                     </div>
-                                : null
-                            ) : null}
 
-                            {byWho ? 
-                                <div>
-                                    <h3>Add a comment</h3>
-                                    <form id="form" onSubmit={addingComment}>
-                                        <textarea name="comment" rows="5" value={comment} onChange={handleComment} />
-                                        <input type="submit" value={reply ? "Add Reply" : "Add comment"}  disabled={itemzLoading ? true : commentzLoading ? true : repliezLoading ? true : false} ></input>
-                                    </form>
+                                    <div className={styles.divider}></div>
+
                                 </div>
-                            : null}
+                            : null
+                        ) : null}
 
-                        </div>
+                        {byWho ? 
+                            <div>
+                                <h3>Add a comment</h3>
+                                <form id="form" onSubmit={addingComment} className={styles.commform}>
+                                    <textarea name="comment" rows="5" value={comment} onChange={handleComment} className={styles.commformtext}/>
+                                    <input type="submit" value={reply ? "Add Reply" : "Add comment"}  disabled={itemzLoading ? true : commentzLoading ? true : repliezLoading ? true : false} className={styles.commformsubmit}></input>
+                                </form>
+                            </div>
+                        : null}
+
                     </div>
-                : null
-            // )
-            : null}
-        </div>
+                </div>
+            : null
+        // )
+        : null
     )
 }
 

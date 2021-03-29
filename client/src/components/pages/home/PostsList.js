@@ -6,12 +6,20 @@ import { getUsers } from '../../../actions/userActions'
 import { deleteItem, getSpecificItems, getSpecificItemsForMe } from '../../../actions/itemActions'
 import { getItemsFiles, goItemsFiles, deleteItemFile } from '../../../actions/fileActions'
 
-import ViewsSource from '../dashboard/ViewsSource'
-import ViewsTime from '../dashboard/ViewsTime'
-import ViewsUsers from '../dashboard/ViewsUsers'
-import CountAll from '../dashboard/CountAll'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { faComments } from '@fortawesome/free-solid-svg-icons'
+import { faGlasses } from '@fortawesome/free-solid-svg-icons'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const PostsList = ({ match }) => {
+    const viewspost = <FontAwesomeIcon icon={faEye} />
+    const commentspost = <FontAwesomeIcon icon={faComments} />
+    const readpost = <FontAwesomeIcon icon={faGlasses} />
+    const editpost = <FontAwesomeIcon icon={faEdit} />
+    const delpost = <FontAwesomeIcon icon={faTrash} />
+
     const dispatch = useDispatch()
     const history = useHistory();
 
@@ -210,7 +218,7 @@ const PostsList = ({ match }) => {
                         picz.map(pic => {
                             if(pic !== null) {
                                 if(item.picUrl === pic.filename) {
-                                    dispatch(deleteItemFile(pic._id))
+                                    dispatch(deleteItemFile(pic.filename))
                                 }
                             }
                         })
@@ -223,164 +231,144 @@ const PostsList = ({ match }) => {
     
     return (
         byWho ?
-            <main className={styles.thelist}>
+            <main className={match.url.includes('/myaccount') ? styles.myacclist : styles.thelist}>
 
-                <section>                
-                    {match.url.includes('/myaccount') ?
-                        <div>
-                            <CountAll match={match}/>
-                            <ViewsSource match={match}/>
-                            <ViewsTime match={match}/>
-                            <ViewsUsers match={match}/>
-                        </div>
-                    : null}
 
-                    <button onClick={() => history.push(`/addpost`)}> Add Post </button>
-        
-                    <form onSubmit={handleSubmit}>
+                <section className={styles.filtersDiv}>
+
+                    <form className={styles.searchform} onSubmit={handleSubmit}>
                         <input type="text" value={query} onChange={handleSearch}></input>
                         <input type="submit" value="Search"></input>
                     </form>
+                    
+                    <div className={styles.filters}>
+                        {!match.url.includes('/myaccount') ?
+                            <div>
+                                <button onClick={toggleFilters}>Filters</button>
+                                {isOpenFilters ?
+                                    <div className={styles.isopenfilters}>
+                                        <button onClick={toggleAuthor}>Author</button>
+                                        {isOpenAuthor ?
+                                            userz ?
+                                                userz.map(user =>
+                                                    <div className={styles.isopenauthor} key={user.name}>
+                                                        <input className={styles.authorinput}
+                                                            type="checkbox"
+                                                            name="author"
+                                                            id={user.name}
+                                                            value={
+                                                                match.params.author ?
+                                                                    
+                                                                    match.params.author === user.name ?
+                                                                        ''
+                                                                    : match.params.author.includes(`${user.name},`) ?
+                                                                        match.params.author.replace(`${user.name},`,'')
+                                                                    : match.params.author.includes(`,${user.name}`) ?
+                                                                        match.params.author.replace(`,${user.name}`,'')
+                                                                    : `${match.params.author},${user.name}`
 
-                    {!match.url.includes('/myaccount') ?
-                        <div>
-                            <button onClick={toggleFilters}>Filters</button>
-                            {isOpenFilters ?
-                                <div>
-                                    <h4>Author <button onClick={toggleAuthor}>v</button></h4>
-                                    {isOpenAuthor ?
-                                        userz ?
-                                            userz.map(user =>
-                                                <div key={user.name}>
-                                                    <input 
-                                                        type="checkbox"
-                                                        name="author"
-                                                        id={user.name}
-                                                        value={
-                                                            match.params.author ?
-                                                                
-                                                                match.params.author === user.name ?
-                                                                    ''
-                                                                : match.params.author.includes(`${user.name},`) ?
-                                                                    match.params.author.replace(`${user.name},`,'')
-                                                                : match.params.author.includes(`,${user.name}`) ?
-                                                                    match.params.author.replace(`,${user.name}`,'')
-                                                                : `${match.params.author},${user.name}`
-
-                                                            : user.name
-                                                        }
-                                                        onChange={handleAuthor}
-                                                        defaultChecked={
-                                                            match.params.author ?
-                                                                match.params.author.includes(user.name) ?
-                                                                    true
-                                                                : match.params.author === user.name ?
-                                                                    true
+                                                                : user.name
+                                                            }
+                                                            onChange={handleAuthor}
+                                                            defaultChecked={
+                                                                match.params.author ?
+                                                                    match.params.author.includes(user.name) ?
+                                                                        true
+                                                                    : match.params.author === user.name ?
+                                                                        true
+                                                                    : false
                                                                 : false
-                                                            : false
-                                                        }
-                                                    ></input>
-                                                    <p>{user.name}</p>
-                                                </div>
-                                            )
-                                        : null
-                                    : null}
+                                                            }
+                                                        ></input>
+                                                        <p>{user.name}</p>
+                                                    </div>
+                                                )
+                                            : null
+                                        : null}
+                                    </div>
+                                : null}
+                            </div>
+                        : null}
+                        
+                        <div>
+                            <button style={{ marginRight: '0px', marginLeft: '0px' }} onClick={toggleSort}>Sort</button>
+                            {isOpenSort ?
+                                <div className={styles.isopensort}>
+                                    <div>
+                                        <input type="radio" name="filter" value="descending" onChange={handleDescending} checked={match.params.sort === 'descending' ? true : !match.params.sort ? true : false}></input>
+                                        <p>Newest</p>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="filter" value="ascending" onChange={handleAscending} checked={match.params.sort === 'ascending' ? true : false}></input>
+                                        <p>Oldest</p>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="filter" value="popular" onChange={handlePopular} checked={match.params.sort === 'popular' ? true : false}></input>
+                                        <p>Most popular</p>
+                                    </div>
                                 </div>
                             : null}
                         </div>
-                    : null}
-                    
-                    <button onClick={toggleSort}>Sort</button>
-                    {isOpenSort ?
-                        <div>
-                            <input type="radio" name="filter" value="descending" onChange={handleDescending} checked={match.params.sort === 'descending' ? true : !match.params.sort ? true : false}></input> <p>Newest</p>
-                            <input type="radio" name="filter" value="ascending" onChange={handleAscending} checked={match.params.sort === 'ascending' ? true : false}></input> <p>Oldest</p>           
-                            <input type="radio" name="filter" value="popular" onChange={handlePopular} checked={match.params.sort === 'popular' ? true : false}></input> <p>Most popular</p>
-                        </div>
-                    : null}
+                    </div>
+                        
                 </section>
 
-                <section>
+                <section className={styles.itemslistnow}>
                     {itemz ?
                         itemz.map(item =>                            
                             <article key={item._id} className={styles.item}>
-                                <div>
-                                    {picz ?
-                                        picz.length > 0 ?
-                                            picz.map(pic =>
-                                                pic === null ?
-                                                    null
-                                                : pic.filename === item.picUrl ?
-                                                    <img key={pic._id} src={`/api/uploads/image/${pic.filename}`} alt={pic.filename} width="50" height="50"></img>
-                                                : null
-                                            )
-                                        : null
-                                    : null}
-                                </div>
-                                <div>
-                                    <p>by { item.by }</p>
-                                </div>
-                                <div>
-                                    <p>{item.views.total} views</p>
-                                </div>
-                                <div>
-                                    <p>{item.commCount} comments</p>
-                                </div>                                
-                                <div>
-                                    <h2>{item.title}</h2>
-                                </div>
-                                {/* <div>
-                                    {item.text ?
-                                        item.text.blocks ?
-                                            <p>{item.text.blocks.find(elem => elem.type === 'paragraph').data.text.slice(0,10)}[...]</p>
-                                        : null
-                                    : null}
-                                </div> */}
-                                <div>
-                                    <p>{item.date.slice(0,10)} {item.date.slice(11,19)}</p>
-                                </div>
-                                <div>
-                                    <Link to={`/post/${item._id}`}>
-                                        <p>Read more</p>
-                                    </Link>
-                                </div>
-                                <div>
-                                    {byWho ?
-                                        byWho.role === "admin" ?
-                                            <Link to={`/edit/${item._id}`}>
-                                                <p>Edit</p>
-                                            </Link>
-                                        : null
-                                    : null}
-                                </div>
-                                <div>
-                                    {byWho ?
-                                        byWho.role === "admin" ?
-                                            <button id={item._id} onClick={handleDelPost} > X </button>
-                                        : null
-                                    : null}
-                                </div>
+                                {picz ?
+                                    picz.length > 0 ?
+                                        picz.map(pic =>
+                                            pic === null ?
+                                                null
+                                            : pic.filename === item.picUrl ?
+                                                <img key={pic._id} src={`/api/uploads/image/${pic.filename}`} alt={pic.filename} width="50" height="50"></img>
+                                            : null
+                                        )
+                                    : null
+                                : null}
+                                <h3>{item.title}</h3>
+                                <p>by { item.by }</p>
+                                <p>{item.views.total} {viewspost}</p>
+                                <p>{item.commCount} {commentspost}</p>
+                                <p>{item.date.slice(0,10)} {item.date.slice(11,19)}</p>
+                                <Link style={{ color: 'rgb(255, 255, 255)' }} to={`/post/${item._id}`}>
+                                    <p>{readpost}</p>
+                                </Link>
+                                {byWho ?
+                                    byWho.role === "admin" ?
+                                        <Link to={`/edit/${item._id}`}>
+                                            <p style={{ color: 'rgb(255, 255, 255)' }}>{editpost}</p>
+                                        </Link>
+                                    : null
+                                : null}
+                                {byWho ?
+                                    byWho.role === "admin" ?
+                                        <p style={{ cursor: 'pointer' }} id={item._id} onClick={handleDelPost} >{delpost}</p>
+                                    : null
+                                : null}
                             </article>                        
                         )
                     : null}
 
                     {/* PAGINATION */}
-    
+                    
                     {previous ?
                         next ?
-                            <div>
+                            <div className={styles.pagination}>
                                 <button value={previous.page} onClick={togglePage}>{previous.page}</button>
                                 <button disabled>{next.page - 1}</button>
-                                <button value={next.page} onClick={togglePage}>{next.page}</button>
+                                <button className={styles.lastbtn} value={next.page} onClick={togglePage}>{next.page}</button>
                             </div>
-                        : <div>
+                        : <div className={styles.pagination}>
                             <button value={previous.page} onClick={togglePage}>{previous.page}</button>
-                            <button disabled>{previous.page + 1}</button>
+                            <button className={styles.lastbtn} disabled>{previous.page + 1}</button>
                         </div>
                     : next ?
-                        <div>
+                        <div className={styles.pagination}>
                             <button disabled>{next.page - 1}</button>
-                            <button value={next.page} onClick={togglePage}>{next.page}</button>
+                            <button className={styles.lastbtn} value={next.page} onClick={togglePage}>{next.page}</button>
                         </div>
                     : null}
     

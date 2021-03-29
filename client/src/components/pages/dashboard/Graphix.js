@@ -25,24 +25,22 @@ const Graphix = () => {
 
     return (
         graphix ?
-            <div>
-                <h2>Total Views</h2>
+            <div className={styles.bigdiv}>
+                
+            <h2>Total Views</h2>
 
-                <form onSubmit={searchViews}>
-                    <div>
-                        <label>Select time:</label>
-                        <select id="graphixDate" name="graphixDate" value={graphixDate} onChange={handleGraphix}> 
-                            <option value="week">Last Week</option>                                    
-                            <option value="month">Last Month</option>                                    
-                            <option value="year">Last Year</option>                                  
-                            <option value="all">All Time</option>
-                        </select>
-                    </div>
+                <form onSubmit={searchViews} className={styles.myform}>
+                    <select id="graphixDate" name="graphixDate" value={graphixDate} onChange={handleGraphix}> 
+                        <option value="week">Last Week</option>                                    
+                        <option value="month">Last Month</option>                                    
+                        <option value="year">Last Year</option>                                  
+                        <option value="all">All Time</option>
+                    </select>
                     <input type='submit' value='Submit' />
                 </form>
                 
                 {graphix ?
-                    <div>
+                    <div className={styles.grffcontainer}>
                         <div className={styles.grff}>
                             {graphix.dayz.map(d => 
                                 <div key={d.date} className={styles.mytest}>

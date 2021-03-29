@@ -30,13 +30,18 @@ const ContactAdmin = () => {
 
     useEffect(() => {
         dispatch(getThisUser(byWho.name))
-        // dispatch(getUsers())
         assingUser()
     }, [byWho])
 
     useEffect(() => {
         setMsg(err.msg.msg)
     }, [err])
+
+    useEffect(() => {
+        if(msg || msg !== null || msg !== '') {
+            setTimeout(() => { setMsg('') }, 9000)
+        }
+    }, [msg])
         
     const handleSubject = e => setSubject(e.target.value) 
     const handleText = e => setText(e.target.value) 
@@ -56,23 +61,30 @@ const ContactAdmin = () => {
 
     return (
         byWho ?
-            <div>
-                <div>
-                    {msg ? <h3>{msg}</h3> : null}
-                </div>
-                <div>
-                    <div className={styles.collapse}>
-                        <h1>Contact admin</h1>
-                    </div>
-                    <div className={styles.collapse}>
-                        <form id="form" onSubmit={submitEdit}>
-                            <label>Subject</label>
-                            <input name="subject" value={subject} onChange={handleSubject}></input>
-                            <label>Text</label>
-                            <textarea name="text" value={text} onChange={handleText} />
-                            <input type="submit" value={"Submit"} ></input>
-                        </form>
-                    </div>
+            <div className={styles.contact}>
+                <div className={styles.contactdiv}>
+                    {msg ? <h3 className={styles.msg}>{msg}</h3> : null}
+                    <form className={styles.myform} id="form" onSubmit={submitEdit}>
+                        <label>Subject</label>
+                        <input
+                            className={styles.formeripnut}
+                            type='text'
+                            name="subject"
+                            value={subject}
+                            onChange={handleSubject}
+                            placeholder='Subject'
+                        ></input>
+                        <label>Text</label>
+                        <textarea
+                            className={styles.formeripnut}
+                            type='text'
+                            name="text"
+                            value={text}
+                            onChange={handleText}
+                            placeholder='Insert text here'
+                        />
+                        <input className={styles.formersubmit} type="submit" value={"Submit"} ></input>
+                    </form>
                 </div>
             </div>
         : null

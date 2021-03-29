@@ -5,7 +5,12 @@ import { useHistory } from 'react-router-dom'
 import { getSpecificSubs, unsubscribe, getTotalSubs } from '../../../actions/subActions'
 import Campagne from './Campagne'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
 const SubsList = ({ match }) => {  
+    const delpost = <FontAwesomeIcon icon={faTrash} />
+
     const dispatch = useDispatch()
     const history = useHistory();
 
@@ -85,6 +90,12 @@ const SubsList = ({ match }) => {
         setMsg(err.msg.msg)
     }, [err])
 
+    useEffect(() => {
+        if(msg || msg !== null || msg !== '') {
+            setTimeout(() => { setMsg('') }, 9000)
+        }
+    }, [msg])
+
     // SEARCH
     const handleSearch = e => {
         setQuery(e.target.value)
@@ -125,92 +136,109 @@ const SubsList = ({ match }) => {
     } 
 
     return (
-        <div>
-            {byWho ?
+            byWho ?
                 // byWho.role === "admin" ?
 
-                    <div>
-                    
-                        <div>
-                            {msg ? <h3>{msg}</h3> : null}
-                        </div>
+                    <main className={styles.thelist}>
 
-                        {subz ?
-                            <div>
-                                <h3>New subscribers: {totalSubs}</h3>
-                                <form onSubmit={searchTime}>
-                                    <label>Select time:</label>
-                                    <select id="whatTime" name="whatTime" value={whatTime} onChange={handleChangeTime}>                                    
-                                        <option value="day">Last Day</option>                                    
-                                        <option value="week">Last Week</option>                                    
-                                        <option value="month">Last Month</option>                                    
-                                        <option value="year">Last Year</option>
-                                    </select>
-                                    <input type='submit' value='Submit' />
+                            <section className={styles.filtersDivA}>
+
+                                <header>
+                                    <h1>NEW SUBS: {totalSubs}</h1>
+                                </header>
+                            
+                                <div className={styles.divider}></div>
+
+                                {subz ?
+                                    <form className={styles.searchform} onSubmit={searchTime}>
+                                        <div className={styles.underform}>
+                                            <select id="whatTime" name="whatTime" value={whatTime} onChange={handleChangeTime}>                                    
+                                                <option value="day">Last Day</option>                                    
+                                                <option value="week">Last Week</option>                                    
+                                                <option value="month">Last Month</option>                                    
+                                                <option value="year">Last Year</option>
+                                            </select>
+                                        </div>
+                                        <input type='submit' value='Submit' />
+                                    </form>
+                                : null}
+
+                            </section>
+
+                        <section className={styles.myacclist}>
+
+                            <header>
+                                <h1>SUBSCRIBERS LIST</h1>
+                            </header>
+
+                            <div className={styles.divider}></div>
+
+                            <section className={styles.filtersDivB}>
+                                <form className={styles.searchformB} onSubmit={handleSubmit}>
+                                    <input className={styles.anyinputB} type="text" value={query} onChange={handleSearch}></input>
+                                    <input type="submit" value="Search"></input>
                                 </form>
-                            </div>
-                        : null}
-
-                        <form onSubmit={handleSubmit}>
-                            <input type="text" value={query} onChange={handleSearch}></input>
-                            <input type="submit" value="Search"></input>
-                        </form>
-
-                        <button onClick={toggleSort}>Sort</button>
-                        {isOpenSort ?
-                            <div>
-                                <input type="radio" name="filter" value="descending" onChange={handleDescending} checked={match.params.sort === 'descending' ? true : !match.params.sort ? true : false}></input> <p>Newest</p>
-                                <input type="radio" name="filter" value="ascending" onChange={handleAscending} checked={match.params.sort === 'ascending' ? true : false}></input> <p>Oldest</p>
-                            </div>
-                        : null}
-
-                        <div>
-                            {subz ? 
-                                subz.map(sub =>
-                                    <div key={sub._id} className={styles.item}>
-                                        <div>
-                                            <p>{sub.email}</p>
-                                        </div>
-                                        <div>
-                                            <p>{sub.register_date.slice(0,10)} {sub.register_date.slice(11,19)}</p>
-                                        </div>
-                                        <div>
-                                            <button id={sub.email} onClick={handleDelSub} > X </button>
-                                        </div>
-                                    </div>
-                                )
-                            : null}                          
-
-                            {/* PAGINATION */}
-
-                            {previous ?
-                                next ?
+                                <div className={styles.filters}>
                                     <div>
-                                        <button value={previous.page} onClick={togglePage}>{previous.page}</button>
-                                        <button disabled>{next.page - 1}</button>
-                                        <button value={next.page} onClick={togglePage}>{next.page}</button>
+                                        <button style={{ marginRight: '0px', marginLeft: '0px' }} onClick={toggleSort}>Sort</button>
+                                        {isOpenSort ?
+                                            <div className={styles.isopensort}>
+                                                <div>
+                                                    <input type="radio" name="filter" value="descending" onChange={handleDescending} checked={match.params.sort === 'descending' ? true : !match.params.sort ? true : false}></input>
+                                                    <p>Newest</p>
+                                                </div>
+                                                <div>
+                                                    <input type="radio" name="filter" value="ascending" onChange={handleAscending} checked={match.params.sort === 'ascending' ? true : false}></input>
+                                                    <p>Oldest</p>
+                                                </div>
+                                            </div>
+                                        : null}
                                     </div>
-                                : <div>
-                                    <button value={previous.page} onClick={togglePage}>{previous.page}</button>
-                                    <button disabled>{previous.page + 1}</button>
                                 </div>
-                            : next ?
-                                <div>
-                                    <button disabled>{next.page - 1}</button>
-                                    <button value={next.page} onClick={togglePage}>{next.page}</button>
-                                </div>
-                            : null}
+                            </section>
 
-                            {/* PAGINATION */}
+                            <section className={styles.itemslistnow}>
+                                {subz ? 
+                                    subz.map(sub =>
+                                        <article key={sub._id} className={styles.item}>
+                                            <p>{sub.email}</p>
+                                            <p>{sub.register_date.slice(0,10)} {sub.register_date.slice(11,19)}</p>
+                                            <button id={sub.email} onClick={handleDelSub} >{delpost}</button>
+                                        </article>
+                                    )
+                                : null}                          
 
-                        </div>  
+                                {/* PAGINATION */}
+
+                                {previous ?
+                                    next ?
+                                        <div className={styles.pagination}>
+                                            <button value={previous.page} onClick={togglePage}>{previous.page}</button>
+                                            <button disabled>{next.page - 1}</button>
+                                            <button className={styles.lastbtn} value={next.page} onClick={togglePage}>{next.page}</button>
+                                        </div>
+                                    : <div className={styles.pagination}>
+                                        <button value={previous.page} onClick={togglePage}>{previous.page}</button>
+                                        <button className={styles.lastbtn} disabled>{previous.page + 1}</button>
+                                    </div>
+                                : next ?
+                                    <div className={styles.pagination}>
+                                        <button disabled>{next.page - 1}</button>
+                                        <button className={styles.lastbtn} value={next.page} onClick={togglePage}>{next.page}</button>
+                                    </div>
+                                : null}
+
+                                {/* PAGINATION */}
+
+                            </section>  
+
+                        </section>
 
                         <Campagne/>
 
-                    </div>
+                    </main>
                 // : null
-            : null}
-        </div>
+            : null
     )
 }  
 

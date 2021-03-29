@@ -10,7 +10,12 @@ import unknown from '../../../unknown.png'
 import AddUser from './AddUser'
 import MessUsers from './MessUsers'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
 const UsersList = ({ match }) => {
+    const delpost = <FontAwesomeIcon icon={faTrash} />
+
     const dispatch = useDispatch()
     const history = useHistory();
 
@@ -122,16 +127,26 @@ const UsersList = ({ match }) => {
         setMsg(err.msg.msg)
     }, [err])
 
+    useEffect(() => {
+        if(msg || msg !== null || msg !== '') {
+            setTimeout(() => { setMsg('') }, 9000)
+        }
+    }, [msg])
+
     const handleDelUser = e => {
-        dispatch(deleteUser(e.target.id))
-        if(e.target.value !== 'unknown.png') {
-            if(!filezLoading) {
-                if(!userzLoading) {
-                    dispatch(deleteAvatarFile(e.target.value))
+        if(e.target.id) {
+            if(e.target.value) {
+                dispatch(deleteUser(e.target.id))
+                if(e.target.value !== 'unknown.png') {
+                    if(!filezLoading) {
+                        if(!userzLoading) {
+                            dispatch(deleteAvatarFile(e.target.value))
+                        }
+                    }
                 }
+                setFinder(!finder)
             }
         }
-        setFinder(!finder)
     }
 
     const promote = e => {
@@ -235,97 +250,119 @@ const UsersList = ({ match }) => {
             byWho ?
                 // byWho.role === "admin" ?
 
-                    <div>
-                        {msg ? <p>{msg}</p> : null}
+                    <main className={styles.thelist}>
 
                         <AddUser/>
+
+                        <section className={styles.myacclist}>
+
+                            <header>
+                                <h1>USERS LIST</h1>
+                            </header>
+                            
+                            <div className={styles.divider}></div>
         
-                        <form onSubmit={handleSubmitQuery}>
-                            <input type="text" value={query} onChange={handleSearch}></input>
-                            <input type="submit" value="Search"></input>
-                        </form>
+                            <section className={styles.filtersDiv}>
 
-                        <button onClick={toggleFilters}>Filters</button>
-                        {isOpenFilters ?
-                            <div>
-                                <h4>Role <button onClick={toggleRl}>v</button></h4>
-                                {isOpenRl ?
+                                <form className={styles.searchform} onSubmit={handleSubmitQuery}>
+                                    <input type="text" value={query} onChange={handleSearch}></input>
+                                    <input type="submit" value="Search"></input>
+                                </form>
+
+                                <div className={styles.filters}>
                                     <div>
-                                        {/* HERE */}                                            
-                                            <input 
-                                                type="checkbox" 
-                                                name="admin"
-                                                value={
-                                                    match.params.rl ?
-                                                        
-                                                        match.params.rl === "admin" ?
-                                                            ''
-                                                        : match.params.rl.includes(`admin,`) ?
-                                                            match.params.rl.replace(`admin,`,'')
-                                                        : match.params.rl.includes(`,admin`) ?
-                                                            match.params.rl.replace(`,admin`,'')
-                                                        : `${match.params.rl},admin`
+                                        <button onClick={toggleFilters}>Filters</button>
+                                        {isOpenFilters ?
+                                            <div className={styles.isopenfilters}>
+                                                <button onClick={toggleRl}>Role</button>
+                                                {isOpenRl ?
+                                                    <div className={styles.isopenauthor}>
+                                                        {/* HERE */}                                            
+                                                            <input className={styles.authorinput}
+                                                                type="checkbox" 
+                                                                name="admin"
+                                                                value={
+                                                                    match.params.rl ?
+                                                                        
+                                                                        match.params.rl === "admin" ?
+                                                                            ''
+                                                                        : match.params.rl.includes(`admin,`) ?
+                                                                            match.params.rl.replace(`admin,`,'')
+                                                                        : match.params.rl.includes(`,admin`) ?
+                                                                            match.params.rl.replace(`,admin`,'')
+                                                                        : `${match.params.rl},admin`
 
-                                                    : "admin"}
-                                                onChange={handleRl}
-                                                defaultChecked={
-                                                    match.params.rl ?
-                                                        match.params.rl.includes("admin") ?
-                                                            true
-                                                        : match.params.rl === "admin" ?
-                                                            true
-                                                        : false
-                                                    : false
-                                                }
-                                            ></input>
-                                            <p>Admin</p>
-                                                                                        
-                                            <input 
-                                                type="checkbox" 
-                                                name="basic"
-                                                value={
-                                                    match.params.rl ?
-                                                        
-                                                        match.params.rl === "basic" ?
-                                                            ''
-                                                        : match.params.rl.includes(`basic,`) ?
-                                                            match.params.rl.replace(`basic,`,'')
-                                                        : match.params.rl.includes(`,basic`) ?
-                                                            match.params.rl.replace(`,basic`,'')
-                                                        : `${match.params.rl},basic`
+                                                                    : "admin"}
+                                                                onChange={handleRl}
+                                                                defaultChecked={
+                                                                    match.params.rl ?
+                                                                        match.params.rl.includes("admin") ?
+                                                                            true
+                                                                        : match.params.rl === "admin" ?
+                                                                            true
+                                                                        : false
+                                                                    : false
+                                                                }
+                                                            ></input>
+                                                            <p>Admin</p>
+                                                                                                        
+                                                            <input className={styles.authorinput}
+                                                                type="checkbox" 
+                                                                name="basic"
+                                                                value={
+                                                                    match.params.rl ?
+                                                                        
+                                                                        match.params.rl === "basic" ?
+                                                                            ''
+                                                                        : match.params.rl.includes(`basic,`) ?
+                                                                            match.params.rl.replace(`basic,`,'')
+                                                                        : match.params.rl.includes(`,basic`) ?
+                                                                            match.params.rl.replace(`,basic`,'')
+                                                                        : `${match.params.rl},basic`
 
-                                                    : "basic"}
-                                                onChange={handleRl}
-                                                defaultChecked={
-                                                    match.params.rl ?
-                                                        match.params.rl.includes("basic") ?
-                                                            true
-                                                        : match.params.rl === "basic" ?
-                                                            true
-                                                        : false
-                                                    : false
-                                                }
-                                            ></input>
-                                            <p>Basic</p>
-                                        {/* HERE */}
+                                                                    : "basic"}
+                                                                onChange={handleRl}
+                                                                defaultChecked={
+                                                                    match.params.rl ?
+                                                                        match.params.rl.includes("basic") ?
+                                                                            true
+                                                                        : match.params.rl === "basic" ?
+                                                                            true
+                                                                        : false
+                                                                    : false
+                                                                }
+                                                            ></input>
+                                                            <p>Basic</p>
+                                                        {/* HERE */}
+                                                    </div>
+                                                : null}
+                                            </div>
+                                        : null}
                                     </div>
-                                : null}
-                            </div>
-                        : null}
 
-                        <button onClick={toggleSort}>Sort</button>
-                        {isOpenSort ?
-                            <div>
-                                <input type="radio" name="filter" value="descending" onChange={handleDescending} checked={match.params.sort === 'descending' ? true : !match.params.sort ? true : false}></input> <p>Newest</p>
-                                <input type="radio" name="filter" value="ascending" onChange={handleAscending} checked={match.params.sort === 'ascending' ? true : false}></input> <p>Oldest</p>
-                            </div>
-                        : null}
+                                    <div>
+                                        <button style={{ marginRight: '0px', marginLeft: '0px' }} onClick={toggleSort}>Sort</button>
+                                        {isOpenSort ?
+                                            <div className={styles.isopensort}>
+                                                <div>
+                                                    <input type="radio" name="filter" value="descending" onChange={handleDescending} checked={match.params.sort === 'descending' ? true : !match.params.sort ? true : false}></input>
+                                                    <p>Newest</p>
+                                                </div>
+                                                <div>
+                                                    <input type="radio" name="filter" value="ascending" onChange={handleAscending} checked={match.params.sort === 'ascending' ? true : false}></input>
+                                                    <p>Oldest</p>
+                                                </div>
+                                            </div>
+                                        : null}
+                                    </div>
+                                </div>
+                                
+                            </section>
 
-                        <div>
-                            {userz ? 
-                                userz.map(user =>
-                                    <div key={user._id} className={styles.item}>
-                                        <div>                    
+                            <section className={styles.itemslistnow}>
+                                {userz ? 
+                                    userz.map(user =>
+                                        <article key={user._id} className={styles.item}>
                                             {user.avatar === 'unknown.png' ?
                                                 <img src={unknown} alt={user.name} width="50" height="50"></img>
                                             : filez ?
@@ -337,64 +374,55 @@ const UsersList = ({ match }) => {
                                                     : null
                                                 )
                                             : null}
-                                        </div>
-                                        <div>
-                                            <p>{user.name}</p>
-                                        </div>
-                                        <div>
+                                            <h3>{user.name}</h3>
                                             <p>{user.email}</p>
-                                        </div>
-                                        <div>
                                             <p>{user.role}</p>
-                                        </div>
-                                        <div>
                                             <p>{user.register_date.slice(0,10)} {user.register_date.slice(11,19)}</p>
-                                        </div>
-                                        <div>
                                             {byWho ?
                                                 byWho._id !== user._id ?
                                                     user.role === "admin" ?
-                                                        <button id={user._id} onClick={demote} > Dem </button>
-                                                    : <button id={user._id} onClick={promote} > Pro </button>
+                                                        <button id={user._id} onClick={demote}>Demote</button>
+                                                    : <button id={user._id} onClick={promote}>Promote</button>
                                                 : user.role === "admin" ?
-                                                    <button disabled > Dem </button>
-                                                : <button disabled > Pro </button>
+                                                    <button disabled>Demote</button>
+                                                : <button disabled>Promote</button>
                                             : null}
-                                        </div>
-                                        <div>
-                                            {user.role === "admin" ? <button disabled > X </button> : <button id={user._id} value={user.avatar} onClick={handleDelUser} > X </button>}
-                                        </div>
-                                    </div>                                
-                                )
-                            : null}                            
+                                            {user.role === "admin" ?
+                                                <button disabled>{delpost}</button>
+                                            : <button id={user._id} value={user.avatar} onClick={handleDelUser}>{delpost}</button>}
+                                        </article>                                
+                                    )
+                                : null}                            
 
-                            {/* PAGINATION */}
+                                {/* PAGINATION */}
 
-                            {previous ?
-                                next ?
-                                    <div>
+                                {previous ?
+                                    next ?
+                                        <div className={styles.pagination}>
+                                            <button value={previous.page} onClick={togglePage}>{previous.page}</button>
+                                            <button disabled>{next.page - 1}</button>
+                                            <button className={styles.lastbtn} value={next.page} onClick={togglePage}>{next.page}</button>
+                                        </div>
+                                    : <div className={styles.pagination}>
                                         <button value={previous.page} onClick={togglePage}>{previous.page}</button>
-                                        <button disabled>{next.page - 1}</button>
-                                        <button value={next.page} onClick={togglePage}>{next.page}</button>
+                                        <button className={styles.lastbtn} disabled>{previous.page + 1}</button>
                                     </div>
-                                : <div>
-                                    <button value={previous.page} onClick={togglePage}>{previous.page}</button>
-                                    <button disabled>{previous.page + 1}</button>
-                                </div>
-                            : next ?
-                                <div>
-                                    <button disabled>{next.page - 1}</button>
-                                    <button value={next.page} onClick={togglePage}>{next.page}</button>
-                                </div>
-                            : null}
+                                : next ?
+                                    <div className={styles.pagination}>
+                                        <button disabled>{next.page - 1}</button>
+                                        <button className={styles.lastbtn} value={next.page} onClick={togglePage}>{next.page}</button>
+                                    </div>
+                                : null}
 
-                            {/* PAGINATION */}
+                                {/* PAGINATION */}
 
-                        </div>   
+                            </section>
+
+                        </section>
 
                         <MessUsers/>
 
-                    </div>
+                    </main>
 
                 // : null
             : null

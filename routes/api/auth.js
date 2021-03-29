@@ -14,6 +14,7 @@ const User = require('../../models/User');
 
 // Nodemailer
 const sgMail = require('@sendgrid/mail');
+const { faDatabase } = require('@fortawesome/free-solid-svg-icons');
 
 // @route POST api/auth
 // @desc Auth user(Login)
@@ -218,7 +219,7 @@ router.put('/updatePasswordViaEmail', (req, res, next) => {
     .then(user => {
         if(user) {            
             if(password !== confirmPassword) {
-                return res.status(400).json({ msg: "Invalid credentials" })
+                return res.status(400).json({ msg: "Passwords don't match!" })
             }
             bcrypt.hash(password, 12)
             .then(hashedPassword => {
@@ -226,11 +227,11 @@ router.put('/updatePasswordViaEmail', (req, res, next) => {
                 user.resetPasswordToken = null,
                 user.resetPasswordExpires = null
                 user.save().then(() => {
-                    res.json({ msg: 'password updated' })
+                    res.json({ msg: 'Password reset succesfully. You can now login.' })
                 })
             })
         } else {
-            res.status(404).json({ msg: 'no user exists in db to update' });
+            res.status(404).json({ msg: 'User doesn`t exist in our database.' });
         }
     })
 });

@@ -48,12 +48,11 @@ const ViewsTime = ({ match }) => {
     return (
         byWho ?
             userz ?
-                <div>
-                    <form onSubmit={searchViews}>
+                <div className={match.url.includes('/myaccount') ? styles.formdiv : styles.dashformdiv}>
+                    <form onSubmit={searchViews} className={styles.searchform}>
                         {!match.url.includes('/myaccount') ?
                             !userz.results ?
-                                <div>
-                                    <label>Views for:</label>
+                                <div className={styles.underform}>
                                     <select id="whooseViews" name="whooseViews" value={whooseViews} onChange={handleUsersViews}>  
                                         {userz ?
                                             userz.map(user => <option key={user._id} value={user.name}>{user.name}</option>)
@@ -63,8 +62,7 @@ const ViewsTime = ({ match }) => {
                                 </div>
                             : null
                         : null}
-                        <div>
-                            <label>Select source:</label>
+                        <div className={styles.underform}>
                             <select id="whatSource" name="whatSource" value={whatSource} onChange={handleChangeSource}>                                    
                                 <option value="organic">Organic</option>                                    
                                 <option value="facebook">Facebook</option>                                    

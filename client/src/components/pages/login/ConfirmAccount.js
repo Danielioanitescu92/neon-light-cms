@@ -20,9 +20,9 @@ const ConfirmAccount = ({ match }) => {
     }, [err])
 
     return (
-        <div>
+        <div className={styles.thelist}>
             {msg ?
-                <h3>{msg}</h3>
+                <h3 className={styles.messg}>{msg}</h3>
             : null}
         </div>
     )

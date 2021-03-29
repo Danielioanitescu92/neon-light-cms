@@ -201,14 +201,12 @@ router.post('/editprofile/:id', (req, res) => {
     };
     User.findByIdAndUpdate(req.params.id, editedProfile, {new: true}, (err, user) => {
         if(!user)
-            res.status(404).json({ msg: "user is not found" });
+            res.status(404).json("User not found");
         else
             user.save()
             res.status(200).send(user)
-            // .then(user => res.json({ msg: 'user updated!' }))
-            // .catch(() => res.status(400).send("Update not possible"));
         })
-        .catch(err => res.status(400).json({ msg: "Update not possible" }));
+        .catch(err => res.status(400).json("Update not possible"));
 })
 
 // @route UPDATE api/users/changepass/:id
@@ -264,7 +262,7 @@ router.delete('/:id', (req, res) => {
         console.log("Del User ", req.params.id)
         user.remove().then(() => res.status(200).json({ success: true }))
     })
-    .catch(err => res.status(404).json({ success: false }))
+    .catch(err => res.status(404).json({ msg: "Failed to delete user." }))
 });
 
 // @route POST api/users
@@ -403,7 +401,7 @@ router.post('/contactdev', (req, res) => {
         
         } else {
             console.log("5")
-            res.status(400).json({ msg: "User's email not found" });
+            res.status(400).json({ msg: "Dev's email not found" });
         }
 
     })
@@ -446,7 +444,7 @@ router.post('/contactadmin', (req, res) => {
             })
         
         } else {
-            res.status(400).json({ msg: "User's email not found exists" });
+            res.status(400).json({ msg: "Admin's email not found exists" });
         }
 
     })

@@ -1,4 +1,5 @@
 import React,{ useEffect } from 'react';
+import styles from './index.module.css'
 
 import AppNavbar from './components/pages/navs/AppNavbar'
 import RoutesNav from './components/pages/navs/RoutesNav'
@@ -28,7 +29,7 @@ import AddPost from './components/pages/home/AddPost'
 import Dashboard from './components/pages/dashboard/Dashboard'
 
 import { ProtectedRoute } from './components/functionals/ProtectedRoute'
-import { LoggedRoute } from './components/functionals/LoggedRoute'
+import { RouteForAdmin } from './components/functionals/RouteForAdmin'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { Provider } from 'react-redux';
@@ -46,91 +47,100 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div>
-          <AppNavbar/>            
-          <RoutesNav/>
-          <Switch>
-            
-            {/* <LoggedRoute path="/section/(page)?/:page?/(sort)?/:sort?" component={Section} /> */}
 
-            <LoggedRoute path="/dashboard" component={Dashboard} />
-            <LoggedRoute path="/addpost" component={AddPost} />
+        <AppNavbar/>            
+        <RoutesNav/>
 
-            <LoggedRoute path="/myaccount" exact component={MyAccount} />
-            <LoggedRoute path="/myaccount/page/:page" exact component={MyAccount} />
-            <LoggedRoute path="/myaccount/sort/:sort" exact component={MyAccount} />
-            <LoggedRoute path="/myaccount/search/:search" exact component={MyAccount} />
-            <LoggedRoute path="/myaccount/page/:page/sort/:sort" exact component={MyAccount} />
-            <LoggedRoute path="/myaccount/search/:search/page/:page" exact component={MyAccount} />
-            <LoggedRoute path="/myaccount/search/:search/sort/:sort" exact component={MyAccount} />
-            <LoggedRoute path="/myaccount/search/:search/page/:page/sort/:sort" exact component={MyAccount} />
+        <div className={styles.myApp}>
+          <div className={styles.myBackground}></div>
+          <div className={styles.myRoutes}>
 
-            <LoggedRoute path="/search/:search" exact component={PostsList} />
-            <LoggedRoute path="/search/:search/page/:page" exact component={PostsList} />
-            <LoggedRoute path="/search/:search/sort/:sort" exact component={PostsList} />
-            <LoggedRoute path="/search/:search/page/:page/sort/:sort" exact component={PostsList} />
-            <LoggedRoute path="/search/:search/author/:author" exact component={PostsList} />
-            <LoggedRoute path="/search/:search/author/:author/sort/:sort" exact component={PostsList} />
-            <LoggedRoute path="/search/:search/author/:author/page/:page" exact component={PostsList} />
-            <LoggedRoute path="/search/:search/author/:author/page/:page/sort/:sort" exact component={PostsList} />
+            <Switch>
+              
+                {/* <ProtectedRoute path="/section/(page)?/:page?/(sort)?/:sort?" component={Section} /> */}
 
-            <Route path="/confirmAccount/:token" component={ConfirmAccount} />
-            <ProtectedRoute path="/editabout/:id" component={EditAbout} />
-            <ProtectedRoute path="/edit/:id" component={EditPage} />
-            <ProtectedRoute path="/edittc/:id" component={EditTAC} />
-            <ProtectedRoute path="/editpp/:id" component={EditPP} />
-            <LoggedRoute path="/contact admin" component={ContactAdmin} />
-            <ProtectedRoute path="/settings/about us" component={BlogAbout} />
-            <ProtectedRoute path="/settings/contact developer" component={ContactDev} />
-            <ProtectedRoute path="/settings/blog privacy policies" exact component={BlogPP} />
-            <ProtectedRoute path="/settings/blog terms and conditions" exact component={BlogTAC} />
-            <ProtectedRoute path="/settings" exact component={Settings} />
-            <Route path="/termsandconditions" component={TermsConds} />
-            <Route path="/privacypolicies" component={PrivacyPolicies} />
+              <ProtectedRoute path="/dashboard" component={Dashboard} />
+              <ProtectedRoute path="/addpost" component={AddPost} />
 
-            <LoggedRoute path="/" exact component={PostsList} />
-            <LoggedRoute path="/page/:page" exact component={PostsList} />
-            <LoggedRoute path="/sort/:sort" exact component={PostsList} />
-            <LoggedRoute path="/page/:page/sort/:sort" exact component={PostsList} />
-            <LoggedRoute path="/author/:author" exact component={PostsList} />
-            <LoggedRoute path="/author/:author/sort/:sort" exact component={PostsList} />
-            <LoggedRoute path="/author/:author/page/:page" exact component={PostsList} />
-            <LoggedRoute path="/author/:author/page/:page/sort/:sort" exact component={PostsList} />
-            
-            <ProtectedRoute path="/users" exact component={UsersList} />
-            <ProtectedRoute path="/users/rl/:rl" exact component={UsersList} />
-            <ProtectedRoute path="/users/page/:page" exact component={UsersList} />
-            <ProtectedRoute path="/users/sort/:sort" exact component={UsersList} />
-            <ProtectedRoute path="/users/search/:search" exact component={UsersList} />
-            <ProtectedRoute path="/users/page/:page/sort/:sort" exact component={UsersList} />
-            <ProtectedRoute path="/users/search/:search/page/:page" exact component={UsersList} />
-            <ProtectedRoute path="/users/search/:search/sort/:sort" exact component={UsersList} />
-            <ProtectedRoute path="/users/search/:search/rl/:rl" exact component={UsersList} />
-            <ProtectedRoute path="/users/rl/:rl/page/:page" exact component={UsersList} />
-            <ProtectedRoute path="/users/rl/:rl/sort/:sort" exact component={UsersList} />
-            <ProtectedRoute path="/users/search/:search/page/:page/sort/:sort" exact component={UsersList} />
-            <ProtectedRoute path="/users/search/:search/rl/:rl/sort/:sort" exact component={UsersList} />
-            <ProtectedRoute path="/users/search/:search/rl/:rl/page/:page" exact component={UsersList} />
-            <ProtectedRoute path="/users/rl/:rl/page/:page/sort/:sort" exact component={UsersList} />            
-            <ProtectedRoute path="/users/search/:search/rl/:rl/page/:page/sort/:sort" exact component={UsersList} />
-            
-            <ProtectedRoute path="/subslist" exact component={SubsList} />
-            <ProtectedRoute path="/subslist/page/:page" exact component={SubsList} />
-            <ProtectedRoute path="/subslist/sort/:sort" exact component={SubsList} />
-            <ProtectedRoute path="/subslist/search/:search" exact component={SubsList} />
-            <ProtectedRoute path="/subslist/page/:page/sort/:sort" exact component={SubsList} />
-            <ProtectedRoute path="/subslist/search/:search/page/:page" exact component={SubsList} />
-            <ProtectedRoute path="/subslist/search/:search/sort/:sort" exact component={SubsList} />
-            <ProtectedRoute path="/subslist/search/:search/page/:page/sort/:sort" exact component={SubsList} />
+              <ProtectedRoute path="/myaccount" exact component={MyAccount} />
+              <ProtectedRoute path="/myaccount/page/:page" exact component={MyAccount} />
+              <ProtectedRoute path="/myaccount/sort/:sort" exact component={MyAccount} />
+              <ProtectedRoute path="/myaccount/search/:search" exact component={MyAccount} />
+              <ProtectedRoute path="/myaccount/page/:page/sort/:sort" exact component={MyAccount} />
+              <ProtectedRoute path="/myaccount/search/:search/page/:page" exact component={MyAccount} />
+              <ProtectedRoute path="/myaccount/search/:search/sort/:sort" exact component={MyAccount} />
+              <ProtectedRoute path="/myaccount/search/:search/page/:page/sort/:sort" exact component={MyAccount} />
 
-            <LoggedRoute path="/changepass/:id" component={ChangePass} />
-            <LoggedRoute path="/editprofile/:id" component={EditProfile} />
-            <Route path="/resetPass/:token" component={ResetPass} />
-            <LoggedRoute path="/post/:id" component={PostPage} />
+              <ProtectedRoute path="/search/:search" exact component={PostsList} />
+              <ProtectedRoute path="/search/:search/page/:page" exact component={PostsList} />
+              <ProtectedRoute path="/search/:search/sort/:sort" exact component={PostsList} />
+              <ProtectedRoute path="/search/:search/page/:page/sort/:sort" exact component={PostsList} />
+              <ProtectedRoute path="/search/:search/author/:author" exact component={PostsList} />
+              <ProtectedRoute path="/search/:search/author/:author/sort/:sort" exact component={PostsList} />
+              <ProtectedRoute path="/search/:search/author/:author/page/:page" exact component={PostsList} />
+              <ProtectedRoute path="/search/:search/author/:author/page/:page/sort/:sort" exact component={PostsList} />
 
-          </Switch>
-          <Footer/>
+              <Route path="/confirmAccount/:token" component={ConfirmAccount} />
+              <RouteForAdmin path="/editabout/:id" component={EditAbout} />
+              <RouteForAdmin path="/edit/:id" component={EditPage} />
+              <RouteForAdmin path="/edittc/:id" component={EditTAC} />
+              <RouteForAdmin path="/editpp/:id" component={EditPP} />
+              <ProtectedRoute path="/contact admin" component={ContactAdmin} />
+              <RouteForAdmin path="/settings/about us" component={BlogAbout} />
+              <RouteForAdmin path="/settings/contact developer" component={ContactDev} />
+              <RouteForAdmin path="/settings/blog privacy policies" exact component={BlogPP} />
+              <RouteForAdmin path="/settings/blog terms and conditions" exact component={BlogTAC} />
+              <RouteForAdmin path="/settings" exact component={Settings} />
+              <Route path="/termsandconditions" component={TermsConds} />
+              <Route path="/privacypolicies" component={PrivacyPolicies} />
+
+              <ProtectedRoute path="/" exact component={PostsList} />
+              <ProtectedRoute path="/page/:page" exact component={PostsList} />
+              <ProtectedRoute path="/sort/:sort" exact component={PostsList} />
+              <ProtectedRoute path="/page/:page/sort/:sort" exact component={PostsList} />
+              <ProtectedRoute path="/author/:author" exact component={PostsList} />
+              <ProtectedRoute path="/author/:author/sort/:sort" exact component={PostsList} />
+              <ProtectedRoute path="/author/:author/page/:page" exact component={PostsList} />
+              <ProtectedRoute path="/author/:author/page/:page/sort/:sort" exact component={PostsList} />
+              
+              <RouteForAdmin path="/users" exact component={UsersList} />
+              <RouteForAdmin path="/users/rl/:rl" exact component={UsersList} />
+              <RouteForAdmin path="/users/page/:page" exact component={UsersList} />
+              <RouteForAdmin path="/users/sort/:sort" exact component={UsersList} />
+              <RouteForAdmin path="/users/search/:search" exact component={UsersList} />
+              <RouteForAdmin path="/users/page/:page/sort/:sort" exact component={UsersList} />
+              <RouteForAdmin path="/users/search/:search/page/:page" exact component={UsersList} />
+              <RouteForAdmin path="/users/search/:search/sort/:sort" exact component={UsersList} />
+              <RouteForAdmin path="/users/search/:search/rl/:rl" exact component={UsersList} />
+              <RouteForAdmin path="/users/rl/:rl/page/:page" exact component={UsersList} />
+              <RouteForAdmin path="/users/rl/:rl/sort/:sort" exact component={UsersList} />
+              <RouteForAdmin path="/users/search/:search/page/:page/sort/:sort" exact component={UsersList} />
+              <RouteForAdmin path="/users/search/:search/rl/:rl/sort/:sort" exact component={UsersList} />
+              <RouteForAdmin path="/users/search/:search/rl/:rl/page/:page" exact component={UsersList} />
+              <RouteForAdmin path="/users/rl/:rl/page/:page/sort/:sort" exact component={UsersList} />            
+              <RouteForAdmin path="/users/search/:search/rl/:rl/page/:page/sort/:sort" exact component={UsersList} />
+              
+              <RouteForAdmin path="/subslist" exact component={SubsList} />
+              <RouteForAdmin path="/subslist/page/:page" exact component={SubsList} />
+              <RouteForAdmin path="/subslist/sort/:sort" exact component={SubsList} />
+              <RouteForAdmin path="/subslist/search/:search" exact component={SubsList} />
+              <RouteForAdmin path="/subslist/page/:page/sort/:sort" exact component={SubsList} />
+              <RouteForAdmin path="/subslist/search/:search/page/:page" exact component={SubsList} />
+              <RouteForAdmin path="/subslist/search/:search/sort/:sort" exact component={SubsList} />
+              <RouteForAdmin path="/subslist/search/:search/page/:page/sort/:sort" exact component={SubsList} />
+
+              <ProtectedRoute path="/changepass/:id" component={ChangePass} />
+              <ProtectedRoute path="/editprofile/:id" component={EditProfile} />
+              <Route path="/resetPass/:token" component={ResetPass} />
+              <ProtectedRoute path="/post/:id" component={PostPage} />
+
+            </Switch>
+
+            <Footer/>
+
+          </div>
         </div>
+
       </Router>
     </Provider>
   );

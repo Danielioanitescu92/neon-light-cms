@@ -111,10 +111,10 @@ export const reset = ({ username, password, confirmPassword }) => {
 
         axios.put('/api/auth/updatePasswordViaEmail', body, config)
         .then(res => {
-            dispatch(returnErrors(res.data, res.status, 'RESET_SUCCESS'));
+            dispatch(returnErrors(res.data, res.status, 'Password reset succesfully. You can now login.'));
         })
         .catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status, 'RESET_FAIL'));
+            dispatch(returnErrors(err.response.data, err.response.status, 'Password reset failed. Please contact our team.'));
         })
     }
 }

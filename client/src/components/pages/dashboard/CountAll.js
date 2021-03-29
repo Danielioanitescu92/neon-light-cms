@@ -18,6 +18,22 @@ const CountAll = ({ match }) => {
 
     return (
         countAll ?
+            match.url.includes('/myaccount') ?
+                <div className={styles.myaccarange}>
+                    <div className={styles.myaccdiva}>
+                        <h3>POSTS</h3>
+                        <p>{countAll.Posts}</p>
+                    </div>
+                    <div className={styles.myaccdiva}>
+                        <h3>VIEWS</h3>
+                        <p>{countAll.Views}</p>
+                    </div>
+                    <div className={styles.myaccdiva}>
+                        <h3>COMMS</h3>
+                        <p>{countAll.Comms}</p>
+                    </div>
+                </div>
+            : 
             <div className={styles.arange}>
                 <div className={styles.diva}>
                     <h3>POSTS</h3>
@@ -28,21 +44,17 @@ const CountAll = ({ match }) => {
                     <h1>{countAll.Views}</h1>
                 </div>
                 <div className={styles.diva}>
-                    <h3>COMMENTS</h3>
+                    <h3>COMMS</h3>
                     <h1>{countAll.Comms}</h1>
                 </div>
-                {!match.url.includes('/myaccount') ?
-                    <div className={styles.diva}>
-                        <h3>USERS</h3>
-                        <h1>{countAll.Users}</h1>
-                    </div>
-                : null}
-                {!match.url.includes('/myaccount') ?
-                    <div className={styles.diva}>
-                        <h3>SUBSCRIBERS</h3>
-                        <h1>{countAll.Subs}</h1>
-                    </div>
-                : null}
+                <div className={styles.diva}>
+                    <h3>USERS</h3>
+                    <h1>{countAll.Users}</h1>
+                </div>
+                <div className={styles.diva}>
+                    <h3>SUBS</h3>
+                    <h1>{countAll.Subs}</h1>
+                </div>
             </div>
         : null
     )

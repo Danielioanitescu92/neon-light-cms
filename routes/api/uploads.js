@@ -137,18 +137,23 @@ router.post('/upload', singleUpload, (req, res) => {
 // // @desc Delete file
 // // @access Public
 router.delete('/files/:id', (req, res) => {
-   if(req.params.id !== '5f7c6895d276b443684c93b3') {
-      const obj_id = new mongoose.Types.ObjectId(req.params.id)
-      console.log("DEL IMG: ", obj_id)
-      gfs.delete( obj_id )
-      res.status(200).json({ msg: "File deleted!" })
-   } else {
-      res.status(500).json({ msg: "You cannot delete the default image!" })
-   }
+   console.log("1 deleteFile id: ", req.params.id)
+   gfs.find({ filename: req.params.id }).toArray((err, files) => {
+      console.log("2 deleteFile files found: ", files)
+      if(!files[0] || files[0].length === 0){
+         console.log("3 deleteFile file not good")
+         return res.status(404).json({ err: "Could not find file" });
+      } else {
+         console.log("4 deleteFile file found: ", files[0])
+         const fileId = files[0]._id
+         gfs.delete(fileId);
+         res.json("successfully deleted image!");
+      }
+   })
+   .catch(err => res.status(400).json("Delete image not possible"));
 })
 
 module.exports = router;
-
 
 
 // (node:1144) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.

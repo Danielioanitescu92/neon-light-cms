@@ -46,10 +46,9 @@ const ViewsUser = ({ match }) => {
     return (
         byWho ?
             userz ?
-                <div>
-                    <form onSubmit={searchViews}>
-                        <div>
-                            <label>Select source:</label>
+                <div className={match.url.includes('/myaccount') ? styles.formdiv : styles.dashformdiv}>
+                    <form onSubmit={searchViews} className={styles.searchform}>
+                        <div className={styles.underform}>
                             <select id="whatSource" name="whatSource" value={whatSource} onChange={handleChangeSource}>                                    
                                 <option value="organic">Organic</option>                                    
                                 <option value="facebook">Facebook</option>                                    
@@ -57,8 +56,7 @@ const ViewsUser = ({ match }) => {
                                 <option value="total">Total</option>
                             </select>
                         </div>
-                        <div>
-                            <label>Select time:</label>
+                        <div className={styles.underform}>
                             <select id="whatTime" name="whatTime" value={whatTime} onChange={handleChangeTime}>                                    
                                 <option value="day">Last Day</option>                                    
                                 <option value="week">Last Week</option>                                    
@@ -74,41 +72,45 @@ const ViewsUser = ({ match }) => {
                         <div>
                             <h3>Total views: {viewsUsersTotal}</h3>
                             
-                            {colors ?
-                                <ChartPie viewsUsez={viewsUser} colors={colors}/>
-                            : null}
-
-                            {viewsUser ?
+                            {!match.url.includes('/myaccount') ?
                                 colors ?
-                                    viewsUser.map(user =>
-                                        colors.map(col =>
-                                            col.name === user.name ?
-                                                !match.url.includes('/myaccount') ?
-                                                    <div key={user.name}>
-                                                        <div style={{
-                                                            width: '10px',
-                                                            height: '10px',
-                                                            borderRadius: '50%',
-                                                            background: col.color
-                                                        }}></div>
-                                                        <h4 key={user.name}>{user.name}'s views: {user.counting}</h4>
-                                                    </div>
-                                                : user.name === byWho.name ?
-                                                    <div key={user.name}>
-                                                        <div style={{
-                                                            width: '10px',
-                                                            height: '10px',
-                                                            borderRadius: '50%',
-                                                            background: col.color
-                                                        }}></div>
-                                                        <h4 key={user.name}>{user.name}'s views: {user.counting}</h4>
-                                                    </div>
-                                                : null
-                                            : null
-                                        )
-                                    )
+                                    <ChartPie viewsUsez={viewsUser} colors={colors}/>
                                 : null
                             : null}    
+                            
+                            {!match.url.includes('/myaccount') ?
+                                viewsUser ?
+                                    colors ?
+                                        viewsUser.map(user =>
+                                            colors.map(col =>
+                                                col.name === user.name ?
+                                                    !match.url.includes('/myaccount') ?
+                                                        <div key={user.name}>
+                                                            <div style={{
+                                                                width: '10px',
+                                                                height: '10px',
+                                                                borderRadius: '50%',
+                                                                background: col.color
+                                                            }}></div>
+                                                            <h4 key={user.name}>{user.name}'s views: {user.counting}</h4>
+                                                        </div>
+                                                    : user.name === byWho.name ?
+                                                        <div key={user.name}>
+                                                            <div style={{
+                                                                width: '10px',
+                                                                height: '10px',
+                                                                borderRadius: '50%',
+                                                                background: col.color
+                                                            }}></div>
+                                                            <h4 key={user.name}>{user.name}'s views: {user.counting}</h4>
+                                                        </div>
+                                                    : null
+                                                : null
+                                            )
+                                        )
+                                    : null
+                                : null
+                            : null}                           
 
                         </div>
                     : null}

@@ -17,6 +17,12 @@ const ForgotPass = () => {
         setMsg(err.msg.msg)
     }, [err])
 
+    useEffect(() => {
+        if(msg || msg !== null || msg !== '') {
+            setTimeout(() => { setMsg('') }, 9000)
+        }
+    }, [msg])
+
     const sendEmail = e => {
         e.preventDefault()
         dispatch(forg(email))
@@ -24,21 +30,19 @@ const ForgotPass = () => {
 
     return (
         <div>
-            <div>
-                {msg ? <h3>{msg}</h3> : null}
-            </div>
-            <div className={styles.collapse}>
-                <form onSubmit={sendEmail}>
-                    <label>Insert your email</label>
+            <div className={styles.forg}>
+                <div className={styles.blurer}></div>
+                <div className={styles.former}>
+                    {msg ? <h3 className={styles.messg}>{msg}</h3> : null}
                     <input
-                        // type="email"
+                        type="email"
                         name='email'
                         value={email}
                         onChange={handleEmail}
                         placeholder="Enter Email"
                     ></input>
-                    <input type="submit" value="Send Email"></input>
-                </form>
+                    <input onClick={sendEmail} className={styles.formersubmit} type="submit" value="Send Email"></input>
+                </div>
             </div>
         </div>
     )

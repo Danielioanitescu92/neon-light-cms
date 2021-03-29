@@ -35,43 +35,50 @@ const AddUser = () => {
     }
 
     return (
-        <div className={styles.collapse}>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <label>Name</label>
-                    <input 
-                        type='text'
-                        name='name'
-                        id='name'
-                        placeholder='Name'
-                        value={name}
-                        onChange={handleChangeName}
-                    ></input>
-                    <label>Email</label>
-                    <input
-                        name='email'
-                        id='email'
-                        placeholder='Email'
-                        value={email}
-                        onChange={handleChangeEmail}
-                    ></input>
-                    <label>Password</label>
-                    <input
-                        name='password'
-                        id='password'
-                        placeholder='Password'
-                        value={password}
-                        onChange={handleChangePassword}
-                    ></input>
-                    <label>Role</label>
-                    <select id="role" name="role" value={role} onChange={handleChangeRole}>
+        <section className={styles.filtersDiv}>
+
+            <header>
+                <h1>ADD NEW USER</h1>
+            </header>
+                            
+            <div className={styles.divider}></div>
+
+            <form className={styles.searchform} onSubmit={handleSubmit}>
+                <label>Name</label>
+                <input className={styles.anyinput}
+                    type='text'
+                    name='name'
+                    id='name'
+                    placeholder='Name'
+                    value={name}
+                    onChange={handleChangeName}
+                ></input>
+                <label>Email</label>
+                <input className={styles.anyinput}
+                    name='email'
+                    id='email'
+                    placeholder='Email'
+                    value={email}
+                    onChange={handleChangeEmail}
+                ></input>
+                <label>Password</label>
+                <input className={styles.anyinput}
+                    name='password'
+                    id='password'
+                    placeholder='Password'
+                    value={password}
+                    onChange={handleChangePassword}
+                ></input>
+                <label>Role</label>
+                <div className={styles.underform}>
+                    <select  className={styles.anyinput} id="role" name="role" value={role} onChange={handleChangeRole}>
                         <option value="basic">Basic</option>
                         <option value="admin">Admin</option>
                     </select>
-                    <input type='submit' value='Register' />
-                </form>
-            </div>
-        </div>
+                </div>
+                <input type='submit' value='Register' />
+            </form>
+        </section>
     )
 }
 

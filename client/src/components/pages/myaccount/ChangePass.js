@@ -91,16 +91,13 @@ const ChangePass = ({ match }) => {
 
             {userz ? userz.map((user, index) =>
                 user._id === match.params.id ?
-                    <div key={user._id} className={styles.item}>
-                        <h3>Change your password</h3>
-                        <form id="form" onSubmit={e => submitEdit(e, index)}>
-                            <label>Old Password</label>
-                            <input name="oldPassword" value={oldPassword} onChange={handleOldPass}></input>
-                            <label>New Password</label>
-                            <input name="newPassword" value={newPassword} onChange={handleNewPass}></input>
-                            <input type="submit" value={"Submit"} ></input>
-                        </form>
-                    </div>
+                    <form key={user._id} id="form" onSubmit={e => submitEdit(e, index)} className={styles.myform}>
+                        <label>Old Password</label>
+                        <input name="oldPassword" value={oldPassword} onChange={handleOldPass}></input>
+                        <label>New Password</label>
+                        <input name="newPassword" value={newPassword} onChange={handleNewPass}></input>
+                        <input type="submit" value={"Submit"}  className={styles.myformsub}></input>
+                    </form>
                 : null
             ) : null}
             

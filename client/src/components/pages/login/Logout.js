@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './styles/Logout.module.css'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -33,7 +34,7 @@ const Logout = () => {
     return (
         <div>
             <Link to={'/'}>
-                <button onClick={handleLogout}>Logout</button>
+                <button className={styles.logger} onClick={handleLogout}>Logout</button>
             </Link>
         </div>
     )

@@ -1,12 +1,16 @@
-.footer {
-    margin-bottom: 0;
+.footerNormal {
+    box-sizing: border-box;
     width: 100%;
     height: 70px;
-    background: rgb(150, 150, 163);
-    color: rgb(255, 255, 255);
+    background: rgba(255, 255, 255, 0.3);
+    color: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.footerNormal div {
+    height: 100%;
 }
 
 .inline {
@@ -16,4 +20,23 @@
 .inline * {
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.footerlink {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 1);
+}
+
+.footerDown {
+    position: absolute;
+    top: calc(100vh - 70px);
+    width: 100%;
+    height: 70px;
+    padding-left: 5vw;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.3);
+    color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }

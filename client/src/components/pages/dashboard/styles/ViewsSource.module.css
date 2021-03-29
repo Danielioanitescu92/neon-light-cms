@@ -1,0 +1,50 @@
+.formdiv {
+    margin: 10px 0 10px 0;
+    width: 100%;
+}
+
+.dashformdiv {
+    margin: 10px 10px 10px 0;
+    width: 100%;
+}
+
+.underform {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.searchform {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.searchform select {
+    width: 100%;
+    height: 30px;
+    background: rgba(39, 104, 43, 0.15);
+    color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(161, 224, 167, 0.1);
+    border-radius: 5px;
+    outline: none;
+}
+
+.searchform option {
+    padding: 10px 0 10px 0;
+    background: rgba(39, 104, 43, 0.15);
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.searchform input[type="submit"] {
+    width: 100%;
+    height: 36px;
+    background: rgba(255, 255, 255, 0);
+    color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}

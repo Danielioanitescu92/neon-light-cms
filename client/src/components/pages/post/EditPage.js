@@ -15,7 +15,12 @@ import Marker from '@editorjs/marker';
 import Warning from '@editorjs/warning'; 
 import Delimiter from '@editorjs/delimiter'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+
 const EditPage = ({ match }) => {
+    const warnnn = <FontAwesomeIcon icon={faExclamationTriangle} />
+
     const byWho = useSelector(store => store.auth.user)
     const itemz = useSelector(store => store.item.items)
     const history = useHistory();
@@ -155,112 +160,108 @@ const EditPage = ({ match }) => {
     }
 
     return (
-        <div className={styles.thelist}>
-            {byWho ?
-                itemz ?
-                    itemz._id === match.params.id ?
-                        <div>
-                            <div className={styles.addpost}>
-                                <b>Title</b>
-                                <input name="title" type="text" value={title} onChange={handleTitle}></input>
-                                <b>Subtitle</b>
-                                <input name="subtitle" type="text" value={subtitle} onChange={handleSubtitle}></input>
-                                <b>Main Text</b>
-                                <div className={styles.myedit}>
-                                    <EditorJs
-                                        instanceRef={instance => instanceRef.current = instance} 
-                                        tools={{ 
-                                            header: Header, 
-                                            paragraph: Paragraph,
-                                            list: List,
-                                            quote: Quote,
-                                            linkTool: LinkTool,
-                                            marker: Marker,
-                                            warning: Warning,
-                                            delimiter: Delimiter
-                                        }}
-                                        data={data}
-                                        onChange={handleSave}
-                                    />
-                                </div>
-                                <b>Tags</b>
-                                <input name="tagText" type="text" value={tagText} onKeyDown={addTag} onChange={handleTags}></input>
-                                <div>
-                                    <span id='tag1' className={tag1 ? styles.mytag : null} onClick={delTag}>{tag1 ? tag1 : tag1 === '' ? null : null}</span>
-                                    <span id='tag2' className={tag2 ? styles.mytag : null} onClick={delTag}>{tag2 ? tag2 : tag2 === '' ? null : null}</span>
-                                    <span id='tag3' className={tag3 ? styles.mytag : null} onClick={delTag}>{tag3 ? tag3 : tag3 === '' ? null : null}</span>
-                                    <span id='tag4' className={tag4 ? styles.mytag : null} onClick={delTag}>{tag4 ? tag4 : tag4 === '' ? null : null}</span>
-                                </div>
-                                <button onClick={handleSubmit}>Submit</button>
-                            </div>        
-                            <h1>Preview:</h1>                            
+        byWho ?
+            itemz ?
+                itemz._id === match.params.id ?
+                    <div className={styles.thelist}>
+                        <div className={styles.addpost}>
+                            <b>Title</b>
+                            <input name="title" type="text" value={title} onChange={handleTitle}></input>
+                            <b>Subtitle</b>
+                            <input name="subtitle" type="text" value={subtitle} onChange={handleSubtitle}></input>
+                            <b>Main Text</b>
+                            <div className={styles.myedit}>
+                                <EditorJs
+                                    instanceRef={instance => instanceRef.current = instance} 
+                                    tools={{ 
+                                        header: Header, 
+                                        paragraph: Paragraph,
+                                        list: List,
+                                        quote: Quote,
+                                        linkTool: LinkTool,
+                                        marker: Marker,
+                                        warning: Warning,
+                                        delimiter: Delimiter
+                                    }}
+                                    data={data}
+                                    onChange={handleSave}
+                                />
+                            </div>
+                            <b>Tags</b>
+                            <input name="tagText" type="text" value={tagText} onKeyDown={addTag} onChange={handleTags}></input>
+                            <div className={styles.tags}>
+                                <span id='tag1' className={tag1 ? styles.mytag : null} onClick={delTag}>{tag1 ? tag1 : tag1 === '' ? null : null}</span>
+                                <span id='tag2' className={tag2 ? styles.mytag : null} onClick={delTag}>{tag2 ? tag2 : tag2 === '' ? null : null}</span>
+                                <span id='tag3' className={tag3 ? styles.mytag : null} onClick={delTag}>{tag3 ? tag3 : tag3 === '' ? null : null}</span>
+                                <span id='tag4' className={tag4 ? styles.mytag : null} onClick={delTag}>{tag4 ? tag4 : tag4 === '' ? null : null}</span>
+                            </div>
+                            <button onClick={handleSubmit}>Submit</button>
+                        </div>        
+
+                        <h1>Preview:</h1>            
+                        <div className={styles.post}>                
                             <h2>{title ? title : null}</h2>
                             <h4>{subtitle ? subtitle : null}</h4>
                             <p>{by ? by : null}</p>
-                            <div>
+                            <div className={styles.textblocks}>
                                 {text ?
                                     text.blocks ?
                                         text.blocks.map(elem =>
                                             elem.type === 'header' ?
-                                                <h3 key={elem.data.text}>{elem.data.text}</h3>
+                                                <h3 className={styles.blockheader} key={elem.data.text}>{elem.data.text}</h3>
                                             : elem.type === 'paragraph' ?
-                                                <p key={elem.data.text}>{elem.data.text}</p>
+                                                <p className={styles.blockparagraph} key={elem.data.text}>{elem.data.text}</p>
                                             : elem.type === 'list' ?
                                                 elem.data.style === 'ordered' ?
-                                                    <ol key={uuidv4()}>
-                                                        {elem.data.items.map(it => <li key={it.slice('0,10')}>{it}</li>)}
+                                                    <ol className={styles.blocklist} key={uuidv4()}>
+                                                        {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                     </ol>
-                                                : 
-                                                    <ul key={uuidv4()}>
-                                                        {elem.data.items.map(it => <li key={it.slice('0,10')}>{it}</li>)}
+                                            : 
+                                                    <ul className={styles.blocklist} key={uuidv4()}>
+                                                        {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                     </ul>
                                             : elem.type === 'delimiter' ?
-                                                <h2 key='delimiter'>* * *</h2>
+                                                <h2 className={styles.delimiter} key='delimiter'>* * *</h2>
                                             : elem.type === 'quote' ?
-                                                <div key='quote'>
-                                                    <div>
-                                                        <span><h2>"</h2></span>
-                                                        <span><p>{elem.data.text}</p></span>
-                                                        <span><h2>"</h2></span>
+                                                <div className={styles.quote} key='quote'>
+                                                    <div className={styles.quotequote}>
+                                                        <h2 className={styles.firstq}>"</h2>
+                                                        <blockquote>{elem.data.text}</blockquote>
+                                                        <h2 className={styles.secondq}>"</h2>
                                                     </div>
-                                                    <div>
-                                                        <span><h2>By </h2></span>
-                                                        <span><p>{elem.data.caption}</p></span>
+                                                    <div className={styles.quoteby}>
+                                                        <i>{elem.data.caption}</i>
                                                     </div>
                                                 </div>
                                             : elem.type === 'linkTool' ?
-                                                <a href={elem.data.link} key={elem.data.link}>
+                                                <a className={styles.linktool} href={elem.data.link} key={elem.data.link}>
                                                     <b>{elem.data.link}</b>
                                                 </a>
                                             : elem.type === 'warning' ?
-                                                <div key='warning'>
-                                                    <span><h2>! </h2></span>
-                                                    <span>
-                                                        <div>
-                                                            <b>{elem.data.title}</b>
-                                                        </div>
-                                                        <div>
-                                                            <p>{elem.data.message}</p>
-                                                        </div>
-                                                    </span>
+                                                <div className={styles.warning} key='warning'>
+                                                    <h2 className={styles.warnsign}>{warnnn}</h2>
+                                                    <div className={styles.warndiv}>
+                                                        <b>{elem.data.title}</b>
+                                                        <p>{elem.data.message}</p>
+                                                    </div>
                                                 </div>
                                             : null
                                         )
                                     : null
                                 : null}
                             </div>
-                            <div>
-                                <span>{tag1 ? tag1 : tag1 === '' ? null : null}</span>
-                                <span>{tag2 ? tag2 : tag2 === '' ? null : null}</span>
-                                <span>{tag3 ? tag3 : tag3 === '' ? null : null}</span>
-                                <span>{tag4 ? tag4 : tag4 === '' ? null : null}</span>
+                            <div className={styles.tags}>
+                                <span className={tag1 ? styles.mytag : null}>{tag1 ? tag1 : tag1 === '' ? null : null}</span>
+                                <span className={tag2 ? styles.mytag : null}>{tag2 ? tag2 : tag2 === '' ? null : null}</span>
+                                <span className={tag3 ? styles.mytag : null}>{tag3 ? tag3 : tag3 === '' ? null : null}</span>
+                                <span className={tag4 ? styles.mytag : null}>{tag4 ? tag4 : tag4 === '' ? null : null}</span>
                             </div>
                         </div>
-                        
-                    : null
+                    </div>
+                    
                 : null
-            : null}
-        </div>
+            : null
+        : null
     )
 }
 

@@ -1,0 +1,33 @@
+.mymain {
+    min-height: calc(100vh - 190px);
+    margin-top: 120px;
+    padding: 10vw;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.mymain a {
+    height: 20vh;
+    min-height: 100px;
+    width: 15vw;
+    min-width: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.07);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.mymain a h3 {
+    color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+}

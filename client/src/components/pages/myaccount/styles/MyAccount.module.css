@@ -1,3 +1,262 @@
-/* .myprofile {
+.myprofile {
+    min-height: 100vh;
+    margin-top: 120px;
+    padding: 20vw 0 0 0;
+    width: 100%;
     display: flex;
-} */
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+}
+
+.accinfos {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    box-sizing: border-box;
+}
+
+.relav {
+    position: relative;
+    margin: auto;
+    margin-top: -90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.picdiv {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 75px;
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.4);
+}
+
+.avatar {
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.delavatar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 10px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chooseavatar {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(0, 0, 0, 0.7);
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fileInputDiv input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    display: block;
+    cursor: pointer;
+}
+
+.chooseavatar button, .fileInputDiv {
+    /* overflow: hidden; */
+    position: relative;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(0, 0, 0, 0.7);
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.social {
+    font-weight: 600;
+    text-decoration: none;
+    
+    margin: 0 5px 5px 0 !important;
+    width: fit-content;
+    height: 30px;
+    padding: 0 10px 0 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.07);
+    border-radius: 5px;
+    outline: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.alink {
+    text-decoration: none !important;
+    color: rgba(0, 0, 0, 0.7) !important;
+    cursor: pointer;
+}
+
+.plink {
+    font-weight: 600;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+}
+
+.info {
+    width: 100%;
+    margin: 10px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.underinfo {
+    width: 100%;
+    margin: 10px 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.underinfo h3 {
+    font-size: 12px;
+}
+
+.underinfo p {
+    font-size: 14px;
+    font-weight: 400px;
+}
+
+.underinfo * {
+    margin: 5px;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.info p {
+    margin-left: 20px;
+}
+
+.info a {
+    margin-left: 20px;
+}
+
+
+
+
+
+
+.rest {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    box-sizing: border-box;
+}
+
+.toprest {
+    background: rgba(255, 255, 255, 0.2);
+    width: 100%;
+    padding: 2vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.toprest .userinfo .info .detail {
+    margin: 0;
+}
+
+.userbuttons a {    
+    margin: 5px;
+    width: 180px;
+    height: 30px;
+    padding: 0 10px 0 10px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    outline: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.listings {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.userdash {
+    padding: 10px;
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    box-sizing: border-box;
+}

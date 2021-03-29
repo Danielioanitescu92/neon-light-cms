@@ -61,16 +61,13 @@ export const getItemsFiles = picsArray => {
 };
 
 export const getAvatarsFile = avatarsArray => {
-    console.log("111 present avatars: ", avatarsArray)
     return function(dispatch) {
         dispatch(setAvatarFilesLoading());
         dispatch(goAvatarsFile());
         avatarsArray.map(filename => {
-            console.log("222 map each avatars: ", filename)
             axios
             .get(`/api/uploads/files/${filename}`)
             .then(res => {
-                console.log("333 res.data: ", res.data)
                 dispatch({
                     type: GET_AVATARS_FILE,
                     payload: res.data
@@ -177,19 +174,22 @@ export const deleteItemFile = id => {
 };
 
 export const deleteAvatarFile = id => {
+    console.log("1 deleteAvatarFile id: ", id)
     return function(dispatch) {
         axios
             .delete(`/api/uploads/files/${id}`)
             .then(res => {
+                console.log("2 deleteAvatarFile worked: ")
                     dispatch({
                         type: DELETE_AVATAR_FILE,
                         payload: id
                     })
                 }
             )
-            .catch(err => 
+            .catch(err => {
+                console.log("3 deleteAvatarFile didnt work")
                 dispatch(returnErrors(err.response.data, err.response.status))
-            )
+            })
     }
 };
 

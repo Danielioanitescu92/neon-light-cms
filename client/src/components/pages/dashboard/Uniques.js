@@ -25,26 +25,21 @@ const Uniques = () => {
 
     return (
         uniques ?
-            <div>
-                <h2>Total Views</h2>
+            <div className={styles.bigdiv}>
+                <h2>Unique Views</h2>
 
-                <form onSubmit={searchViews}>
-                    <div>
-                        <label>Select time:</label>
-                        <select id="uniquesDate" name="uniquesDate" value={uniquesDate} onChange={handleUniques}> 
-                            <option value="week">Last Week</option>                                    
-                            <option value="month">Last Month</option>                                    
-                            <option value="year">Last Year</option>                                  
-                            <option value="all">All Time</option>
-                        </select>
-                    </div>
+                <form onSubmit={searchViews} className={styles.myform}>
+                    <select id="uniquesDate" name="uniquesDate" value={uniquesDate} onChange={handleUniques}> 
+                        <option value="week">Last Week</option>                                    
+                        <option value="month">Last Month</option>                                    
+                        <option value="year">Last Year</option>                                  
+                        <option value="all">All Time</option>
+                    </select>
                     <input type='submit' value='Submit' />
                 </form>
                 
                 {uniques ?
-                    <div>
-                        <h3>Unique visitors: {uniques.uniques}</h3>
-                    </div>
+                    <h3>Unique visitors: {uniques.uniques}</h3>
                 : null}
                 
             </div>

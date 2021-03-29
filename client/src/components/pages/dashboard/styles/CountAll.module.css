@@ -1,20 +1,66 @@
 .arange {
     width: 100%;
-    height: 200px;
-    margin: 50px;
-    background-color: rgb(150, 150, 163);
+    margin-bottom: 5vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .diva {
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    background-color: rgb(41, 41, 180);
+    width: 150px;
+    height: 150px;
+    margin: 1vw 0 1vw 0;
+    background: rgba(255, 255, 255, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.05);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.diva h3, h1 {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+
+
+
+
+
+.myaccarange {
+    padding: 10px;
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    box-sizing: border-box;
+}
+
+.myaccdiva {
+    width: 100%;
+    margin: 10px 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.myaccdiva h3 {
+    font-size: 12px;
+}
+
+.myaccdiva p {
+    font-size: 24px;
+    font-weight: 900px;
+}
+
+.myaccdiva * {
+    margin: 5px;
 }
