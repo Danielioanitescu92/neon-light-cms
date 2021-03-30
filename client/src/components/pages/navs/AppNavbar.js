@@ -33,7 +33,7 @@ const AppNavbar = () => {
             <div className={styles.navbar}>
                 <Link to={'/dashboard'} className={styles.navbarlink}> <h1>Dashboard</h1> </Link>                
                 <div className={styles.navbarInfoDiv}>
-                    {user ? <p>Welcome, { user.name }!</p> : null}
+                    {user ? <p className={styles.smallScreen}>Welcome, { user.name }!</p> : null}
                     {isAuth ? <Logout/> : <Link to={'/'}> <button onClick={toggleLog} className={styles.logger}>Login</button> </Link>}
                 </div>
             </div>

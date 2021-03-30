@@ -90,12 +90,6 @@ const SubsList = ({ match }) => {
         setMsg(err.msg.msg)
     }, [err])
 
-    useEffect(() => {
-        if(msg !== '' || msg !== null) {
-            setTimeout(() => { setMsg('') }, 5000)
-        }
-    }, [msg])
-
     // SEARCH
     const handleSearch = e => {
         setQuery(e.target.value)
@@ -202,7 +196,7 @@ const SubsList = ({ match }) => {
                                     subz.map(sub =>
                                         <article key={sub._id} className={styles.item}>
                                             <p>{sub.email}</p>
-                                            <p>{sub.register_date.slice(0,10)} {sub.register_date.slice(11,19)}</p>
+                                            <p className={styles.smallScreen}>{sub.register_date.slice(0,10)} {sub.register_date.slice(11,19)}</p>
                                             <button id={sub.email} onClick={handleDelSub} >{delpost}</button>
                                         </article>
                                     )

@@ -28,12 +28,6 @@ const ContactDev = () => {
     useEffect(() => {
         setMsg(err.msg.msg)
     }, [err])
-
-    useEffect(() => {
-        if(msg !== '' || msg !== null) {
-            setTimeout(() => { setMsg('') }, 5000)
-        }
-    }, [msg])
         
     const handleSubject = e => setSubject(e.target.value) 
     const handleText = e => setText(e.target.value) 

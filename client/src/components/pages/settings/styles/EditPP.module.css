@@ -20,7 +20,6 @@
     margin-top: 5px;
     margin-bottom: 5px;
     background: rgba(255, 255, 255, 0.2);
-    color: rgb(255, 255, 255);
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     background-clip: padding-box;
@@ -33,7 +32,6 @@
     margin: 2vw;
     padding: 1vw;
     background: rgba(39, 104, 43, 0.15);
-    color: rgba(255, 255, 255, 0.5);
     border: 2px solid rgba(161, 224, 167, 0.1);
     border-radius: 5px;
     outline: none;
@@ -45,7 +43,6 @@
     width: 120px;
     height: 30px;
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.5);
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.07);
     border-radius: 5px;
@@ -56,17 +53,6 @@
 .addpost button {
     margin: 10px;
     width: 120px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.5);
-    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.07);
-    border-radius: 5px;
-    outline: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
 }
 
 .preview * {
@@ -86,7 +72,6 @@
     height: 30px;
     padding: 0 10px 0 10px;
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.5);
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.07);
     border-radius: 5px;
@@ -107,7 +92,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    color:rgba(0, 0, 0, 0.8);
 }
 
 .textblocks * {
@@ -118,7 +102,6 @@
 
 .blockheader {
     font-size: 24px;
-    color:rgba(0, 0, 0, 0.8);
 }
 
 .blockparagraph {
@@ -130,7 +113,6 @@
 }
 
 .delimiter {
-    color:rgba(0, 0, 0, 0.8);
     align-self: center;
     font-size: 36px;
 }
@@ -178,7 +160,6 @@
 }
 
 .linktool {
-    color:rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;

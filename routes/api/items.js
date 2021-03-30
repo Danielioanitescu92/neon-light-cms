@@ -379,13 +379,19 @@ router.post('/edit/:id', (req, res) => {
 // @desc Delete item
 // @access Private
 router.delete('/:id', auth, (req, res) => {
+    console.log("back 1 delPost id: ", req.params.id)
     Item.findById(req.params.id)
     .then(item => {
+        console.log("back 2 item: ", item)
         item.remove().then(() => {
+            console.log("back 3 item removed!")
             res.status(200).json({ success: true })
         })
     })
-    .catch(err => res.status(404).json({ success: false }))
+    .catch(err => {
+        console.log("back 4 item not found. ERR: ", err)
+        res.status(404).json({ success: false })
+    })
 });
 
 // @route GET api/items/viewsSource

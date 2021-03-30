@@ -17,12 +17,6 @@ const ForgotPass = () => {
         setMsg(err.msg.msg)
     }, [err])
 
-    useEffect(() => {
-        if(msg !== '' || msg !== null) {
-            setTimeout(() => { setMsg('') }, 5000)
-        }
-    }, [msg])
-
     const sendEmail = e => {
         e.preventDefault()
         dispatch(forg(email))

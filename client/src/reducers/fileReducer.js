@@ -44,10 +44,10 @@ export default function(state = initialState, action) {
                 ...state,
                 files: {
                     ...state.files,
-                    items:  [
-                        ...state.files.items,
-                        state.files.items.some((element) => element.filename === action.payload[0].filename) ? null : action.payload[0]
-                    ]
+                    items: 
+                        state.files.items.some((element) => element.filename === action.payload[0].filename) ? 
+                            [ ...state.files.items ]
+                        : [ ...state.files.items, action.payload[0] ]
                 },
                 loadingIt: false
             }
@@ -56,10 +56,10 @@ export default function(state = initialState, action) {
                 ...state,
                 files: {
                     ...state.files,
-                    avatars: [
-                        ...state.files.avatars,
-                        state.files.avatars.some((element) => element.filename === action.payload[0].filename) ? null : action.payload[0]
-                    ]
+                    avatars: 
+                        state.files.avatars.some((element) => element.filename === action.payload[0].filename) ? 
+                            [ ...state.files.avatars ]
+                        : [ ...state.files.avatars, action.payload[0] ]
                 },
                 loadingAv: false
             }
@@ -91,7 +91,7 @@ export default function(state = initialState, action) {
                 ...state,
                 files: {
                     ...state.files,
-                    avatars: state.files.avatars.filter(file => file._id !== action.payload)
+                    avatars: state.files.avatars.filter(file => file.filename !== action.payload)
                 }
             }
         case DELETE_ITEM_FILE:

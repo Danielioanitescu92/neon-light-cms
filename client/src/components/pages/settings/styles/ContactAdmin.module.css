@@ -18,7 +18,6 @@
     justify-content: center;
     align-items: center;
     background: rgba(255, 255, 255, 0.2);
-    color: rgba(0, 0, 0, 0.7);
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     background-clip: padding-box;
@@ -28,7 +27,6 @@
 
 .msg {
     background: rgba(238, 255, 0, 0.7);
-    color: rgba(0, 0, 0, 0.9);
     border: 2px solid rgba(238, 255, 0, 0.15);
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
@@ -47,13 +45,11 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    color: rgba(0, 0, 0, 0.7);
 }
 
 .myform label {
     font-weight: 900;
     width: 100%;
-    color: rgba(0, 0, 0, 0.7);
 }
 
 .formeripnut {
@@ -62,7 +58,6 @@
     width: 100%;
     height: 36px;
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(0, 0, 0, 0.7);
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.07);
     border-radius: 5px;
@@ -74,7 +69,6 @@
     width: 100px;
     height: 30px;
     background-color: rgba(255, 255, 255, 0);
-    color: rgba(255, 255, 255, 0.9);
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);

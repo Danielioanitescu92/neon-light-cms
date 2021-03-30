@@ -151,13 +151,13 @@ const AddPost = () => {
     return (
         <div className={styles.thelist}>
             <div className={styles.addpost}>
-                <b>Picture</b>
+                <label>Picture</label>
                 <input name="myFile" type="file" onChange={onFileChange}></input>
-                <b>Title</b>
+                <label>Title</label>
                 <input name="title" type="text" value={title} onChange={handleTitle}></input>
-                <b>Subtitle</b>
+                <label>Subtitle</label>
                 <input name="subtitle" type="text" value={subtitle} onChange={handleSubtitle}></input>
-                <b>Main Text</b>
+                <label>Main Text</label>
                 <div className={styles.myedit}>
                     <EditorJs
                         instanceRef={instance => instanceRef.current = instance} 
@@ -175,7 +175,7 @@ const AddPost = () => {
                         onChange={handleSave}
                     />
                 </div>
-                <b>Tags</b>
+                <label>Tags</label>
                 <input name="tagText" type="text" value={tagText} onKeyDown={addTag} onChange={handleTags}></input>
                 <div className={styles.tags}>
                     <span id='tag1' className={tag1 ? styles.mytag : null} onClick={delTag}>{tag1 ? tag1 : tag1 === '' ? null : null}</span>

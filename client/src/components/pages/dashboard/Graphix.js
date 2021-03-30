@@ -42,24 +42,24 @@ const Graphix = () => {
                 {graphix ?
                     <div className={styles.grffcontainer}>
                         <div className={styles.grff}>
-                            {graphix.dayz.map(d => 
-                                <div key={d.date} className={styles.mytest}>
+                            {graphix.dayz.map((d, index) => 
+                                <div key={index} className={styles.mytest}>
                                     {graphix.highest.views === 0 ?
-                                        <div className={styles.grffBl} style={{ height: `0%` }}></div>
+                                        <div key={index + 1} className={styles.grffBl} style={{ height: `0%` }}></div>
                                     : d.views === graphix.highest.views ?
-                                        <div className={styles.grffBl} style={{ height: `100%` }}></div>
-                                    : <div className={styles.grffBl} style={{ height: `${(d.views * 100)/graphix.highest.views}%` }}></div>}
+                                        <div key={index + 1} className={styles.grffBl} style={{ height: `100%` }}></div>
+                                    : <div key={index + 1} className={styles.grffBl} style={{ height: `${(d.views * 100)/graphix.highest.views}%` }}></div>}
                                 </div>
                             )}
                             <div className={styles.mynrs}>
-                                {graphix.countFromHigh.map(myNr =>
-                                    <div key={myNr} className={styles.mynr}>{myNr}</div>
+                                {graphix.countFromHigh.map((myNr, index) =>
+                                    <div key={index} className={styles.mynr}>{myNr}</div>
                                 )}
                             </div>
                         </div>
                         <div className={styles.mydate}>
-                            {graphix.dayz.map(d => 
-                                <p key={d.date} className={styles.mydateNr}> {d.date.slice(0,10)} </p>
+                            {graphix.dayz.map((d, index) => 
+                                <p key={index} className={styles.mydateNr}> {d.date.slice(0,10)} </p>
                             )}
                         </div>
                     </div>

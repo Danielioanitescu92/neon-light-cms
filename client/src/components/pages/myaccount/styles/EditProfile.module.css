@@ -19,7 +19,6 @@
     align-items: center;
     margin: 5px;
     background: rgba(255, 255, 255, 0.2);
-    color: rgba(0, 0, 0, 0.7);
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     background-clip: padding-box;
@@ -36,7 +35,6 @@
     height: 30px;
     margin: 1vw;
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.5);
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.07);
     border-radius: 5px;
@@ -47,7 +45,6 @@
 .myformsub {
     width: 100px !important;
     background-color: rgba(255, 255, 255, 0);
-    color: rgba(255, 255, 255, 0.7);
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     cursor: pointer;

@@ -210,23 +210,28 @@ const PostsList = ({ match }) => {
 
     // DELETE POST
     const handleDelPost = e => {
-        dispatch(deleteItem(e.target.id))
-        if(!piczLoading) {
-            if(!itemzLoading) {
-                itemz.map(item => {
-                    if(item._id === e.target.id) {
-                        picz.map(pic => {
-                            if(pic !== null) {
-                                if(item.picUrl === pic.filename) {
-                                    dispatch(deleteItemFile(pic.filename))
+        if(e) {
+            console.log("FRONT delPost id: ", e)
+            dispatch(deleteItem(e))
+            if(!piczLoading) {
+                if(!itemzLoading) {
+                    itemz.map(item => {
+                        if(item._id === e) {
+                            picz.map(pic => {
+                                if(pic !== null) {
+                                    if(item.picUrl === pic.filename) {
+                                        dispatch(deleteItemFile(pic.filename))
+                                    }
                                 }
-                            }
-                        })
-                    }
-                })
+                            })
+                        }
+                    })
+                }
             }
+            setFinder(!finder)
+        } else {
+            console.log("e.target.id NOT FOUND: ", e.target.id)
         }
-        setFinder(!finder)
     }
     
     return (
@@ -329,23 +334,23 @@ const PostsList = ({ match }) => {
                                     : null
                                 : null}
                                 <h3>{item.title}</h3>
-                                <p>by { item.by }</p>
-                                <p>{item.views.total} {viewspost}</p>
-                                <p>{item.commCount} {commentspost}</p>
-                                <p>{item.date.slice(0,10)} {item.date.slice(11,19)}</p>
-                                <Link style={{ color: 'rgb(255, 255, 255)' }} to={`/post/${item._id}`}>
-                                    <p>{readpost}</p>
+                                <p className={styles.smallScreen}>by { item.by }</p>
+                                <p className={styles.smallScreen}>{item.views.total} {viewspost}</p>
+                                <p className={styles.smallScreen}>{item.commCount} {commentspost}</p>
+                                <p className={styles.smallScreen}>{item.date.slice(0,10)} {item.date.slice(11,19)}</p>
+                                <Link to={`/post/${item._id}`}>
+                                    <p className={styles.hovering}>{readpost}</p>
                                 </Link>
                                 {byWho ?
                                     byWho.role === "admin" ?
                                         <Link to={`/edit/${item._id}`}>
-                                            <p style={{ color: 'rgb(255, 255, 255)' }}>{editpost}</p>
+                                            <p className={styles.hovering}>{editpost}</p>
                                         </Link>
                                     : null
                                 : null}
                                 {byWho ?
                                     byWho.role === "admin" ?
-                                        <p style={{ cursor: 'pointer' }} id={item._id} onClick={handleDelPost} >{delpost}</p>
+                                        <p className={styles.hovering} style={{ cursor: 'pointer' }} onClick={() => handleDelPost(item._id)} >{delpost}</p>
                                     : null
                                 : null}
                             </article>                        

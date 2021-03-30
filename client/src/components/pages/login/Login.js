@@ -28,12 +28,6 @@ const Login = () => {
         }
     }, [err, isAuth])
 
-    useEffect(() => {
-        if(msg !== '' || msg !== null) {
-            setTimeout(() => { setMsg('') }, 5000)
-        }
-    }, [msg])
-
     const onSubmit = e => {
         e.preventDefault()
         const user = {

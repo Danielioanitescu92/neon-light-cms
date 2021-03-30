@@ -13,12 +13,12 @@
 .accinfos {
     padding: 10px;
     background: rgba(255, 255, 255, 0.2);
-    color: rgb(255, 255, 255);
     background-clip: padding-box;
     box-sizing: border-box;
 }
 
 .relav {
+    width: fit-content;
     position: relative;
     margin: auto;
     margin-top: -90px;
@@ -47,11 +47,9 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    margin: 10px;
     width: 40px;
     height: 40px;
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.5);
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.07);
     border-radius: 20px;
@@ -60,6 +58,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    transition-duration: 0.4s;
 }
 
 .chooseavatar {
@@ -69,7 +69,6 @@
     width: 100%;
     height: 20px;
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(0, 0, 0, 0.7);
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.07);
     border-radius: 20px;
@@ -104,7 +103,6 @@
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(0, 0, 0, 0.7);
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.07);
     border-radius: 20px;
@@ -124,7 +122,6 @@
     height: 30px;
     padding: 0 10px 0 10px;
     background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.5);
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     border: 2px solid rgba(255, 255, 255, 0.07);
     border-radius: 5px;
@@ -133,18 +130,25 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    
+    transition-duration: 0.4s;
 }
 
 .alink {
     text-decoration: none !important;
-    color: rgba(0, 0, 0, 0.7) !important;
     cursor: pointer;
+    
+    transition-duration: 0.4s;
+}
+
+.alink:hover, .social:hover, .delavatar:hover {
+    background-color: rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.3) !important;
 }
 
 .plink {
     font-weight: 600;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.9);
     cursor: pointer;
 }
 
@@ -206,7 +210,6 @@
     justify-content: space-between;
     align-items: flex-start;
     background: rgba(255, 255, 255, 0.2);
-    color: rgb(255, 255, 255);
     background-clip: padding-box;
     box-sizing: border-box;
 }
@@ -256,7 +259,48 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    color: rgb(255, 255, 255);
     background-clip: padding-box;
     box-sizing: border-box;
+}
+
+
+
+
+
+@media screen and (max-width: 768px) {
+
+    .myprofile {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .accinfos {
+        width: 100%;
+    }
+
+    .myacclist {
+        min-height: 10px !important;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 425px) {
+
+    .myprofile {
+        padding: 30vw 0 0 0;
+    }
+
+    .listings {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .userdash {
+        width: 100%;
+    }
+
 }

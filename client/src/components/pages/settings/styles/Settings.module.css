@@ -25,9 +25,15 @@
     outline: none;
     cursor: pointer;
     text-decoration: none;
+    
+    transition-duration: 0.4s;
+}
+
+.mymain a:hover {
+    background-color: rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.3) !important;
 }
 
 .mymain a h3 {
-    color: rgba(0, 0, 0, 0.7);
     text-align: center;
 }

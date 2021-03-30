@@ -179,7 +179,7 @@ const PostPage = ({ match }) => {
                     <div className={styles.post}>
                         <h1>{itemz.title}</h1>
                         <div className={styles.main}>
-                            <Link to={`/author/${itemz.by}`}> <p>{itemz.by}</p> </Link>
+                            <Link to={`/author/${itemz.by}`}> <p className={styles.hovering}>{itemz.by}</p> </Link>
                             <p>{itemz.date.slice(0,10)} {itemz.date.slice(11,19)}</p>
                             <p>{itemz.views.total} views</p>
                             <p>{itemz.commCount} comments</p>

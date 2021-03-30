@@ -3,11 +3,10 @@
     width: 100%;
     height: 50px;
     background: rgba(255, 255, 255, 0.3);
-    color: rgba(255, 255, 255, 0);
     display: flex;
     justify-content: space-around;
     align-items: center;
-    z-index: 1;
+    z-index: 5;
 }
 
 .navbar div {
@@ -19,7 +18,6 @@
 
 .navbarlink {
     height: 100%;
-    color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,7 +35,6 @@
 
 .navbarInfoDiv {
     display: flex;
-    color: rgba(0, 0, 0, 1);
     font-size: 14px;
     font-weight: 900;
 }
@@ -46,15 +43,22 @@
     margin-left: 5px;
     margin-right: 5px;
 }
+    
+.smallScreen {
+    display: block;
+}
 
-.logger {
-    width: 90px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0);
-    color: rgba(255, 255, 255, 0.5);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
+
+
+
+
+
+
+
+@media screen and (max-width: 500px) {
+    
+    .smallScreen {
+        display: none;
+    }
+
 }

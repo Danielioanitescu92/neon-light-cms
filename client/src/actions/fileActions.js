@@ -175,18 +175,21 @@ export const deleteItemFile = id => {
     }
 };
 
-export const deleteAvatarFile = id => {
+export const deleteAvatarFile = filename => {
+    console.log("1 ACT delAv: ", filename)
     return function(dispatch) {
         axios
-            .delete(`/api/uploads/files/${id}`)
-            .then(() => {
+            .delete(`/api/uploads/files/${filename}`)
+            .then(res => {
+                console.log("2 ACT delAv: ", res)
                     dispatch({
                         type: DELETE_AVATAR_FILE,
-                        payload: id
+                        payload: filename
                     })
                 }
             )
             .catch(err => {
+                console.log("3 ACT delAv")
                 dispatch(returnErrors(err.response.data, err.response.status))
             })
     }

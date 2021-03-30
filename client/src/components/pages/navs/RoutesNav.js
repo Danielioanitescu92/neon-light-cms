@@ -40,32 +40,32 @@ const RoutesNav = () => {
 
     return (
             byWho ?
-                <nav className={styles.navbar}>                   
+                <nav className={styles.navbar}>                    
                         
                     <div>
                         <Link to={'/'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
-                            {/* <img src={A} alt='Posts List' width="30" height="30" onClick={togglePage}></img> */}
-                            <h4 onClick={togglePage}>Posts</h4>
+                            <img src={A} alt='Posts List' width="30" height="30" onClick={togglePage} className={styles.smallScreen}></img>
+                            <h4 onClick={togglePage} className={styles.bigScreen}>Posts</h4>
                         </Link>
                     </div>
                     <div>
                         <Link to={'/addpost'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
-                            {/* <img src={B} alt='Add Post' width="30" height="30"></img> */}
-                            <h4>Add Post</h4>
+                            <img src={B} alt='Add Post' width="30" height="30" className={styles.smallScreen}></img>
+                            <h4 onClick={togglePage} className={styles.bigScreen}>Add Post</h4>
                         </Link>
                     </div>
                     <div>
                         <Link to={'/myaccount'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
-                            {/* <img src={C} alt='My Account' width="30" height="30" onClick={toggleAcc}></img> */}
-                            <h4 onClick={toggleAcc}>My Account</h4>
+                            <img src={C} alt='My Account' width="30" height="30" onClick={toggleAcc} className={styles.smallScreen}></img>
+                            <h4 onClick={toggleAcc} className={styles.bigScreen}>My Account</h4>
                         </Link>
                     </div>                        
                             
                     {byWho.role === "basic" ?
                         <div>
                             <Link to={'/contact admin'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
-                                {/* <img src={D} alt='Contact' width="30" height="30"></img> */}
-                                <h4>Contact admin</h4>
+                                <img src={D} alt='Contact' width="30" height="30" className={styles.smallScreen}></img>
+                                <h4 className={styles.bigScreen}>Contact admin</h4>
                             </Link>
                         </div>
                     : null}
@@ -73,24 +73,24 @@ const RoutesNav = () => {
                     {byWho.role === "admin" ?
                         <div>
                             <Link to={'/users'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
-                                {/* <img src={E} alt='Users' width="30" height="30" onClick={toggleUsr}></img> */}
-                                <h4 onClick={toggleUsr}>Users</h4>
+                                <img src={E} alt='Users' width="30" height="30" onClick={toggleUsr} className={styles.smallScreen}></img>
+                                <h4 onClick={toggleUsr} className={styles.bigScreen}>Users</h4>
                             </Link>
                         </div>
                     : null}
                     {byWho.role === "admin" ?
                         <div>
                             <Link to={'/subslist'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
-                                {/* <img src={F} alt='Subscribers' width="30" height="30" onClick={toggleSubs}></img> */}
-                                <h4 onClick={toggleSubs}>Subscribers</h4>
+                                <img src={F} alt='Subscribers' width="30" height="30" onClick={toggleSubs} className={styles.smallScreen}></img>
+                                <h4 onClick={toggleSubs} className={styles.bigScreen}>Subscribers</h4>
                             </Link>
                         </div>
                     : null}
                     {byWho.role === "admin" ?
                         <div>
                             <Link to={'/settings'} className={styles.navbarlink} style={{ pointerEvents: itemzLoading ? 'none' : 'auto' }}>
-                                {/* <img src={G} alt='Settings' width="30" height="30"></img> */}
-                                <h4>Settings</h4>
+                                <img src={G} alt='Settings' width="30" height="30" className={styles.smallScreen}></img>
+                                <h4 className={styles.bigScreen}>Settings</h4>
                             </Link>
                         </div>
                     : null}

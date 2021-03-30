@@ -21,10 +21,6 @@
     box-sizing: border-box;
 }
 
-.diva h3, h1 {
-    color: rgba(0, 0, 0, 0.7);
-}
-
 
 
 
@@ -38,7 +34,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    color: rgb(255, 255, 255);
     background-clip: padding-box;
     box-sizing: border-box;
 }
@@ -63,4 +58,27 @@
 
 .myaccdiva * {
     margin: 5px;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 500px) {
+
+    .myaccarange {
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        background-clip: padding-box;
+        box-sizing: border-box;
+    }
+
 }

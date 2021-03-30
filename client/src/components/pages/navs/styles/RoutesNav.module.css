@@ -4,19 +4,50 @@
     height: 70px;
     width: 100vw;
     background: rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0);
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.05);
     display: flex;
     justify-content: space-around;
     align-items: center;
-    z-index: 1;
+    z-index: 5;
 }
 
 .navbarlink {
-    color: rgba(0, 0, 0, 0.9);
     text-decoration: none;
 }
 
 .navbarlink img {
     opacity: 0.7;
+}
+
+
+
+
+
+
+
+.bigScreen {
+    display: block;
+}
+
+.smallScreen {
+    display: none;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 500px) {
+
+    .bigScreen {
+        display: none;
+    }
+    
+    .smallScreen {
+        display: block;
+    }
+
 }

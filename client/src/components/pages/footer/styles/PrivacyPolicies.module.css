@@ -1,6 +1,7 @@
 .itemz {
-    min-height: calc(100vh - 120px);
-    margin-top: 120px;
+    position: relative;
+    min-height: calc(100vh - 50px);
+    margin-top: 50px;
     padding: 10vw;
     width: 100%;
     display: flex;

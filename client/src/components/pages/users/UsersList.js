@@ -127,12 +127,6 @@ const UsersList = ({ match }) => {
         setMsg(err.msg.msg)
     }, [err])
 
-    useEffect(() => {
-        if(msg !== '' || msg !== null) {
-            setTimeout(() => { setMsg('') }, 5000)
-        }
-    }, [msg])
-
     const handleDelUser = e => {
         if(e.target.id) {
             if(e.target.value) {
@@ -364,20 +358,20 @@ const UsersList = ({ match }) => {
                                     userz.map(user =>
                                         <article key={user._id} className={styles.item}>
                                             {user.avatar === 'unknown.png' ?
-                                                <img src={unknown} alt={user.name} width="50" height="50"></img>
+                                                <img className={styles.smallScreen} src={unknown} alt={user.name} width="50" height="50"></img>
                                             : filez ?
                                                 filez.map(file =>
                                                     file === null ?
                                                         null
                                                     : file.filename === user.avatar ?
-                                                        <img key={file._id} src={`/api/uploads/image/${file.filename}`} alt={user.name} width="50" height="50"></img>
+                                                        <img className={styles.smallScreen} key={file._id} src={`/api/uploads/image/${file.filename}`} alt={user.name} width="50" height="50"></img>
                                                     : null
                                                 )
                                             : null}
                                             <h3>{user.name}</h3>
-                                            <p>{user.email}</p>
-                                            <p>{user.role}</p>
-                                            <p>{user.register_date.slice(0,10)} {user.register_date.slice(11,19)}</p>
+                                            <p className={styles.smallScreen}>{user.email}</p>
+                                            <p className={styles.smallScreen}>{user.role}</p>
+                                            <p className={styles.smallScreen}>{user.register_date.slice(0,10)} {user.register_date.slice(11,19)}</p>
                                             {byWho ?
                                                 byWho._id !== user._id ?
                                                     user.role === "admin" ?
