@@ -20,7 +20,6 @@ const { faDatabase } = require('@fortawesome/free-solid-svg-icons');
 // @desc Auth user(Login)
 // @access Public
 router.post('/', (req, res) => {
-    console.log("1 api req made")
     const { email, password } = req.body;
 
     if(!email || !password) {
@@ -29,25 +28,19 @@ router.post('/', (req, res) => {
 
     User.findOne({ email })
     .then(user => {
-        console.log("2 trying to fin user")
         if(!user) {
             return res.status(400).json({ msg: "User does not exists" })
         } else if(user.resetPasswordToken = null || !user.resetPasswordToken) {
-            console.log("3 user found")
             if(user.safetyLock > Date.now()) {
-                console.log("TOO MANY ATTEMPTS!!!")
                 user.resetPasswordToken = null
                 user.save()
                 return res.status(400).json({ msg: "There were 3 failed attempts resulting in blocking user. Please come back in 24 hours and try logging in again!" });
             } else {
-                console.log("4 no more than 3 attempts")
                 bcrypt.compare(password, user.password)
                 .then(isMatch => {
                     if(!isMatch) {
-                        console.log("5 pass doesn't match")
                         user.loginAttempts = user.loginAttempts +1
                         if(user.loginAttempts === 3) {
-                            console.log("6 now you made 3 ATTEMPTS!!!")
                             user.safetyLock = Date.now() + 3600000;
                             user.loginAttempts = 0;
                             user.save()
@@ -70,11 +63,9 @@ router.post('/', (req, res) => {
                             sgMail
                             .send(msg)
                             .then(() => {
-                                console.log("7 email sent")
                                 return res.status(400).json({ msg: "There were 3 failed attempts resulting in blocking user. Please come back in 24 hours and try logging in again!" });
                             })
                             .catch((error) => {
-                                console.log("7 error mailing...")
                                 res.status(400).json({ msg: 'There was an error sending the attempts email...' });
                             })
 
@@ -82,20 +73,16 @@ router.post('/', (req, res) => {
                             user.save()
 
                         } else {
-                            console.log("6 loginAttempts +1")
                             user.resetPasswordToken = null
                             user.save()
                             return res.status(400).json({ msg: "Invalid credentials" });
                         }
                     } else {
-                        console.log("5 good password and email ;)")
                         if(user.loginAttempts > 0) {
-                            console.log("6 reset loginAttempts to 0")
                             user.loginAttempts = 0
                             user.save()
                         }
                         if(user.safetyLock) {
-                            console.log("7 reset safetyLock to null")
                             user.safetyLock = null
                             user.save()
                         }

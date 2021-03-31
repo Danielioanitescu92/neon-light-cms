@@ -28,7 +28,6 @@ router.get('/allSubscribers', (req, res) => {
 // @desc Get all subscribers count
 // @access Public
 router.get('/allsubs/:mytime', (req, res) => {
-    console.log("1 mytime: ", req.params.mytime)
     let total = 0
     let choosenTime
 
@@ -52,17 +51,13 @@ router.get('/allsubs/:mytime', (req, res) => {
     
     Subscriber.find()
     .then(subs => {
-        console.log("2 subs exist; choosenTime: ", choosenTime)
         subs.map(sub => {
-            console.log("3 map each sub: ", sub._id)
             if(Math.round(sub.register_date / 1000) > choosenTime) {
-                console.log("4 (sub.date) included in (choosenTime): ", Math.round(sub.register_date / 1000), choosenTime)
                 total = total + 1
             }
         })
     })
     .then(() => {
-        console.log("5 total subs chosen: ", total)
         res.status(200).json(total)
     })
 });

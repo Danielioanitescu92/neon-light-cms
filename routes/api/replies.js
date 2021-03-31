@@ -48,18 +48,15 @@ router.post('/', (req, res) => {
 // @desc Delete reply
 // @access Private
 router.delete('/:id', (req, res) => {
-    console.log("rep del 1")
     Reply.find({ forWich: req.params.id })
     .then(rep => {
         if(rep.length > 0) {
             rep.map(r => {
-                console.log("rep del 2, rep: ", r._id)
                 r.remove()
             })
         }
     })
     .then(() => {
-        console.log("rep del 3")
         res.status(200).json({ success: true })
     })
     .catch(err => res.status(404).json({ success: false }))
@@ -69,19 +66,16 @@ router.delete('/:id', (req, res) => {
 // @desc Delete reply
 // @access Private
 router.delete('/onPostDel/:id', (req, res) => {
-    console.log("dellRep 1")
     Reply.find({ forWich: req.params.id })
     .then(rep => {
         if(rep.length > 0) {
             rep.map(r => {
-                console.log("dellRep 2, rep: ", r._id)
                 // res.status(200).json(comm)
                 r.remove()
             })
         }
     })
     .catch(err => {
-        console.log("dellRep 3, ERROR: ", err)
         res.status(404).json({ success: false })
     })
 });

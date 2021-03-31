@@ -131,7 +131,6 @@ export const sendNewsletter = ({ subject, text }) => {
 }
 
 export const getTotalSubs = mytime => {
-    console.log(mytime)
     return function(dispatch) {
         axios
             .get(`/api/subscribers/allsubs/${mytime}`)

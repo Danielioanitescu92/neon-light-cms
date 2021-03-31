@@ -100,7 +100,6 @@ router.get('/files/:filename', (req, res) => {
 // // @desc Get single file in json
 // // @access Public
 router.get('/image/:filename', (req, res) => {
-   console.log("API IMAGE")
    gfs.find({ filename: req.params.filename }).toArray((err, files) => {
       if(!files[0] || files[0].length === 0){
          return res.status(404).json({ err: "Could not find file" });
@@ -140,14 +139,10 @@ router.post('/upload', singleUpload, (req, res) => {
 // // @desc Delete file
 // // @access Public
 router.delete('/files/:id', (req, res) => {
-   console.log("1 deleteFile id: ", req.params.id)
    gfs.find({ filename: req.params.id }).toArray((err, files) => {
-      console.log("2 deleteFile files found: ", files)
       if(!files || files.length === 0){
-         console.log("3 deleteFile file not good")
          return res.status(404).json({ err: "Could not find file" });
       } else {
-         console.log("4 deleteFile file found: ", files[0])
          const fileId = files[0]._id
          gfs.delete(fileId)
          res.status(200).json( "File deleted" );

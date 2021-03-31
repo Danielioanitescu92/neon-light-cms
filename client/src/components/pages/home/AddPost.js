@@ -52,7 +52,6 @@ const AddPost = () => {
         if(!piczLoading) {
             if(item.length > 0) {
                 if(file.length > 0) {
-                    console.log("history.push('/')")
                     history.push('/')
                 }
             }
@@ -68,7 +67,6 @@ const AddPost = () => {
 
     const addTag = e => {
         if(e.keyCode === 32){
-            console.log("space bar pressed");
             if(tag1 === '') {
                 setTag1(tagText)
                 setTagText('')
@@ -81,25 +79,18 @@ const AddPost = () => {
             } else if(tag4 === '') {
                 setTag4(tagText)
                 setTagText('')
-            } else {
-                console.log("no more tags available");
             }
         }
     }
 
     const delTag = e => {
-        console.log("delete tag");
         if(e.target.id === 'tag1'){
-            console.log("tag1");
             setTag1('')
         } else if(e.target.id === 'tag2'){
-            console.log("tag2");
             setTag2('')
         } else if(e.target.id === 'tag3'){
-            console.log("tag3");
             setTag3('')
         } else if(e.target.id === 'tag4'){
-            console.log("tag4");
             setTag4('')
         }
     }

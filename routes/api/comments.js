@@ -52,16 +52,13 @@ router.post('/', (req, res) => {
 // @desc Delete comment
 // @access Private
 router.delete('/:id', (req, res) => {
-    console.log("comm del 1")
     Comment.findById(req.params.id)
     .then(comm => {
         if(comm) {
-            console.log("comm del 2")
             comm.remove()
         }
     })
     .then(() => {
-        console.log("comm del 3")
         res.status(200).json({ success: true })
     })
     .catch(err => res.status(404).json({ success: false }))
@@ -71,19 +68,16 @@ router.delete('/:id', (req, res) => {
 // @desc Delete reply
 // @access Private
 router.delete('/onPostDel/:id', (req, res) => {
-    console.log("dellComm 1")
     Comment.find({ forWich: req.params.id })
     .then(comm => {
         if(comm.length > 0) {
             comm.map(c => {
-                console.log("dellComm 2, comm: ", c._id)
                 // res.status(200).json(comm)
                 c.remove()
             })
         }
     })
     .catch(err => {
-        console.log("dellComm 3, ERROR: ", err)
         res.status(404).json({ success: false })
     })
 });

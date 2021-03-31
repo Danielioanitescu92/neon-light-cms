@@ -61,9 +61,6 @@ export const deleteReplyOnPostDel = id => {
             //         })
             //     }
             // })
-            .then(() =>
-                console.log("dellRep ACTION, GOOD")
-            )
             .catch(err => 
                 console.log("dellRep ACTION, ERROR: ", err)
             )

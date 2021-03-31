@@ -9,13 +9,10 @@ const Other = require('../../models/Other');
 // @desc Get all unique visitors
 // @access Private
 router.get('/', (req, res) => {
-    console.log("Yo 11")
 
     Other.find()
     .then(item => {
-        console.log("Yo 22: ", item)
     // .then(() => {
-    //     console.log(theUniques)
     //     res.status(200).json({uniques: theUniques})
     // })
     })
@@ -31,12 +28,9 @@ router.post('/', (req, res) => {
         screenSize: 400,
         unique: 'unique'
     });
-
-    console.log("UNQ CREATED 1")
     
     newOther.save()
     .then(item => {
-        console.log("UNQ CREATED 2")
         res.status(200).json(item)
     })
     .catch(err => res.status(404).json({ error: "Cannot create unq: ", err }));
@@ -46,7 +40,6 @@ router.post('/', (req, res) => {
 // @desc Get unique visitors
 // @access Private
 router.get('/getUniques/:date', (req, res) => {
-    console.log("Yo 1")
     const whatTime = req.params.date
     let theUniques = 0
 
@@ -94,10 +87,7 @@ router.get('/getUniques/:date', (req, res) => {
 
     Other.find()
     .then(item => {
-        console.log("Yo 2: ", item)
-
         dateArray.map(dar => {
-            console.log("Yo 3")
             const dayD = dar.getDate();
             const monthD = dar.getMonth();
             const yearD = dar.getFullYear();
@@ -107,16 +97,13 @@ router.get('/getUniques/:date', (req, res) => {
             const yearV = item.date.getFullYear();
 
             if(`${yearD}-${monthD}-${dayD}` === `${yearV}-${monthV}-${dayV}`) {
-                console.log("Yo 4 organic date equal")
                 if(item.unique === 'unique') {
-                    console.log("Yo 5 organic theUniques + 1")
                     theUniques = theUniques + 1
                 }
             }
         })
     })
     .then(() => {
-        console.log(theUniques)
         res.status(200).json({uniques: theUniques})
     })
 });

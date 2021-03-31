@@ -116,7 +116,6 @@ export const getPar = tok => {
 
 // Reset Password
 export const reset = ({ username, password, confirmPassword }) => {
-    console.log('reset')
     return function(dispatch) {
         const config = {
             headers: {

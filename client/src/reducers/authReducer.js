@@ -44,7 +44,6 @@ export default function(state = initialState, action) {
                 user: action.payload
             };
         case TOK_LOADED:
-            console.log('reducer', action.payload)   // works, prints out 'dani'
             return {
                 ...state,
                 isLoading: false,

@@ -223,7 +223,6 @@ router.post('/changepass/:id', (req, res) => {
         } else
             bcrypt.compare(changedPass.oldPassword, user.password, (err, isMatch) => {
                 if (err) {
-                    console.log(err)
                 } else if (isMatch) {
                     bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(changedPass.newPassword, salt, (err, hash) => {
@@ -246,8 +245,6 @@ router.post('/changepass/:id', (req, res) => {
                         })
                     });
 
-                } else if (!isMatch) {
-                    console.log("incorrect password")
                 }
             })
     })
@@ -259,7 +256,6 @@ router.post('/changepass/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     User.findById(req.params.id)
     .then(user => {
-        console.log("Del User ", req.params.id)
         user.remove().then(() => res.status(200).json({ success: true }))
     })
     .catch(err => res.status(404).json({ msg: "Failed to delete user." }))
@@ -269,7 +265,6 @@ router.delete('/:id', (req, res) => {
 // @desc Register new User
 // @access Public
 router.post('/', (req, res) => {
-    console.log("1 add user: ", req.body)
     const { name, email, password, role } = req.body;
 
     if(!name || !email || !password || !role) {
@@ -279,7 +274,6 @@ router.post('/', (req, res) => {
     User.findOne({ email })
     .then(user => {
         if(user) return res.status(400).json({ msg: "User already exists" });
-        console.log("2 add user")
 
         const token = crypto.randomBytes(20).toString('hex');
         const newUser = new User({
@@ -336,7 +330,6 @@ router.post('/', (req, res) => {
 
     })
     .catch(err => {
-        console.log("5 reg not possible: ", err)
         res.status(400).json({ msg: "Register not possible" });
     });
 });
@@ -345,17 +338,13 @@ router.post('/', (req, res) => {
 // // @desc Get resetPasswordToken and erase for confirmation
 // // @access Private
 router.get('/confirmAccount/:token', (req, res) => {
-    console.log("1 confirmAccount req.params.token: ", req.params.token)
     User.findOne({
         resetPasswordToken: req.params.token
     })
     .then(user => {
-        console.log("2 confirmAccount: ", user)
         if(!user) {
-            console.log("3 confirmAccount no user ERR: ")
             res.json({ msg: 'Password reset link is invalid or has expired. Please try again.' })
         } else {
-            console.log("4 confirmAccount user exist")
             res.status(200).json({ msg: 'Your account is active. You can now login.' });
             user.resetPasswordToken = null;
             user.save();
@@ -368,7 +357,6 @@ router.get('/confirmAccount/:token', (req, res) => {
 // @access Public
 router.post('/contactdev', (req, res) => {
     const { email, name, subject, text } = req.body;
-    console.log("1: ", req.body)
 
     if(!email || !name || !subject || !text) {
         return res.status(400).json({ msg: "Plase enter all fields" });
@@ -377,7 +365,6 @@ router.post('/contactdev', (req, res) => {
     User.findOne({ email })
     .then(user => {
         if(user) {
-            console.log("2")
 
             sgMail.setApiKey(SENDGRID_API_KEY)
             const msg = {
@@ -391,22 +378,18 @@ router.post('/contactdev', (req, res) => {
             sgMail
             .send(msg)
             .then(() => {
-                console.log("3")
                 res.status(200).json({ msg: 'Your email has been sent' })
             })
             .catch((error) => {
-                console.log("4")
                 res.status(400).json({ msg: 'There was an error' });
             })
         
         } else {
-            console.log("5")
             res.status(400).json({ msg: "Dev's email not found" });
         }
 
     })
     .catch(err => {
-        console.log("6")
         res.status(400).json({ msg: "Contact dev not possible" });
     });
 });

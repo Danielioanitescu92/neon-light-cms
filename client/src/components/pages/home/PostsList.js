@@ -211,7 +211,6 @@ const PostsList = ({ match }) => {
     // DELETE POST
     const handleDelPost = e => {
         if(e) {
-            console.log("FRONT delPost id: ", e)
             dispatch(deleteItem(e))
             if(!piczLoading) {
                 if(!itemzLoading) {
@@ -229,8 +228,6 @@ const PostsList = ({ match }) => {
                 }
             }
             setFinder(!finder)
-        } else {
-            console.log("e.target.id NOT FOUND: ", e.target.id)
         }
     }
     

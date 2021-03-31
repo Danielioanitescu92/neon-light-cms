@@ -78,7 +78,6 @@ export const getAvatarsFile = avatarsArray => {
 };
 
 export const addPostFile = (file, newItem) => {
-    console.log("1 addPostFile: file Loading")
     return function(dispatch) {
         dispatch(setFilesLoading());
         const config = {
@@ -88,25 +87,21 @@ export const addPostFile = (file, newItem) => {
         }
         axios
             .post('/api/uploads/upload', file, config)
-            .then(res => {
-                console.log("2 addPostFile: file added")
+            .then(res => 
                 dispatch({
                     type: ADD_POST_FILE, 
                     payload: res.data
                 })
-            })
-            .then(() => {
-                console.log("3 addPostFile: addItem")
-                dispatch(addItem(newItem));
-            })
-            .then(() => {
-                console.log("4 addPostFile: sendTheNewPost")
+            )
+            .then(() => 
+                dispatch(addItem(newItem))
+            )
+            .then(() => 
                 dispatch(sendTheNewPost(newItem))
-            })
-            .catch(err => {
-                console.log("5 error: ", err)
+            )
+            .catch(err => 
                 dispatch(returnErrors(err.response.data, err.response.status))
-            })
+            )
     }
 };
 
@@ -141,12 +136,11 @@ export const deleteFile = id => {
     return function(dispatch) {
         axios
             .delete(`/api/uploads/files/${id}`)
-            .then(res => {
-                console.log("File actions res.data: ", res.data)
+            .then(res => 
                 dispatch({
                     type: DELETE_FILE,
                     payload: id
-                })}
+                })
             )
             .catch(err => 
                 dispatch(returnErrors(err.response.data, err.response.status))
@@ -171,22 +165,19 @@ export const deleteItemFile = id => {
 };
 
 export const deleteAvatarFile = filename => {
-    console.log("1 ACT delAv: ", filename)
     return function(dispatch) {
         axios
             .delete(`/api/uploads/files/${filename}`)
-            .then(res => {
-                console.log("2 ACT delAv: ", res)
-                    dispatch({
-                        type: DELETE_AVATAR_FILE,
-                        payload: filename
-                    })
-                }
+            .then(res => 
+                dispatch({
+                    type: DELETE_AVATAR_FILE,
+                    payload: filename
+                })
+                
             )
-            .catch(err => {
-                console.log("3 ACT delAv")
+            .catch(err => 
                 dispatch(returnErrors(err.response.data, err.response.status))
-            })
+            )
     }
 };
 

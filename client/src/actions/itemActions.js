@@ -57,7 +57,6 @@ export const getThisItem = id => {
 };
 
 export const getSpecificItems = (search, author, page, sort) => {
-    console.log("/ ", search, author, page, sort)
     return function(dispatch) {
         dispatch(setItemsLoading())
         dispatch(goItems())
@@ -114,7 +113,6 @@ export const getSpecificItems = (search, author, page, sort) => {
 };
 
 export const getSpecificItemsForMe = (search, me, page, sort) => {
-    console.log("/myAcc ", search, me, page, sort)
     return function(dispatch) {
         dispatch(setItemsLoading())
         dispatch(goItems())
@@ -155,13 +153,11 @@ export const getSpecificItemsForMe = (search, me, page, sort) => {
 };
 
 export const deleteItem = id => {
-    console.log("ACT 1 delPost id: ", id)
     return function(dispatch, getState) {
         dispatch(setItemsLoading())
         axios
             .delete(`/api/items/${id}`, tokenConfig(getState))
             .then(res => {
-                console.log("ACT 2 delPost res: ", res)
                 dispatch({
                     type: DELETE_ITEMS,
                     payload: id
@@ -169,10 +165,9 @@ export const deleteItem = id => {
                 dispatch(deleteCommOnPostDel(id))
                 dispatch(deleteReplyOnPostDel(id))
             })
-            .catch(err => {
-                console.log("NEW ERR: ", err)
+            .catch(err => 
                 dispatch(returnErrors(err.response.data, err.response.status))
-            })
+            )
     }
 };
 
@@ -187,10 +182,9 @@ export const addItem = (item) => {
                     payload: res.data
                 })
             })
-            .catch(err => {
-                console.log("ERROOOOR: ", err)
+            .catch(err => 
                 dispatch(returnErrors(err.response.data, err.response.status))
-            })
+            )
     }
 };
 
