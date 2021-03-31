@@ -19,7 +19,7 @@ input[type="submit"] {
     height: 36px;
     background: rgba(255, 255, 255, 0);
     color: rgba(0, 0, 0, 0.7);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.05) !important;
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     border-radius: 5px;
     outline: none;
@@ -36,7 +36,7 @@ button {
     width: 120px;
     height: 30px;
     background-color: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.01);
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     cursor: pointer;
     border-radius: 5px;
@@ -52,6 +52,18 @@ button:hover, input[type="submit"]:hover {
     background-color: rgba(255, 255, 255, 0.7) !important;
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.3) !important;
 }
+
+button:disabled,
+button[disabled]{
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.02);
+    color: rgba(0, 0, 0, 0.2) !important;
+    cursor: auto;
+}
+
+svg, path {
+    pointer-events: none;
+} 
 
 
 

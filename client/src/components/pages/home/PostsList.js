@@ -69,7 +69,7 @@ const PostsList = ({ match }) => {
                 )
                 dispatch(getSpecificItemsForMe(search, byWho.name, page, sort))
             } else {                
-                if (!search, !author, !page, !sort) { // if everything is NULL (Home) / or coming from another page (to HOME)
+                if (!search && !author && !page && !sort) { // if everything is NULL (Home) / or coming from another page (to HOME)
                     history.push(`/`)
                 }                
                 if (search || author || page || sort) { // if one of them isn't NULL (changing any filter)
@@ -145,7 +145,7 @@ const PostsList = ({ match }) => {
                     dispatch(goItemsFiles());
                     if(itemz.length > 0) {
                         itemz.map(item => {
-                            dispatch(getItemsFiles([item.picUrl]))
+                            return dispatch(getItemsFiles([item.picUrl]))
                         })
                     }
                 }
@@ -215,17 +215,17 @@ const PostsList = ({ match }) => {
             dispatch(deleteItem(e))
             if(!piczLoading) {
                 if(!itemzLoading) {
-                    itemz.map(item => {
-                        if(item._id === e) {
-                            picz.map(pic => {
-                                if(pic !== null) {
-                                    if(item.picUrl === pic.filename) {
+                    itemz.map(item =>
+                        item._id === e ?
+                            picz.map(pic =>
+                                pic !== null ?
+                                    item.picUrl === pic.filename ?
                                         dispatch(deleteItemFile(pic.filename))
-                                    }
-                                }
-                            })
-                        }
-                    })
+                                    : null
+                                : null
+                            )
+                        : null
+                    )
                 }
             }
             setFinder(!finder)

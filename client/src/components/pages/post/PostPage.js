@@ -6,7 +6,6 @@ import { getThisItem, doneEditingCC } from '../../../actions/itemActions'
 import { getThisComms, addComment, deleteComment, addLike, removeLike } from '../../../actions/commentActions'
 import { getThisReps, addReply, deleteReply, addRLike, removeRLike } from '../../../actions/replyActions'
 import { getItemsFiles, goItemsFiles } from '../../../actions/fileActions'
-import { v4 as uuidv4 } from 'uuid';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
@@ -33,9 +32,11 @@ const PostPage = ({ match }) => {
 
     useEffect(() => {
         if(byWho) {
-            dispatch(getThisItem(match.params.id))
-            dispatch(getThisComms(match.params.id))
-            dispatch(getThisReps(match.params.id))
+            if(match.params.id) {
+                dispatch(getThisItem(match.params.id))
+                dispatch(getThisComms(match.params.id))
+                dispatch(getThisReps(match.params.id))
+            }
         }
     }, [byWho])
 
@@ -94,7 +95,7 @@ const PostPage = ({ match }) => {
     const handleDelComm = e => {
         let editedPost = myItem
         if(repliez) {
-            repliez.map(rep => {
+            repliez.forEach(rep => {
                 if(rep.parentComm === e.target.id) {
                     dispatch(deleteReply(rep._id, match.params.id))                                
                     // modify item.countComm:
@@ -206,11 +207,11 @@ const PostPage = ({ match }) => {
                                             <p className={styles.blockparagraph} key={elem.data.text}>{elem.data.text}</p>
                                         : elem.type === 'list' ?
                                             elem.data.style === 'ordered' ?
-                                                <ol className={styles.blocklist} key={uuidv4()}>
+                                                <ol className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                                     {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                 </ol>
                                         : 
-                                                <ul className={styles.blocklist} key={uuidv4()}>
+                                                <ul className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                                     {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                 </ul>
                                         : elem.type === 'delimiter' ?

@@ -1,15 +1,12 @@
 import {
-    ADD_FILE,
     ADD_USER_FILE,
     ADD_POST_FILE,
-    GET_FILE,
     FILE_LOADING,
     AVATAR_FILES_LOADING,
     GO_FILE,
     DELETE_FILE,
     GET_ITEMS_FILES,
     GET_AVATARS_FILE,
-    GET_THIS_FILE,
     GO_ITEMS_FILE,
     GO_AVATARS_FILE,
     DELETE_ITEM_FILE,
@@ -27,18 +24,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch(action.type) {
-        // case GET_FILE:
-        //     return {
-        //         ...state,
-        //         files: action.payload,
-        //         loading: false
-        //     }
-        // case GET_THIS_FILE:
-        //     return {
-        //         ...state,
-        //         files: action.payload,
-        //         loading: false
-        //     }
         case GET_ITEMS_FILES:
             return {
                 ...state,

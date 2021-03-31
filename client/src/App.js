@@ -42,7 +42,7 @@ function App() {
     if(!['/confirmAccount', '/resetPass'].some(el => window.location.pathname.includes(el))) {
       store.dispatch(loadUser());
     }
-  }, [store.dispatch])
+  }, [])
 
   return (
     <Provider store={store}>

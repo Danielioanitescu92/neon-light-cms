@@ -125,7 +125,7 @@ const MyAccount = ({match}) => {
                                         <div key={file._id} className={styles.picdiv}>
                                             <img className={styles.avatar} src={`/api/uploads/image/${file.filename}`} alt={byWho.name} width="50" height="50"></img>
                                         </div>
-                                        <div className={styles.delavatar} disabled={piczLoading ? true : false} id={file.filename} onClick={handleDelAvatar}>{delav}</div>
+                                        <button className={styles.delavatar} disabled={piczLoading ? true : false} id={file.filename} onClick={handleDelAvatar}>{delav}</button>
                                     </div>
                                 : <img className={styles.avatar} src={unknown} alt={byWho.name} width="50" height="50"></img>
                             )
@@ -134,10 +134,10 @@ const MyAccount = ({match}) => {
                     {/* AVATAR */}
 
                     <div className={styles.info}>
-                        {byWho.facebook ? <a className={styles.social} href={`http://${byWho.facebook}`} target="_blank"> {fb} Facebook </a> : null}
-                        {byWho.instagram ? <a className={styles.social} href={`http://${byWho.instagram}`} target="_blank"> {inst} Instagram </a> : null}
-                        {byWho.twitter ? <a className={styles.social} href={`http://${byWho.twitter}`} target="_blank"> {tw} Twitter </a> : null}
-                        {byWho.youtube ? <a className={styles.social} href={`http://${byWho.youtube}`} target="_blank"> {yt} Youtube </a> : null}
+                        {byWho.facebook ? <a className={styles.social} href={`http://${byWho.facebook}`}> {fb} Facebook </a> : null}
+                        {byWho.instagram ? <a className={styles.social} href={`http://${byWho.instagram}`}> {inst} Instagram </a> : null}
+                        {byWho.twitter ? <a className={styles.social} href={`http://${byWho.twitter}`}> {tw} Twitter </a> : null}
+                        {byWho.youtube ? <a className={styles.social} href={`http://${byWho.youtube}`}> {yt} Youtube </a> : null}
                     </div>
 
                     <div className={styles.underinfo}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styles from './styles/ChangePass.module.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { getUsers, getThisUser, donePass } from '../../../actions/userActions'
+import { getThisUser, donePass } from '../../../actions/userActions'
 import { useHistory } from 'react-router-dom'
 
 const ChangePass = ({ match }) => {
@@ -28,8 +28,7 @@ const ChangePass = ({ match }) => {
     useEffect(() => {
         if(byWho) {
             dispatch(getThisUser(byWho.name))
-            // dispatch(getUsers())
-            userz.map(user => {
+            userz.forEach(user => {
                 if(user._id === match.params.id) {
                     setId(user._id)
                     setAvatar(user.avatar)
@@ -45,7 +44,7 @@ const ChangePass = ({ match }) => {
                 }
             })
         }
-    }, [dispatch])
+    }, [])
 
     const handleOldPass = e => setOldPassword(e.target.value)
     const handleNewPass = e => setNewPassword(e.target.value)

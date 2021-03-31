@@ -3,7 +3,6 @@ import styles from '../styles/EditTAC.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { getTc, doneEditTc } from '../../../../actions/tcActions'
 import { useHistory } from 'react-router-dom'
-import { v4 as uuidv4 } from 'uuid';
 
 import EditorJs from 'react-editor-js';
 import Header from '@editorjs/header'; 
@@ -32,14 +31,14 @@ const EditTAC = ({ match }) => {
 
     useEffect(() => {
         dispatch(getTc())
-        termsConz.map(tc => {
+        termsConz.forEach(tc => {
             if(tc._id === match.params.id) {
                 setId(tc._id)
                 setText(tc.text)
                 setData(tc.text.blocks)
             }
         })
-    }, [dispatch])
+    }, [])
 
     const submitEdit = (e, index) => {
         e.preventDefault()
@@ -101,11 +100,11 @@ const EditTAC = ({ match }) => {
                                                 <p className={styles.blockparagraph} key={elem.data.text}>{elem.data.text}</p>
                                             : elem.type === 'list' ?
                                                 elem.data.style === 'ordered' ?
-                                                    <ol className={styles.blocklist} key={uuidv4()}>
+                                                    <ol className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                                         {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                     </ol>
                                             : 
-                                                    <ul className={styles.blocklist} key={uuidv4()}>
+                                                    <ul className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                                         {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                     </ul>
                                             : elem.type === 'delimiter' ?

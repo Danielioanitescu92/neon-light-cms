@@ -2,13 +2,11 @@ import axios from 'axios';
 import {
     GET_FILE,
     DELETE_FILE,
-    ADD_FILE,
     ADD_USER_FILE,
     ADD_POST_FILE,
     GO_FILE,
     FILE_LOADING,
     AVATAR_FILES_LOADING,
-    GET_THIS_FILE,
     GET_ITEMS_FILES,
     GET_AVATARS_FILE,
     GO_ITEMS_FILE,
@@ -21,7 +19,6 @@ import { addItem } from './itemActions';
 import { doneEditing } from './userActions'
 import { sendTheNewPost } from './subActions'
 import { editAvatar } from './authActions'
-import { useHistory } from 'react-router-dom'
 
 export const getFiles = () => {
     return function(dispatch) {
@@ -43,20 +40,19 @@ export const getItemsFiles = picsArray => {
     return function(dispatch) {
         dispatch(setFilesLoading());
         if(picsArray) {
-            picsArray.map(filename => { 
+            picsArray.map(filename =>
                 axios
                 .get(`/api/uploads/files/${filename}`)
-                .then(res => {
+                .then(res =>
                     dispatch({
                         type: GET_ITEMS_FILES,
                         payload: res.data
                     })
-                }
                 )
                 .catch(err => 
                     dispatch(returnErrors(err.response.data, err.response.status))
                 )
-            })
+            )
         }
     }
 };
@@ -65,20 +61,19 @@ export const getAvatarsFile = avatarsArray => {
     return function(dispatch) {
         dispatch(setAvatarFilesLoading());
         dispatch(goAvatarsFile());
-        avatarsArray.map(filename => {
+        avatarsArray.map(filename =>
             axios
             .get(`/api/uploads/files/${filename}`)
-            .then(res => {
+            .then(res =>
                 dispatch({
                     type: GET_AVATARS_FILE,
                     payload: res.data
                 })
-            }
             )
             .catch(err => 
                 dispatch(returnErrors(err.response.data, err.response.status))
             )
-        })
+        )
     }
 };
 

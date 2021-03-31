@@ -2,7 +2,6 @@ import {
     GET_SUBS,
     DELETE_SUB,
     SUBS_LOADING,
-    SUBS_UNLOADING,
     GO_SUBS,
     TOTAL_SUBS
 } from '../actions/types';
@@ -30,25 +29,6 @@ export default function(state = initialState, action) {
                     results: state.subscribers.results.filter(sub => sub._id !== action.payload)
                 }
             }
-
-        // case ADD_SUBS:
-        //     return {
-        //         ...state,
-        //         subscribers: {
-        //             ...state.subscribers,
-        //             results: [
-        //                 action.payload,
-        //                 ...state.subscribers.results
-        //             ]
-        //         }
-        //     }
-
-        // case DELETE_SUB:
-        //     return {
-        //         ...state,
-        //         subscribers: state.subscribers.filter(sub => sub.email !== action.payload)
-        //     }
-
         case SUBS_LOADING:
             return {
                 ...state,

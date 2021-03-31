@@ -33,14 +33,14 @@ const ViewsTime = ({ match }) => {
     useEffect(() => {
         if(viewsTime) {
             let x = 0
-            Object.values(viewsTime).map(vu => {
+            Object.values(viewsTime).map(vu =>
                 x = x + vu
-            })            
+            )            
             setViewsTimeTotal(x)
             let colorz =[]
-            Object.keys(viewsTime).map(vu => {
+            Object.keys(viewsTime).map(vu =>
                 colorz.push({name: vu, color: `rgb(${Math.floor(Math.random() * (255 - 0))},${Math.floor(Math.random() * (255 - 0))},${Math.floor(Math.random() * (255 - 0))})`})
-            })            
+            )            
             setColors(colorz)
         }
     }, [viewsTime])

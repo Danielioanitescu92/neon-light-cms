@@ -3,7 +3,6 @@ import styles from '../styles/EditPP.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { getPp, doneEditPp } from '../../../../actions/ppActions'
 import { useHistory } from 'react-router-dom'
-import { v4 as uuidv4 } from 'uuid';
 
 import EditorJs from 'react-editor-js';
 import Header from '@editorjs/header'; 
@@ -32,14 +31,14 @@ const EditPp = ({ match }) => {
 
     useEffect(() => {
         dispatch(getPp())
-        privPolz.map(pp => {
+        privPolz.forEach(pp => {
             if(pp._id === match.params.id) {
                 setId(pp._id)
                 setText(pp.text)
                 setData(pp.text.blocks)
             }
         })
-    }, [dispatch])
+    }, [])
 
     const submitEdit = (e, index) => {
         e.preventDefault()
@@ -101,11 +100,11 @@ const EditPp = ({ match }) => {
                                                 <p className={styles.blockparagraph} key={elem.data.text}>{elem.data.text}</p>
                                             : elem.type === 'list' ?
                                                 elem.data.style === 'ordered' ?
-                                                    <ol className={styles.blocklist} key={uuidv4()}>
+                                                    <ol className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                                         {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                     </ol>
                                             : 
-                                                    <ul className={styles.blocklist} key={uuidv4()}>
+                                                    <ul className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                                         {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                     </ul>
                                             : elem.type === 'delimiter' ?

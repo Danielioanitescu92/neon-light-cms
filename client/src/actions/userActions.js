@@ -11,7 +11,6 @@ import {
 } from './types';
 import { tokenConfig } from './authActions';
 import { returnErrors } from './errorActions';
-import { loadUser } from './authActions';
 import { goItems } from './itemActions';
 import { goComments } from './commentActions';
 import { goReplies } from './replyActions';

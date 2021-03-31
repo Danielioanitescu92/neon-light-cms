@@ -36,7 +36,7 @@ const ViewsUser = ({ match }) => {
             let colorz =[]
             viewsUser.map(vu => {
                 x = x + vu.counting
-                colorz.push({name: vu.name, color: `rgb(${Math.floor(Math.random() * (255 - 0))},${Math.floor(Math.random() * (255 - 0))},${Math.floor(Math.random() * (255 - 0))})`})
+                return colorz.push({name: vu.name, color: `rgb(${Math.floor(Math.random() * (255 - 0))},${Math.floor(Math.random() * (255 - 0))},${Math.floor(Math.random() * (255 - 0))})`})
             })            
             setViewsUsersTotal(x)
             setColors(colorz)

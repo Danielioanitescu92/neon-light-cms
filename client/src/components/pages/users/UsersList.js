@@ -20,7 +20,6 @@ const UsersList = ({ match }) => {
     const history = useHistory();
 
     const byWho = useSelector(store => store.auth.user)
-    const err = useSelector(store => store.error)
 
     const previous = useSelector(store => store.user.users.previous)
     const userz = useSelector(store => store.user.users.results)
@@ -28,8 +27,6 @@ const UsersList = ({ match }) => {
     const filez = useSelector(store => store.file.files.avatars)
     const filezLoading = useSelector(store => store.file.loadingAv)
     const userzLoading = useSelector(store => store.user.loading)
-    
-    const [ msg, setMsg ] = useState('')
 
     const [ query, setQuery ] = useState('')
     const [ search, setSearch ] = useState(match.params.search ? match.params.search : null)
@@ -44,7 +41,7 @@ const UsersList = ({ match }) => {
     const jump = (search, rl, page, sort) => {
 
         if(byWho) {
-            if (!search, !rl, !page, !sort) { // if everything is NULL (USERS) / or coming from another page (to USERS)
+            if (!search && !rl && !page && !sort) { // if everything is NULL (USERS) / or coming from another page (to USERS)
                 history.push(`/users`)
             }                
             if (search || rl || page || sort) { // if one of them isn't NULL (changing any filter)
@@ -112,20 +109,16 @@ const UsersList = ({ match }) => {
                 if(userz) {
                     dispatch(goAvatarsFile())
                     if(userz.length > 0) {
-                        userz.map(user => {
-                            if(user.avatar !== 'unknown.png') {
+                        userz.map(user =>
+                            user.avatar !== 'unknown.png' ?
                                 dispatch(getAvatarsFile([user.avatar]))
-                            }
-                        })
+                            : null
+                        )
                     }
                 }
             }
         }
     }, [userz])
-
-    useEffect(() => {
-        setMsg(err.msg.msg)
-    }, [err])
 
     const handleDelUser = e => {
         if(e.target.id) {
@@ -144,7 +137,7 @@ const UsersList = ({ match }) => {
     }
 
     const promote = e => {
-        userz.map((usr, index) => {
+        userz.forEach((usr, index) => {
             if(usr._id === e.target.id) {
                 const editedProfile = {
                     _id: usr._id,
@@ -168,7 +161,7 @@ const UsersList = ({ match }) => {
     }
 
     const demote = e => {
-        userz.map((usr, index) => {
+        userz.forEach((usr, index) => {
             if(usr._id === e.target.id) {
                 const editedProfile = {
                     _id: usr._id,

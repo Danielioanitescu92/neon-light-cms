@@ -11,7 +11,10 @@ Grid.mongo = mongoose.mongo;
 const db = process.env.MONGO_URI;
 
 // Create connection
-const conn = mongoose.createConnection(db)
+const conn = mongoose.createConnection(db, {
+   useNewUrlParser: true,
+   useUnifiedTopology: true
+})
 
 // Init gfs
 let gfs;

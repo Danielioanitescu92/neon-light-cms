@@ -33,14 +33,14 @@ const ViewsSource = ({ match }) => {
     useEffect(() => {
         if(viewsSource) {
             let x = 0
-            Object.values(viewsSource).map(vu => {
+            Object.values(viewsSource).map(vu =>
                 x = x + vu
-            })            
+            )            
             setViewsSourceTotal(x)
             let colorz =[]
-            Object.keys(viewsSource).map(vu => {
+            Object.keys(viewsSource).map(vu =>
                 colorz.push({name: vu, color: `rgb(${Math.floor(Math.random() * (255 - 0))},${Math.floor(Math.random() * (255 - 0))},${Math.floor(Math.random() * (255 - 0))})`})
-            })            
+            )            
             setColors(colorz)
         }
     }, [viewsSource])

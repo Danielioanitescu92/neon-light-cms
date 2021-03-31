@@ -9,12 +9,8 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     TOK_LOADED,
-    FORG_SUCCESS,
-    FORG_FAIL,
     NO_USER_LOADING,
     AV_CHANGED
-    // REGISTER_SUCCESS,
-    // REGISTER_FAIL
 } from './types';
 
 // Check token and load user

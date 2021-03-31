@@ -15,14 +15,11 @@ const SubsList = ({ match }) => {
     const history = useHistory();
 
     const byWho = useSelector(store => store.auth.user)
-    const err = useSelector(store => store.error)
 
     const previous = useSelector(store => store.sub.subscribers.previous)
     const subz = useSelector(store => store.sub.subscribers.results)
     const next = useSelector(store => store.sub.subscribers.next)
     const totalSubs = useSelector(store => store.sub.totalSubs)
-    
-    const [ msg, setMsg ] = useState('')
 
     const [ query, setQuery ] = useState('')
     const [ search, setSearch ] = useState(match.params.search ? match.params.search : null)
@@ -35,7 +32,7 @@ const SubsList = ({ match }) => {
     const jump = (search, page, sort) => {
 
         if(byWho) {
-            if (!search, !page, !sort) { // if everything is NULL (SUBSLIST) / or coming from another page (to SUBSLIST)
+            if (!search && !page && !sort) { // if everything is NULL (SUBSLIST) / or coming from another page (to SUBSLIST)
                 history.push(`/subslist`)
             }                
             if (search || page || sort) { // if one of them isn't NULL (changing any filter)
@@ -85,10 +82,6 @@ const SubsList = ({ match }) => {
     useEffect(() => {
         jump(search, page, sort)
     }, [byWho, finder])
-
-    useEffect(() => {
-        setMsg(err.msg.msg)
-    }, [err])
 
     // SEARCH
     const handleSearch = e => {

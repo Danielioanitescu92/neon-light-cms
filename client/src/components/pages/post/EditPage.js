@@ -3,7 +3,6 @@ import styles from './styles/EditPage.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { getThisItem, doneEditing } from '../../../actions/itemActions'
 import { useHistory } from 'react-router-dom'
-import { v4 as uuidv4 } from 'uuid';
 
 import EditorJs from 'react-editor-js';
 import Header from '@editorjs/header'; 
@@ -44,7 +43,7 @@ const EditPage = ({ match }) => {
 
     useEffect(() => {
         dispatch(getThisItem(match.params.id))
-    }, [dispatch])
+    }, [])
 
     useEffect(() => {
         if(itemz) {
@@ -72,7 +71,7 @@ const EditPage = ({ match }) => {
                 }
             }
         }
-    }, [itemz, dispatch])
+    }, [itemz])
     
     const handleTitle = e => setTitle(e.target.value)
     const handleSubtitle = e => setSubtitle(e.target.value)
@@ -101,16 +100,16 @@ const EditPage = ({ match }) => {
 
     const delTag = e => {
         console.log("delete tag");
-        if(e.target.id == 'tag1'){
+        if(e.target.id === 'tag1'){
             console.log("tag1");
             setTag1('')
-        } else if(e.target.id == 'tag2'){
+        } else if(e.target.id === 'tag2'){
             console.log("tag2");
             setTag2('')
-        } else if(e.target.id == 'tag3'){
+        } else if(e.target.id === 'tag3'){
             console.log("tag3");
             setTag3('')
-        } else if(e.target.id == 'tag4'){
+        } else if(e.target.id === 'tag4'){
             console.log("tag4");
             setTag4('')
         }
@@ -213,11 +212,11 @@ const EditPage = ({ match }) => {
                                                 <p className={styles.blockparagraph} key={elem.data.text}>{elem.data.text}</p>
                                             : elem.type === 'list' ?
                                                 elem.data.style === 'ordered' ?
-                                                    <ol className={styles.blocklist} key={uuidv4()}>
+                                                    <ol className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                                         {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                     </ol>
                                             : 
-                                                    <ul className={styles.blocklist} key={uuidv4()}>
+                                                    <ul className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                                         {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                     </ul>
                                             : elem.type === 'delimiter' ?

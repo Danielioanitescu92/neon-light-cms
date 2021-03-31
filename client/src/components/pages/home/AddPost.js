@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { v4 as uuidv4 } from 'uuid';
 import styles from './styles/AddPost.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -39,7 +38,7 @@ const AddPost = () => {
     const [ tag2, setTag2 ] = useState('')
     const [ tag3, setTag3 ] = useState('')
     const [ tag4, setTag4 ] = useState('')  
-    const [ data, setData ] = useState(null)
+    const data = null
 
     useEffect(() => {
         // REMOVE ALL OLD IMAGES
@@ -90,16 +89,16 @@ const AddPost = () => {
 
     const delTag = e => {
         console.log("delete tag");
-        if(e.target.id == 'tag1'){
+        if(e.target.id === 'tag1'){
             console.log("tag1");
             setTag1('')
-        } else if(e.target.id == 'tag2'){
+        } else if(e.target.id === 'tag2'){
             console.log("tag2");
             setTag2('')
-        } else if(e.target.id == 'tag3'){
+        } else if(e.target.id === 'tag3'){
             console.log("tag3");
             setTag3('')
-        } else if(e.target.id == 'tag4'){
+        } else if(e.target.id === 'tag4'){
             console.log("tag4");
             setTag4('')
         }
@@ -197,11 +196,11 @@ const AddPost = () => {
                                 <p className={styles.blockparagraph} key={elem.data.text}>{elem.data.text}</p>
                             : elem.type === 'list' ?
                                 elem.data.style === 'ordered' ?
-                                    <ol className={styles.blocklist} key={uuidv4()}>
+                                    <ol className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                         {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                     </ol>
                                 : 
-                                    <ul className={styles.blocklist} key={uuidv4()}>
+                                    <ul className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                         {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                     </ul>
                             : elem.type === 'delimiter' ?

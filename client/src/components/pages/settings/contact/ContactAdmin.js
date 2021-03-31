@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from '../styles/ContactAdmin.module.css'
-import { getUsers, getThisUser, contAdmin } from '../../../../actions/userActions'
+import { getThisUser, contAdmin } from '../../../../actions/userActions'
 import { useSelector, useDispatch } from 'react-redux'
 
 const ContactAdmin = () => {
@@ -19,7 +19,7 @@ const ContactAdmin = () => {
 
     const assingUser = () => {
         if(userz) {
-            userz.map(user => {
+            userz.forEach(user => {
                 if(user._id === byWho._id) {
                     setName(user.name)
                     setEmail(user.email)

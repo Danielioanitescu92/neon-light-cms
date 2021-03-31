@@ -4,7 +4,6 @@ import styles from './styles/Login.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { login } from '../../../actions/authActions'
 import { clearErrors } from '../../../actions/errorActions'
-import { v4 as uuidv4 } from 'uuid'
 
 const Login = () => {
     const [ email, setEmail ] = useState('')
@@ -35,7 +34,7 @@ const Login = () => {
         }
         dispatch(login(user))
         if (!localStorage.getItem(`userId`)) {
-            localStorage.setItem(`userId`, uuidv4())
+            localStorage.setItem(`userId`, Math.floor(Math.random() * 999999))
         }
     }
     

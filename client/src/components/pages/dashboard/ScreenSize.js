@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styles from './styles/ScreenSize.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { getScreenSize } from '../../../actions/itemActions'

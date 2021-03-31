@@ -62,3 +62,18 @@
     box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
     cursor: pointer;
 }
+
+
+
+
+
+
+
+
+@media screen and (max-width: 425px) {
+
+    .myform {
+        width: 80vw;
+    }
+
+}

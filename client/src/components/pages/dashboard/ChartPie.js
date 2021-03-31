@@ -17,9 +17,9 @@ const ChartPie = ({ viewsUsez, colors }) => {
     
             B = viewsUsez.sort((a, b) => a.counting - b.counting)
         } else {    
-            Object.keys(viewsUsez).map(key => {
+            Object.keys(viewsUsez).map(key =>
                 newvt.push({name: key, counting: viewsUsez[key]})
-            })  
+            )  
             for ( let i = 0; i < newvt.length; i++ ) {
                 tot = tot + newvt[i].counting
             }   
@@ -27,15 +27,15 @@ const ChartPie = ({ viewsUsez, colors }) => {
             B = newvt.sort((a, b) => a.counting - b.counting)
         }
         
-        B.map(b => {
-            if(tot) {
-                colors.map(col => {
-                    if(col.name === b.name) {
+        B.map(b =>
+            tot ?
+                colors.map(col =>
+                    col.name === b.name ?
                         C.push({    counting: (((((b.counting)*100) / tot) * 360) / 100), name: b.name, color: col.color    })
-                    }
-                })
-            }
-        })
+                    : null
+                )
+            : null
+        )
     
         if(C) {
             C.map((item, index, array) => {
@@ -46,7 +46,7 @@ const ChartPie = ({ viewsUsez, colors }) => {
                     }
                 }
                 const it = {a:tot, b:tot+item.counting, name: item.name, color: item.color}
-                D.push(it)
+                return D.push(it)
             })
         }
 

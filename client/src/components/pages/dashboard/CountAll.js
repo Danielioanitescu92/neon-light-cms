@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styles from './styles/CountAll.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCountAll } from '../../../actions/itemActions'
@@ -8,7 +8,7 @@ const CountAll = ({ match }) => {
 
     const byWho = useSelector(store => store.auth.user)
     const countAll = useSelector(store => store.item.countAll)
-    const [ author, setAuthor ] = useState(match.url.includes('/myaccount') ? byWho.name : 'all')
+    const author = match.url.includes('/myaccount') ? byWho.name : 'all'
 
     useEffect(() => {
         if(byWho) {

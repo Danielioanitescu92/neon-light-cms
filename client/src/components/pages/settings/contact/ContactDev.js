@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import styles from '../styles/ContactDev.module.css'
-import { getUsers, getThisUser, contDev } from '../../../../actions/userActions'
+import { getThisUser, contDev } from '../../../../actions/userActions'
 import { useSelector, useDispatch } from 'react-redux'
 
 const ContactDev = () => {
     
     const byWho = useSelector(store => store.auth.user)
-    const userz = useSelector(store => store.user.users)
 
     const [ email, setEmail ] = useState('')
     const [ name, setName ] = useState('')

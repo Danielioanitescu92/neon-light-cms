@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styles from '../styles/BlogPP.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { getPp } from '../../../../actions/ppActions'
 import { Link } from 'react-router-dom'
-import { v4 as uuidv4 } from 'uuid';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
@@ -21,7 +20,7 @@ const BlogPP = () => {
 
     useEffect(() => {
         dispatch(getPp())
-    }, [byWho, dispatch])
+    }, [byWho])
 
     return (
         <main className={styles.itemz}>
@@ -41,11 +40,11 @@ const BlogPP = () => {
                                                     <p className={styles.blockparagraph} key={elem.data.text}>{elem.data.text}</p>
                                                 : elem.type === 'list' ?
                                                     elem.data.style === 'ordered' ?
-                                                        <ol className={styles.blocklist} key={uuidv4()}>
+                                                        <ol className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                                             {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                         </ol>
                                                 : 
-                                                        <ul className={styles.blocklist} key={uuidv4()}>
+                                                        <ul className={styles.blocklist} key={Math.floor(Math.random() * 99)}>
                                                             {elem.data.items.map(it => <li className={styles.listitem} key={it.slice('0,10')}>{it}</li>)}
                                                         </ul>
                                                 : elem.type === 'delimiter' ?

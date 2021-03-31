@@ -2,13 +2,11 @@ import axios from 'axios';
 import {
     GET_ITEMS,
     ADD_ITEMS,
-    UPDATE_ITEM,
     DELETE_ITEMS,
     ITEMS_LOADING,
     GO_ITEMS,
     GET_PAGINATED_ITEMS,
     GET_THIS_ITEM,
-    TOTAL_VIEWS,
     VIEWS_SOURCE,
     VIEWS_TIME,
     VIEWS_USER,
@@ -62,8 +60,6 @@ export const getSpecificItems = (search, author, page, sort) => {
     console.log("/ ", search, author, page, sort)
     return function(dispatch) {
         dispatch(setItemsLoading())
-        let firstArray = []
-        let picsArray = []
         dispatch(goItems())
         dispatch(goComments())
         dispatch(goReplies())
@@ -121,8 +117,6 @@ export const getSpecificItemsForMe = (search, me, page, sort) => {
     console.log("/myAcc ", search, me, page, sort)
     return function(dispatch) {
         dispatch(setItemsLoading())
-        let firstArray = []
-        let picsArray = []
         dispatch(goItems())
         dispatch(goComments())
         dispatch(goReplies())
@@ -185,7 +179,6 @@ export const deleteItem = id => {
 export const addItem = (item) => {
     return function(dispatch, getState) {
         dispatch(setItemsLoading())
-        // const body = JSON.stringify(item);
         axios
             .post('/api/items', item, tokenConfig(getState))
             .then(res => {
@@ -205,12 +198,6 @@ export const doneEditing = item => {
     return function(dispatch, getState) {        
         axios
             .post(`/api/items/edit/${item._id}`, item, tokenConfig(getState))
-            // .then(res => {
-            //     dispatch({
-            //         type: UPDATE_ITEM,
-            //         payload: item
-            //     })
-            // })
             .catch(err => 
                 dispatch(returnErrors(err.response.data, err.response.status))
             )
