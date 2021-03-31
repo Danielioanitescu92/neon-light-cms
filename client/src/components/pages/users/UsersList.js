@@ -27,6 +27,8 @@ const UsersList = ({ match }) => {
     const filez = useSelector(store => store.file.files.avatars)
     const filezLoading = useSelector(store => store.file.loadingAv)
     const userzLoading = useSelector(store => store.user.loading)
+    const piczLoading = useSelector(store => store.file.loadingIt)
+    const itemzLoading = useSelector(store => store.item.loading)
 
     const [ query, setQuery ] = useState('')
     const [ search, setSearch ] = useState(match.params.search ? match.params.search : null)
@@ -253,15 +255,15 @@ const UsersList = ({ match }) => {
 
                                 <form className={styles.searchform} onSubmit={handleSubmitQuery}>
                                     <input type="text" value={query} onChange={handleSearch}></input>
-                                    <input type="submit" value="Search"></input>
+                                    <input type="submit" value="Search" disabled={piczLoading ? true : filezLoading ? true : itemzLoading ? true : userzLoading ? true : false}></input>
                                 </form>
 
                                 <div className={styles.filters}>
                                     <div>
-                                        <button onClick={toggleFilters}>Filters</button>
+                                        <button onClick={toggleFilters} disabled={piczLoading ? true : filezLoading ? true : itemzLoading ? true : userzLoading ? true : false}>Filters</button>
                                         {isOpenFilters ?
                                             <div className={styles.isopenfilters}>
-                                                <button onClick={toggleRl}>Role</button>
+                                                <button onClick={toggleRl} disabled={piczLoading ? true : filezLoading ? true : itemzLoading ? true : userzLoading ? true : false}>Role</button>
                                                 {isOpenRl ?
                                                     <div className={styles.isopenauthor}>
                                                         {/* HERE */}                                            
@@ -328,7 +330,7 @@ const UsersList = ({ match }) => {
                                     </div>
 
                                     <div>
-                                        <button style={{ marginRight: '0px', marginLeft: '0px' }} onClick={toggleSort}>Sort</button>
+                                        <button style={{ marginRight: '0px', marginLeft: '0px' }} onClick={toggleSort} disabled={piczLoading ? true : filezLoading ? true : itemzLoading ? true : userzLoading ? true : false}>Sort</button>
                                         {isOpenSort ?
                                             <div className={styles.isopensort}>
                                                 <div>
@@ -368,15 +370,15 @@ const UsersList = ({ match }) => {
                                             {byWho ?
                                                 byWho._id !== user._id ?
                                                     user.role === "admin" ?
-                                                        <button id={user._id} onClick={demote}>Demote</button>
-                                                    : <button id={user._id} onClick={promote}>Promote</button>
+                                                        <button id={user._id} onClick={demote} disabled={piczLoading ? true : filezLoading ? true : itemzLoading ? true : userzLoading ? true : false}>Demote</button>
+                                                    : <button id={user._id} onClick={promote} disabled={piczLoading ? true : filezLoading ? true : itemzLoading ? true : userzLoading ? true : false}>Promote</button>
                                                 : user.role === "admin" ?
                                                     <button disabled>Demote</button>
                                                 : <button disabled>Promote</button>
                                             : null}
                                             {user.role === "admin" ?
                                                 <button disabled>{delpost}</button>
-                                            : <button id={user._id} value={user.avatar} onClick={handleDelUser}>{delpost}</button>}
+                                            : <button id={user._id} value={user.avatar} onClick={handleDelUser} disabled={piczLoading ? true : filezLoading ? true : itemzLoading ? true : userzLoading ? true : false}>{delpost}</button>}
                                         </article>                                
                                     )
                                 : null}                            
@@ -386,18 +388,18 @@ const UsersList = ({ match }) => {
                                 {previous ?
                                     next ?
                                         <div className={styles.pagination}>
-                                            <button value={previous.page} onClick={togglePage}>{previous.page}</button>
+                                            <button value={previous.page} onClick={togglePage} disabled={piczLoading ? true : filezLoading ? true : itemzLoading ? true : userzLoading ? true : false}>{previous.page}</button>
                                             <button disabled>{next.page - 1}</button>
-                                            <button className={styles.lastbtn} value={next.page} onClick={togglePage}>{next.page}</button>
+                                            <button className={styles.lastbtn} value={next.page} onClick={togglePage} disabled={piczLoading ? true : filezLoading ? true : itemzLoading ? true : userzLoading ? true : false}>{next.page}</button>
                                         </div>
                                     : <div className={styles.pagination}>
-                                        <button value={previous.page} onClick={togglePage}>{previous.page}</button>
+                                        <button value={previous.page} onClick={togglePage} disabled={piczLoading ? true : filezLoading ? true : itemzLoading ? true : userzLoading ? true : false}>{previous.page}</button>
                                         <button className={styles.lastbtn} disabled>{previous.page + 1}</button>
                                     </div>
                                 : next ?
                                     <div className={styles.pagination}>
                                         <button disabled>{next.page - 1}</button>
-                                        <button className={styles.lastbtn} value={next.page} onClick={togglePage}>{next.page}</button>
+                                        <button className={styles.lastbtn} value={next.page} onClick={togglePage} disabled={piczLoading ? true : filezLoading ? true : itemzLoading ? true : userzLoading ? true : false}>{next.page}</button>
                                     </div>
                                 : null}
 

@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import styles from './styles/MessUsers.module.css'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { sendMessage } from '../../../actions/userActions'
 
 const MessUsers = () => {
     const dispatch = useDispatch()
+    
+    const filezLoading = useSelector(store => store.file.loadingAv)
+    const userzLoading = useSelector(store => store.user.loading)
+    const piczLoading = useSelector(store => store.file.loadingIt)
+    const itemzLoading = useSelector(store => store.item.loading)
     
     const [ subject, setSubject ] = useState('')
     const [ text, setText ] = useState('')
@@ -37,7 +42,7 @@ const MessUsers = () => {
                 <input className={styles.anyinput} name="subject" value={subject} onChange={handleSubject}></input>
                 <label>Text</label>
                 <textarea className={styles.anyinput} name="text" value={text} onChange={handleText}/>
-                <input type="submit" value={"Submit"}></input>
+                <input type="submit" value={"Submit"} disabled={piczLoading ? true : itemzLoading ? true : userzLoading ? true : filezLoading ? true : false}></input>
             </form>
         </section>
     )

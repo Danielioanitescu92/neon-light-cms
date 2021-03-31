@@ -10,6 +10,8 @@ const ViewsUser = ({ match }) => {
     const byWho = useSelector(store => store.auth.user)
     const userz = useSelector(store => store.user.users)
     const viewsUser = useSelector(store => store.item.viewsUser)
+    const piczLoading = useSelector(store => store.file.loadingIt)
+    const itemzLoading = useSelector(store => store.item.loading)
 
     const [ whatSource, setWhatSource ] = useState('total')
     const [ whatTime, setWhatTime ] = useState('all')
@@ -65,7 +67,7 @@ const ViewsUser = ({ match }) => {
                                 <option value="all">All Time</option>
                             </select>
                         </div>
-                        <input type='submit' value='Submit' />
+                        <input type='submit' value='Submit'  disabled={piczLoading ? true : itemzLoading ? true : false}/>
                     </form>
                     
                     {viewsUser ?

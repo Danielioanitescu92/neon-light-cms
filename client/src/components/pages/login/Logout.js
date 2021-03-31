@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './styles/Logout.module.css'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { goAb } from '../../../actions/aboutActions'
@@ -17,6 +17,9 @@ import { goSubs } from '../../../actions/subActions'
 const Logout = () => {
     
     const dispatch = useDispatch()
+    
+    const piczLoading = useSelector(store => store.file.loadingIt)
+    const itemzLoading = useSelector(store => store.item.loading)
 
     const handleLogout = () => {
         dispatch(logout())
@@ -34,7 +37,7 @@ const Logout = () => {
     return (
         <div>
             <Link to={'/'}>
-                <button className={styles.logger} onClick={handleLogout}>Logout</button>
+                <button className={styles.logger} onClick={handleLogout} disabled={piczLoading ? true : itemzLoading ? true : false}>Logout</button>
             </Link>
         </div>
     )

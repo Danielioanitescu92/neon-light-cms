@@ -54,11 +54,20 @@ button:hover, input[type="submit"]:hover {
 }
 
 button:disabled,
-button[disabled]{
+button[disabled],
+input[type="submit"]:disabled,
+input[type="submit"][disabled],
+p:disabled,
+p[disabled] {
     background-color: rgba(255, 255, 255, 0.15);
     border: 2px solid rgba(255, 255, 255, 0.02);
     color: rgba(0, 0, 0, 0.2) !important;
-    cursor: auto;
+    cursor: default;
+}
+
+a:disabled,
+a[disabled] {
+    cursor: default;
 }
 
 svg, path {

@@ -182,7 +182,7 @@ const AddPost = () => {
                     <span id='tag3' className={tag3 ? styles.mytag : null} onClick={delTag}>{tag3 ? tag3 : tag3 === '' ? null : null}</span>
                     <span id='tag4' className={tag4 ? styles.mytag : null} onClick={delTag}>{tag4 ? tag4 : tag4 === '' ? null : null}</span>
                 </div>
-                <button onClick={handleSubmit}>Submit</button>
+                <button onClick={handleSubmit} disabled={piczLoading ? true : false}>Submit</button>
             </div>
 
             <h1>Preview:</h1>

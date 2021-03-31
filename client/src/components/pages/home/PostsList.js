@@ -243,16 +243,16 @@ const PostsList = ({ match }) => {
 
                     <form className={styles.searchform} onSubmit={handleSubmit}>
                         <input type="text" value={query} onChange={handleSearch}></input>
-                        <input type="submit" value="Search"></input>
+                        <input type="submit" value="Search" disabled={piczLoading ? true : itemzLoading ? true : false}></input>
                     </form>
                     
                     <div className={styles.filters}>
                         {!match.url.includes('/myaccount') ?
                             <div>
-                                <button onClick={toggleFilters}>Filters</button>
+                                <button onClick={toggleFilters} disabled={piczLoading ? true : itemzLoading ? true : false}>Filters</button>
                                 {isOpenFilters ?
                                     <div className={styles.isopenfilters}>
-                                        <button onClick={toggleAuthor}>Author</button>
+                                        <button onClick={toggleAuthor} disabled={piczLoading ? true : itemzLoading ? true : false}>Author</button>
                                         {isOpenAuthor ?
                                             userz ?
                                                 userz.map(user =>
@@ -296,7 +296,7 @@ const PostsList = ({ match }) => {
                         : null}
                         
                         <div>
-                            <button style={{ marginRight: '0px', marginLeft: '0px' }} onClick={toggleSort}>Sort</button>
+                            <button style={{ marginRight: '0px', marginLeft: '0px' }} onClick={toggleSort} disabled={piczLoading ? true : itemzLoading ? true : false}>Sort</button>
                             {isOpenSort ?
                                 <div className={styles.isopensort}>
                                     <div>
@@ -338,19 +338,19 @@ const PostsList = ({ match }) => {
                                 <p className={styles.smallScreen}>{item.views.total} {viewspost}</p>
                                 <p className={styles.smallScreen}>{item.commCount} {commentspost}</p>
                                 <p className={styles.smallScreen}>{item.date.slice(0,10)} {item.date.slice(11,19)}</p>
-                                <Link to={`/post/${item._id}`}>
-                                    <p className={styles.hovering}>{readpost}</p>
+                                <Link to={piczLoading ? "#" : itemzLoading ? "#" : `/post/${item._id}`}>
+                                    <button className={styles.hovering} disabled={piczLoading ? true : itemzLoading ? true : false}>{readpost}</button>
                                 </Link>
                                 {byWho ?
                                     byWho.role === "admin" ?
-                                        <Link to={`/edit/${item._id}`}>
-                                            <p className={styles.hovering}>{editpost}</p>
+                                        <Link to={piczLoading ? "#" : itemzLoading ? "#" : `/edit/${item._id}`}>
+                                            <button className={styles.hovering} disabled={piczLoading ? true : itemzLoading ? true : false}>{editpost}</button>
                                         </Link>
                                     : null
                                 : null}
                                 {byWho ?
                                     byWho.role === "admin" ?
-                                        <p className={styles.hovering} style={{ cursor: 'pointer' }} onClick={() => handleDelPost(item._id)} >{delpost}</p>
+                                        <button className={styles.hovering} style={{ cursor: 'pointer' }} onClick={() => handleDelPost(item._id)} disabled={piczLoading ? true : itemzLoading ? true : false}>{delpost}</button>
                                     : null
                                 : null}
                             </article>                        
@@ -362,18 +362,18 @@ const PostsList = ({ match }) => {
                     {previous ?
                         next ?
                             <div className={styles.pagination}>
-                                <button value={previous.page} onClick={togglePage}>{previous.page}</button>
+                                <button value={previous.page} onClick={togglePage} disabled={piczLoading ? true : itemzLoading ? true : false}>{previous.page}</button>
                                 <button disabled>{next.page - 1}</button>
-                                <button className={styles.lastbtn} value={next.page} onClick={togglePage}>{next.page}</button>
+                                <button className={styles.lastbtn} value={next.page} onClick={togglePage} disabled={piczLoading ? true : itemzLoading ? true : false}>{next.page}</button>
                             </div>
                         : <div className={styles.pagination}>
-                            <button value={previous.page} onClick={togglePage}>{previous.page}</button>
+                            <button value={previous.page} onClick={togglePage} disabled={piczLoading ? true : itemzLoading ? true : false}>{previous.page}</button>
                             <button className={styles.lastbtn} disabled>{previous.page + 1}</button>
                         </div>
                     : next ?
                         <div className={styles.pagination}>
                             <button disabled>{next.page - 1}</button>
-                            <button className={styles.lastbtn} value={next.page} onClick={togglePage}>{next.page}</button>
+                            <button className={styles.lastbtn} value={next.page} onClick={togglePage} disabled={piczLoading ? true : itemzLoading ? true : false}>{next.page}</button>
                         </div>
                     : null}
     

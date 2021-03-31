@@ -180,7 +180,7 @@ const PostPage = ({ match }) => {
                     <div className={styles.post}>
                         <h1>{itemz.title}</h1>
                         <div className={styles.main}>
-                            <Link to={`/author/${itemz.by}`}> <p className={styles.hovering}>{itemz.by}</p> </Link>
+                            <Link to={piczLoading ? "#" : itemzLoading ? "#" : `/author/${itemz.by}`}> <p className={styles.hovering}>{itemz.by}</p> </Link>
                             <p>{itemz.date.slice(0,10)} {itemz.date.slice(11,19)}</p>
                             <p>{itemz.views.total} views</p>
                             <p>{itemz.commCount} comments</p>
@@ -228,7 +228,7 @@ const PostPage = ({ match }) => {
                                                 </div>
                                             </div>
                                         : elem.type === 'linkTool' ?
-                                            <a className={styles.linktool} href={elem.data.link} key={elem.data.link}>
+                                            <a className={styles.linktool} href={piczLoading ? "#" : itemzLoading ? "#" : elem.data.link} key={elem.data.link}>
                                                 <b>{elem.data.link}</b>
                                             </a>
                                         : elem.type === 'warning' ?
@@ -249,7 +249,7 @@ const PostPage = ({ match }) => {
                                 {itemz.tags.map(t =>
                                     t.tag !== '' ?
                                         <div key={t._id}>
-                                            <Link to={`/search/${t.tag}`} className={styles.tag}> <p>{t.tag}</p> </Link>
+                                            <Link to={piczLoading ? "#" : itemzLoading ? "#" : `/search/${t.tag}`} className={styles.tag}> <p>{t.tag}</p> </Link>
                                         </div>
                                     : null)}
                             </div>
@@ -277,17 +277,17 @@ const PostPage = ({ match }) => {
                                                 {
                                                     comm.likes.length > 0 ?
                                                         comm.likes.some(lk => lk.userId === localStorage.getItem(`userId`)) ?
-                                                            <button value={comm._id} onClick={handleCommUnlike} disabled={!localStorage.getItem(`userId`) ? true : false}>Unlike</button>
-                                                        : <button value={comm._id} onClick={handleCommLike} disabled={!localStorage.getItem(`userId`) ? true : false}>Like</button>
-                                                    : <button value={comm._id} onClick={handleCommLike} disabled={!localStorage.getItem(`userId`) ? true : false}>Like</button>
+                                                            <button value={comm._id} onClick={handleCommUnlike} disabled={!localStorage.getItem(`userId`) ? true : piczLoading ? true : itemzLoading ? true : false}>Unlike</button>
+                                                        : <button value={comm._id} onClick={handleCommLike} disabled={!localStorage.getItem(`userId`) ? true : piczLoading ? true : itemzLoading ? true : false}>Like</button>
+                                                    : <button value={comm._id} onClick={handleCommLike} disabled={!localStorage.getItem(`userId`) ? true : piczLoading ? true : itemzLoading ? true : false}>Like</button>
                                                 }
                                                 <p>{comm.likes.length}</p>
                                         </div>
                                         <div className={styles.commentreply}>
-                                            <a href='#form' id={comm._id} onClick={handleReply}> Reply </a> 
+                                            <a href={piczLoading ? "#" : itemzLoading ? "#" : '#form'} id={comm._id} onClick={handleReply}> Reply </a> 
                                             {byWho ?
                                                 byWho.role === "admin" ?
-                                                    <button id={comm._id} onClick={ handleDelComm } className={styles.commentdel}> X </button>
+                                                    <button id={comm._id} onClick={ handleDelComm } className={styles.commentdel} disabled={piczLoading ? true : itemzLoading ? true : false}> X </button>
                                                 : null
                                             : null}                                    
                                         </div>
@@ -318,7 +318,7 @@ const PostPage = ({ match }) => {
                                                         <div className={styles.commentreply}>
                                                             {byWho ?
                                                                 byWho.role === "admin" ?
-                                                                <button id={rep._id} onClick={handleDelRep} className={styles.commentdel}> X </button>
+                                                                    <button id={rep._id} onClick={handleDelRep} className={styles.commentdel} disabled={piczLoading ? true : itemzLoading ? true : false}> X </button>
                                                                 : null
                                                             : null}   
                                                         </div>
@@ -339,7 +339,7 @@ const PostPage = ({ match }) => {
                                 <h3>Add a comment</h3>
                                 <form id="form" onSubmit={addingComment} className={styles.commform}>
                                     <textarea name="comment" rows="5" value={comment} onChange={handleComment} className={styles.commformtext}/>
-                                    <input type="submit" value={reply ? "Add Reply" : "Add comment"}  disabled={itemzLoading ? true : commentzLoading ? true : repliezLoading ? true : false} className={styles.commformsubmit}></input>
+                                    <input type="submit" value={reply ? "Add Reply" : "Add comment"}  disabled={itemzLoading ? true : itemzLoading ? true : commentzLoading ? true : repliezLoading ? true : false} className={styles.commformsubmit}></input>
                                 </form>
                             </div>
                         : null}

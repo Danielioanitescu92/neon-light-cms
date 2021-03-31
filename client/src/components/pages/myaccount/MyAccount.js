@@ -35,7 +35,8 @@ const MyAccount = ({match}) => {
     const dispatch = useDispatch()
     const byWho = useSelector(store => store.auth.user)
     const filez = useSelector(store => store.file.files.avatars)
-    const piczLoading = useSelector(store => store.file.loadingAv)
+    const piczLoading = useSelector(store => store.file.loadingIt)
+    const itemzLoading = useSelector(store => store.item.loading)
 
     const [ myFile, setMyFile ] = useState('')
     const [ myUser, setMyUser ] = useState()
@@ -113,7 +114,7 @@ const MyAccount = ({match}) => {
                                         Select
                                         <input name="myFile" type="file" placeholder="Select Image" onChange={onFileChange}></input>
                                     </div>
-                                    <button disabled={piczLoading ? true : false} onClick={handleSubmit}>Add image</button>
+                                    <button  disabled={piczLoading ? true : itemzLoading ? true : false} onClick={handleSubmit}>Add image</button>
                                 </div>
                             </div>
                         : filez ?
@@ -125,7 +126,7 @@ const MyAccount = ({match}) => {
                                         <div key={file._id} className={styles.picdiv}>
                                             <img className={styles.avatar} src={`/api/uploads/image/${file.filename}`} alt={byWho.name} width="50" height="50"></img>
                                         </div>
-                                        <button className={styles.delavatar} disabled={piczLoading ? true : false} id={file.filename} onClick={handleDelAvatar}>{delav}</button>
+                                        <button className={styles.delavatar}  disabled={piczLoading ? true : itemzLoading ? true : false} id={file.filename} onClick={handleDelAvatar}>{delav}</button>
                                     </div>
                                 : <img className={styles.avatar} src={unknown} alt={byWho.name} width="50" height="50"></img>
                             )
@@ -134,10 +135,10 @@ const MyAccount = ({match}) => {
                     {/* AVATAR */}
 
                     <div className={styles.info}>
-                        {byWho.facebook ? <a className={styles.social} href={`http://${byWho.facebook}`}> {fb} Facebook </a> : null}
-                        {byWho.instagram ? <a className={styles.social} href={`http://${byWho.instagram}`}> {inst} Instagram </a> : null}
-                        {byWho.twitter ? <a className={styles.social} href={`http://${byWho.twitter}`}> {tw} Twitter </a> : null}
-                        {byWho.youtube ? <a className={styles.social} href={`http://${byWho.youtube}`}> {yt} Youtube </a> : null}
+                        {byWho.facebook ? <a className={styles.social} href={piczLoading ? "#" : itemzLoading ? "#" : `http://${byWho.facebook}`}> {fb} Facebook </a> : null}
+                        {byWho.instagram ? <a className={styles.social} href={piczLoading ? "#" : itemzLoading ? "#" : `http://${byWho.instagram}`}> {inst} Instagram </a> : null}
+                        {byWho.twitter ? <a className={styles.social} href={piczLoading ? "#" : itemzLoading ? "#" : `http://${byWho.twitter}`}> {tw} Twitter </a> : null}
+                        {byWho.youtube ? <a className={styles.social} href={piczLoading ? "#" : itemzLoading ? "#" : `http://${byWho.youtube}`}> {yt} Youtube </a> : null}
                     </div>
 
                     <div className={styles.underinfo}>
@@ -171,10 +172,10 @@ const MyAccount = ({match}) => {
                         </div>
 
                         <div className={styles.userbuttons}>
-                            <Link className={styles.alink} to={`/editprofile/${byWho._id}`}>
+                            <Link className={styles.alink} to={piczLoading ? "#" : itemzLoading ? "#" : `/editprofile/${byWho._id}`}>
                                 <p className={styles.plink}> {editacc} Edit Account</p>
                             </Link>
-                            <Link className={styles.alink} to={`/changepass/${byWho._id}`}>
+                            <Link className={styles.alink} to={piczLoading ? "#" : itemzLoading ? "#" : `/changepass/${byWho._id}`}>
                                 <p className={styles.plink}> {passacc} Change password</p>
                             </Link>
                         </div>

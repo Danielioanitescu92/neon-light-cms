@@ -12,6 +12,10 @@ const AppNavbar = () => {
 
     const isAuth = useSelector(store => store.auth.isAuthenticated)
     const user = useSelector(store => store.auth.user)
+    const filezLoading = useSelector(store => store.file.loadingAv)
+    const userzLoading = useSelector(store => store.user.loading)
+    const piczLoading = useSelector(store => store.file.loadingIt)
+    const itemzLoading = useSelector(store => store.item.loading)
 
     const [ isOpenLog, setIsOpenLog ] = useState(false)
 
@@ -31,10 +35,10 @@ const AppNavbar = () => {
     return (
         <header>
             <div className={styles.navbar}>
-                <Link to={'/dashboard'} className={styles.navbarlink}> <h1>Dashboard</h1> </Link>                
+                <Link to={piczLoading ? "#" : itemzLoading ? "#" : filezLoading ? "#" : userzLoading ? "#" : '/dashboard'} className={styles.navbarlink}> <h1>Dashboard</h1> </Link>                
                 <div className={styles.navbarInfoDiv}>
                     {user ? <p className={styles.smallScreen}>Welcome, { user.name }!</p> : null}
-                    {isAuth ? <Logout/> : <Link to={'/'}> <button onClick={toggleLog} className={styles.logger}>Login</button> </Link>}
+                    {isAuth ? <Logout/> : <Link to={'/'}> <button onClick={toggleLog} className={styles.logger} disabled={piczLoading ? true : itemzLoading ? true : filezLoading ? true : userzLoading ? true : false}>Login</button> </Link>}
                 </div>
             </div>
             {isOpenLog ? <Login/> : null}

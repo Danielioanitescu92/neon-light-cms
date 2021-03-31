@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import styles from './styles/AddUser.module.css'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { addUser } from '../../../actions/userActions'
 
 const AddUser = () => {
     const dispatch = useDispatch()
     const history = useHistory();
+    
+    const filezLoading = useSelector(store => store.file.loadingAv)
+    const userzLoading = useSelector(store => store.user.loading)
+    const piczLoading = useSelector(store => store.file.loadingIt)
+    const itemzLoading = useSelector(store => store.item.loading)
 
     const [ name, setName ] = useState('')
     const [ email, setEmail ] = useState('')
@@ -76,7 +81,7 @@ const AddUser = () => {
                         <option value="admin">Admin</option>
                     </select>
                 </div>
-                <input type='submit' value='Register' />
+                <input type='submit' value='Register' disabled={piczLoading ? true : itemzLoading ? true : userzLoading ? true : filezLoading ? true : false}/>
             </form>
         </section>
     )
