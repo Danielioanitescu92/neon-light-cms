@@ -25,7 +25,6 @@ const ForgotPass = () => {
     return (
         <div>
             <div className={styles.forg}>
-                <div className={styles.blurer}></div>
                 <div className={styles.former}>
                     {msg ? <h3 className={styles.messg}>{msg}</h3> : null}
                     <input

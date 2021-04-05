@@ -81,7 +81,7 @@ const BlogAbout = () => {
                                 {byWho ?
                                     byWho.role === "admin" ?
                                         <Link to={`/editabout/${ab._id}`}>
-                                            <p className={styles.butt}>Edit</p>
+                                            <button className={styles.butt}>Edit</button>
                                         </Link>
                                     : null
                                 : null}

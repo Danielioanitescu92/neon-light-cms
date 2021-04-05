@@ -27,18 +27,10 @@
 
 .myform select {
     width: 100%;
-    height: 36px;
-    background: rgba(39, 104, 43, 0.15);
-    color: rgba(255, 255, 255, 0.5);
-    border: 2px solid rgba(161, 224, 167, 0.1);
-    border-radius: 5px;
-    outline: none;
 }
 
 .myform option {
     padding: 10px 0 10px 0;
-    background: rgba(39, 104, 43, 0.15);
-    color: rgba(0, 0, 0, 0.7);
 }
 
 
@@ -60,7 +52,7 @@
 }
 
 .grffBl {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgb(191, 191, 191);
     width: 10px;
 }
 
@@ -82,6 +74,10 @@
     justify-content: space-between;
     align-items: center;
     font-weight: 900;
+}
+
+.mynrs {
+    color: rgb(211, 211, 211);
 }
 
 .mydate {

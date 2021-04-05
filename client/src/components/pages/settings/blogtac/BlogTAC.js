@@ -81,7 +81,7 @@ const BlogTAC = () => {
                                 {byWho ?
                                     byWho.role === "admin" ?
                                         <Link to={`/edittc/${tc._id}`}>
-                                            <p className={styles.butt}>Edit</p>
+                                            <button>Edit</button>
                                         </Link>
                                     : null
                                 : null}

@@ -81,7 +81,7 @@ const BlogPP = () => {
                                 {byWho ?
                                     byWho.role === "admin" ?
                                         <Link to={`/editpp/${pp._id}`}>
-                                            <p className={styles.butt}>Edit</p>
+                                            <button>Edit</button>
                                         </Link>
                                     : null
                                 : null}

@@ -59,14 +59,7 @@
 
 .searchform input[type="submit"]{
     width: 100px;
-    height: 36px;
     margin-left: 10px;
-    background: rgba(255, 255, 255, 0);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
 }
 
 .filters {

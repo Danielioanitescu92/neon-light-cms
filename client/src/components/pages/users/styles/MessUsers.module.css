@@ -25,22 +25,12 @@
     height: 30px;
     margin: 0.5vw 0 0.5vw 0;
     padding: 0 2vw 0 2vw;
-    background: rgba(39, 104, 43, 0.15);
-    border: 2px solid rgba(161, 224, 167, 0.1);
+    color: rgb(211, 211, 211);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: solid 1px rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     outline: none;
     box-sizing: border-box;
-}
-
-.searchform input[type="submit"] {
-    width: 100px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
 }
 
 .divider {

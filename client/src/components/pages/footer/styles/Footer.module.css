@@ -26,6 +26,8 @@
 
 .footerlink {
     text-decoration: none;
+    color: rgb(211, 211, 211);
+    margin-right: 2vw;
 }
 
 .footerDown {

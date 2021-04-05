@@ -46,30 +46,31 @@ const Login = () => {
     return (
         <div>
             <div className={styles.logger}>
-                <div className={styles.blurer}></div>
-                <div className={styles.former}>
-                    {msg ? <h3 className={styles.msg}>{msg}</h3> : null}
-                    <form>
-                        <input 
-                            className={styles.formeripnut}
-                            type='email'
-                            name='email'
-                            id='email'
-                            placeholder='Email'
-                            onChange={handleChangeEmail}
-                        ></input>
-                        <input 
-                            className={styles.formeripnut}
-                            type='password'
-                            name='password'
-                            id='password'
-                            placeholder='Password'
-                            onChange={handleChangePassword}
-                        ></input>
-                        <input className={styles.formersubmit} onClick={onSubmit} type='submit' value='Login' disabled={userLoading ? true : false} />
-                    </form>
-                    {!isAuth ? <p className={styles.formerforg} onClick={toggleForg}>Forgot password?</p> : null}
-                    {isOpenForg ? <ForgotPass/> : null}
+                <div className={styles.blurer}>
+                    <div className={styles.former}>
+                        {msg ? <h3 className={styles.msg}>{msg}</h3> : null}
+                        <form>
+                            <input 
+                                className={styles.formeripnut}
+                                type='email'
+                                name='email'
+                                id='email'
+                                placeholder='Email'
+                                onChange={handleChangeEmail}
+                            ></input>
+                            <input 
+                                className={styles.formeripnut}
+                                type='password'
+                                name='password'
+                                id='password'
+                                placeholder='Password'
+                                onChange={handleChangePassword}
+                            ></input>
+                            <input className={styles.formersubmit} onClick={onSubmit} type='submit' value='Login' disabled={userLoading ? true : false} />
+                        </form>
+                        {!isAuth ? <p className={styles.formerforg} onClick={toggleForg}>Forgot password?</p> : null}
+                        {isOpenForg ? <ForgotPass/> : null}
+                    </div>
                 </div>
             </div>
         </div>

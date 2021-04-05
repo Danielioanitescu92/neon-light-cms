@@ -31,7 +31,8 @@
     width: 60vw;
     margin: 2vw;
     padding: 1vw;
-    background: rgba(39, 104, 43, 0.15);
+    color: rgb(211, 211, 211) !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
     border: 2px solid rgba(161, 224, 167, 0.1);
     border-radius: 5px;
     outline: none;
@@ -71,8 +72,8 @@
     height: 30px;
     padding: 0 10px 0 10px;
     background: rgba(255, 255, 255, 0.1);
-    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.07);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
     border-radius: 5px;
     outline: none;
     display: flex;
@@ -84,8 +85,8 @@
 }
 
 .mytag:hover {
-    background-color: rgba(255, 255, 255, 0.7) !important;
-    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.3) !important;
+    background-color: rgba(255, 0, 0, 0.2) !important;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3) !important;
 }
 
 

@@ -1,12 +1,12 @@
 .forg {
     position: relative;
-    background: rgb(141, 158, 141);
+    background: rgb(73, 73, 73);
     padding: 0;
     width: 300px;
     height: 200px;
     border: solid 20px transparent;
     box-sizing: border-box;
-    box-shadow: 10px 10px 10px  rgba(46, 54, 68, 0.2);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
 
@@ -14,27 +14,13 @@
     background: rgba(238, 255, 0, 0.7);
     border: 2px solid rgba(238, 255, 0, 0.15);
     border-radius: 5px;
-    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     margin: 10px;
     padding: 5px;
-}
-
-.blurer {
-    position: absolute;
-    margin: 0;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-image: url('../../../../statics/drops-4192309_960_720.webp');
-    filter: grayscale(0.3) blur(40px);
-    background-position: center;
-    background-size: cover;
-    border: solid 20px transparent;
 }
 
 .former {
@@ -59,7 +45,7 @@
 }
 
 .former input[type=email] {
-    background-color: rgba(131, 196, 131, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
     padding-left: 20px;
     border: solid 1px rgba(255, 255, 255, 0.2);
 }
@@ -72,7 +58,7 @@
     padding-left: 0;
     background: rgba(255, 255, 255, 0);
     border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 5px 5px 5px rgba(46, 54, 68, 0.1);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
