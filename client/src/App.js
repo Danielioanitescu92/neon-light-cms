@@ -32,8 +32,8 @@ import ProtectedRoute from './components/functionals/ProtectedRoute'
 import RouteForAdmin from './components/functionals/RouteForAdmin'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-// import { Provider } from 'react-redux';
-import store from './store';
+import { Provider } from 'react-redux';
+// import store from './store';
 import { loadUser } from './actions/authActions';
 
 function App() {
