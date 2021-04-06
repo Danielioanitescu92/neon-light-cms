@@ -38,11 +38,11 @@ import { loadUser } from './actions/authActions';
 
 function App() {
 
-  useEffect(() => {
-    if(!['/confirmAccount', '/resetPass'].some(el => window.location.pathname.includes(el))) {
-      store.dispatch(loadUser());
-    }
-  }, [])
+  // useEffect(() => {
+  //   if(!['/confirmAccount', '/resetPass'].some(el => window.location.pathname.includes(el))) {
+  //     store.dispatch(loadUser());
+  //   }
+  // }, [])
 
   return (
     <>
