@@ -38,20 +38,22 @@ import { loadUser } from './actions/authActions';
 
 function App() {
 
-  // useEffect(() => {
-  //   if(!['/confirmAccount', '/resetPass'].some(el => window.location.pathname.includes(el))) {
-  //     store.dispatch(loadUser());
-  //   }
-  // }, [])
-
   useEffect(() => {
-    store.dispatch(loadUser())
-  }, [store.dispatch])
+    if(!['/confirmAccount', '/resetPass'].some(el => window.location.pathname.includes(el))) {
+      store.dispatch(loadUser());
+    }
+  }, [])
 
   return (
-    <Provider store={store}>
-      <h1>000</h1>
-    </Provider>
+    <>
+      <h1>111</h1>
+      <div>
+        <h1>222</h1>
+        <Provider store={store}>
+          <h1>333</h1>
+        </Provider>
+      </div>
+    </>
     // <Provider store={store}>
     //   <h1>AAA</h1>
     //   <Router>
