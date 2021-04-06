@@ -46,12 +46,15 @@ function App() {
 
   return (
     <Provider store={store}>
+      <h1>AAA</h1>
       <Router>
+        <h1>BBB</h1>
 
         <AppNavbar/>            
         <RoutesNav/>
 
         <Switch>
+          <h1>CCC</h1>
           
             {/* <ProtectedRoute path="/section/(page)?/:page?/(sort)?/:sort?" component={Section} /> */}
 
