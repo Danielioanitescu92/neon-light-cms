@@ -28,9 +28,9 @@ import ContactAdmin from './components/pages/settings/contact/ContactAdmin'
 import AddPost from './components/pages/home/AddPost'
 import Dashboard from './components/pages/dashboard/Dashboard'
 
-// import { ProtectedRoute } from './components/functionals/ProtectedRoute'
-// import { RouteForAdmin } from './components/functionals/RouteForAdmin'
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import ProtectedRoute from './components/functionals/ProtectedRoute'
+import RouteForAdmin from './components/functionals/RouteForAdmin'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 // import { Provider } from 'react-redux';
 // import store from './store';
