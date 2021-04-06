@@ -1,5 +1,5 @@
 import React,{ useEffect } from 'react';
-import styles from './index.module.css'
+// import styles from './index.module.css'
 
 import AppNavbar from './components/pages/navs/AppNavbar'
 import RoutesNav from './components/pages/navs/RoutesNav'
