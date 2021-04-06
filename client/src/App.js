@@ -44,6 +44,10 @@ function App() {
   //   }
   // }, [])
 
+  useEffect(() => {
+    store.dispatch(loadUser())
+  }, [])
+
   return (
     <Provider store={store}>
       <h1>000</h1>
